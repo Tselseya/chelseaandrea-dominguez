@@ -1412,6 +1412,180 @@
       </div>
     </div>
 
+    <!-- CASE: 4-Module Content Pipeline -->
+    <div class="case-card fade-in" id="case-content-pipeline" style="margin-top:2px;">
+      <div class="case-header" onclick="toggleCase('case-content-pipeline')">
+        <div>
+          <div class="case-meta">
+            <span class="tag tag-live">Live in Production</span>
+            <span class="tag">n8n</span>
+            <span class="tag">Ollama</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Meta Graph API</span>
+            <span class="tag">Telegram</span>
+          </div>
+          <h3 class="case-title">4-Module AI Content<br />Pipeline</h3>
+          <p class="case-subtitle">End-to-end automation from Instagram DM intake to multi-platform publishing using self-hosted LLMs and modular n8n workflows.</p>
+        </div>
+        <span class="case-arrow">+</span>
+      </div>
+
+      <div class="case-body">
+        <div class="case-body-inner">
+          <div>
+            <p class="case-section-label">The Problem</p>
+            <p class="case-text">
+              Scroll and Tell is a Reddit-style storytelling brand on Instagram. The manual workflow for sourcing, processing, approving, and publishing each story involved too many disconnected steps: monitor comments, start a DM conversation, ask the right questions, extract the story, write content, get it approved, then publish across platforms.
+            </p>
+            <p class="case-text" style="margin-top:1rem;">
+              Each step is repeatable with clear inputs and outputs. That means each step can be automated — if the system is designed correctly.
+            </p>
+
+            <p class="case-section-label" style="margin-top:2rem;">System Overview</p>
+            <div class="arch-layer">
+              <p class="arch-layer-name">Module 1 — DM &amp; Comment Intake</p>
+              <p>Instagram webhook triggers intent classification (TinyLlama). Story submissions activate the AI Story Collector Agent (Phi-3 Mini). Extracts story with structured conversation, saves to Google Sheets.</p>
+            </div>
+            <div class="arch-arrow">&#8595;</div>
+            <div class="arch-layer">
+              <p class="arch-layer-name">Module 2 — Content Engine</p>
+              <p>Webhook trigger on story completion. Duplicate check against PostgreSQL, then Phi-3 generates JSON: hook, scene breakdown, caption variants, hashtag clusters. Insert to DB as pending_approval.</p>
+            </div>
+            <div class="arch-arrow">&#8595;</div>
+            <div class="arch-layer">
+              <p class="arch-layer-name">Module 3 — Approval System</p>
+              <p>Telegram message with Approve/Reject/Upload buttons. Human reviews with one tap. Database status updates to approved or rejected.</p>
+            </div>
+            <div class="arch-arrow">&#8595;</div>
+            <div class="arch-layer">
+              <p class="arch-layer-name">Module 4 — Distribution Engine</p>
+              <p>Retrieves approved content from DB, fans out to Instagram and Facebook via Graph API. Rate limits and error handling built in.</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="case-section-label">Module 1 — DM &amp; Comment Intake</p>
+            <p class="case-text">
+              Instagram sends all events (DMs and comments) to a single webhook. First decision: is this a DM or a comment? — field check, no AI needed. Then TinyLlama (temp 0) classifies intent into six categories.
+            </p>
+            <p class="case-text" style="margin-top:0.5rem;">
+              Five intents get rule-based canned replies. One intent — story_submission — activates Phi-3 Mini (via Ollama) for a multi-turn conversation. Completion detected via string match on STORY_COMPLETE marker.
+            </p>
+
+            <div class="rule-vs-ai">
+              <div class="rvai-row">
+                <span class="rvai-component">Webhook verification</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Binary check, deterministic</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">DM vs Comment routing</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Structural field, no ambiguity</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Intent classification</span>
+                <span class="rvai-type ai">AI</span>
+                <span class="rvai-reason">Natural language varies</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Canned replies</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Fixed brand voice, no inference cost</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Story conversation</span>
+                <span class="rvai-type ai">AI</span>
+                <span class="rvai-reason">Requires context and judgment</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Completion detection</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">String match on structured marker</span>
+              </div>
+            </div>
+
+            <p class="case-section-label" style="margin-top:2rem;">Module 2 — Content Engine</p>
+            <p class="case-text">
+              Duplicate check against PostgreSQL using a hash of story fields — stops immediately if already processed, no wasted inference. Phi-3 generates structured JSON output (hook, scene breakdown, caption variants, hashtags).
+            </p>
+            <p class="case-text" style="margin-top:0.5rem;">
+              Output is parsed and validated. Failed parses are logged to PostgreSQL with notification — no silent failures. On success, inserts to DB as pending_approval and triggers Module 3.
+            </p>
+
+            <p class="case-section-label" style="margin-top:2rem;">Module 3 — Approval System</p>
+            <p class="case-text">
+              Telegram message with hook, caption, and three inline buttons: Approve, Reject, Upload. Callback routes to three paths: updates DB to approved/rejected, or saves media path for manual upload.
+            </p>
+            <p class="case-text" style="margin-top:0.5rem;">
+              Human approval is structurally required — Module 4 cannot fire without approved status. One tap from anywhere.
+            </p>
+
+            <p class="case-section-label" style="margin-top:2rem;">Module 4 — Distribution Engine</p>
+            <p class="case-text">
+              Retrieves approved content package from DB, fans out to platform branches. Instagram creates media container via Graph API, waits 30s for processing, then publishes. Same for Facebook. TikTok and YouTube branches exist but deactivated.
+            </p>
+            <p class="case-text" style="margin-top:0.5rem;">
+              Error trigger catches any platform API failure, logs to PostgreSQL, fires notification. Every status transition is persisted for auditability.
+            </p>
+
+            <div class="rule-vs-ai">
+              <div class="rvai-row">
+                <span class="rvai-component">Instagram publish</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Isolated branch, failure contained</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Facebook publish</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Isolated branch, failure contained</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Content generation</span>
+                <span class="rvai-type ai">AI</span>
+                <span class="rvai-reason">Structured output needs LLM</span>
+              </div>
+              <div class="rvai-row">
+                <span class="rvai-component">Approval routing</span>
+                <span class="rvai-type rule">Rule</span>
+                <span class="rvai-reason">Switch node, deterministic</span>
+              </div>
+            </div>
+
+            <p class="case-section-label" style="margin-top:2rem;">Outcomes</p>
+            <div class="impact-stats">
+              <div class="stat-box"><p class="stat-num">&#10003;</p><p class="stat-label">Story collection fully automated</p></div>
+              <div class="stat-box"><p class="stat-num">2</p><p class="stat-label">AI inference calls per story</p></div>
+              <div class="stat-box"><p class="stat-num">&#10003;</p><p class="stat-label">Every error logged and notified</p></div>
+              <div class="stat-box"><p class="stat-num">4</p><p class="stat-label">Isolated modules</p></div>
+            </div>
+
+            <p class="case-section-label" style="margin-top:2rem;">What This Is Not</p>
+            <p class="case-text">
+              This is not a social media scheduling tool. It is a demonstration of multi-module AI workflow architecture under real constraints: self-hosted infrastructure (no per-token cost), modular failure isolation (4 workflows = 4 failure surfaces), selective AI use (only 2 calls in entire pipeline), and human-in-the-loop by design (structural, not bolted on).
+            </p>
+
+            <p class="case-section-label" style="margin-top:2rem;">Tools</p>
+            <div class="tech-grid">
+              <div class="tech-item"><p class="tech-name">n8n</p><p class="tech-role">Workflow automation (self-hosted)</p></div>
+              <div class="tech-item"><p class="tech-name">TinyLlama</p><p class="tech-role">Intent classification</p></div>
+              <div class="tech-item"><p class="tech-name">Phi-3 Mini</p><p class="tech-role">Story collection agent</p></div>
+              <div class="tech-item"><p class="tech-name">PostgreSQL</p><p class="tech-role">Database</p></div>
+              <div class="tech-item"><p class="tech-name">Telegram Bot</p><p class="tech-role">Approval channel</p></div>
+              <div class="tech-item"><p class="tech-name">Meta Graph API</p><p class="tech-role">IG + FB distribution</p></div>
+              <div class="tech-item"><p class="tech-name">Google Sheets</p><p class="tech-role">Story intake storage</p></div>
+              <div class="tech-item"><p class="tech-name">ngrok</p><p class="tech-role">Tunnel (dev)</p></div>
+            </div>
+
+            <p class="case-section-label" style="margin-top:2rem;">Key Takeaway</p>
+            <div class="innovation-box">
+              <p>Four decoupled modules means each can be tested independently, replaced without touching others, and scaled without risking the whole pipeline. The self-hosted LLM constraint forced tighter prompt engineering — Phi-3 Mini is not GPT-4, so prompts had to be specific and output formats enforced. That constraint made the system better.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CASE 2: Content Automation -->
     <div class="case-card fade-in" id="case-content" style="margin-top:2px;">
       <div class="case-header" onclick="toggleCase('case-content')">
