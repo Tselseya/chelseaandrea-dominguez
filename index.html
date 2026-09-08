@@ -665,6 +665,12 @@
   /* SCREENSHOT GALLERY INSIDE POPUP */
   .screenshot-gallery { margin-top: 1.5rem; }
 
+  .featured-container {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
   .screenshot-featured {
     width: 100%;
     border: 1px solid var(--border);
@@ -709,6 +715,37 @@
     text-transform: uppercase;
   }
 
+  /* Gallery arrow buttons (overlaid on featured image) */
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, opacity 0.2s;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .featured-container:hover .gallery-arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .gallery-arrow:hover { background: rgba(0,0,0,0.8); }
+  .gallery-arrow-left { left: 8px; }
+  .gallery-arrow-right { right: 8px; }
+
   /* LIGHTBOX */
   .lightbox-overlay {
     display: none;
@@ -751,6 +788,30 @@
   }
 
   .lightbox-close:hover { color: #fff; border-color: var(--accent); }
+
+  /* Lightbox arrows */
+  .lightbox-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10001;
+  }
+
+  .lightbox-arrow:hover { background: rgba(0,0,0,0.8); }
+  .lightbox-arrow-left { left: 1.5rem; }
+  .lightbox-arrow-right { right: 1.5rem; }
 
   /* SKILLS (Expandable Icon Grid) */
   .skills-expand-section { padding-top: 0; }
@@ -1005,6 +1066,10 @@
     .project-popup-content { padding: 1.5rem; }
     .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
     .skills-grid-icons { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    .lightbox-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+    .lightbox-arrow-left { left: 0.5rem; }
+    .lightbox-arrow-right { right: 0.5rem; }
+    .gallery-arrow { width: 28px; height: 28px; font-size: 0.9rem; }
   }
 </style>
 </head>
@@ -1131,7 +1196,7 @@
     <!-- CARDS GRID -->
     <div class="cards-grid fade-in" id="cardsGrid">
 
-      <!-- CARD 1: Scroll & Tell (UPDATED) -->
+      <!-- CARD 1: Scroll & Tell -->
       <div class="case-card" data-tags="smm video design ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Personal Project</span>
@@ -1176,13 +1241,17 @@
           </div>
 
           <div class="screenshot-gallery" id="gallery-scrolltell">
-            <img
-              id="featured-scrolltell"
-              class="screenshot-featured"
-              src="images/scrolltell-architecture.png"
-              alt="Instagram DM & Comment Automation — System Architecture"
-              onclick="event.stopPropagation(); openLightbox(this.src, this.alt)"
-            />
+            <div class="featured-container">
+              <img
+                id="featured-scrolltell"
+                class="screenshot-featured"
+                src="images/scrolltell-architecture.png"
+                alt="Instagram DM & Comment Automation — System Architecture"
+                onclick="event.stopPropagation(); openLightbox(this.src, this.alt)"
+              />
+              <button class="gallery-arrow gallery-arrow-left" onclick="event.stopPropagation(); navigateGallery('scrolltell', -1)">‹</button>
+              <button class="gallery-arrow gallery-arrow-right" onclick="event.stopPropagation(); navigateGallery('scrolltell', 1)">›</button>
+            </div>
             <div class="screenshot-thumbs">
               <img class="screenshot-thumb active" src="images/scrolltell-architecture.png" alt="System architecture" onclick="event.stopPropagation(); switchScreenshot('scrolltell', this.src, this); openLightbox(this.src, this.alt)" />
               <img class="screenshot-thumb" src="images/scrolltell-conversation.png" alt="Conversation flow" onclick="event.stopPropagation(); switchScreenshot('scrolltell', this.src, this); openLightbox(this.src, this.alt)" />
@@ -1194,7 +1263,7 @@
         </div>
       </div>
 
-      <!-- CARD 2: 4-Module AI Pipeline (UPDATED) -->
+      <!-- CARD 2: 4-Module AI Pipeline -->
       <div class="case-card" data-tags="ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Personal Project</span>
@@ -1233,7 +1302,7 @@
         </div>
       </div>
 
-      <!-- CARD 3: Short-Form Content Workflow (UPDATED - REMOVED 65% CLAIMS) -->
+      <!-- CARD 3: Short-Form Content Workflow -->
       <div class="case-card" data-tags="smm ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Experiment</span>
@@ -1296,7 +1365,7 @@
         </div>
       </div>
 
-      <!-- CARD 4: MathDesk (UPDATED) -->
+      <!-- CARD 4: MathDesk -->
       <div class="case-card" data-tags="ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Live Project</span>
@@ -1338,13 +1407,17 @@
           </div>
 
           <div class="screenshot-gallery" id="gallery-mathdesk">
-            <img
-              id="featured-mathdesk"
-              class="screenshot-featured"
-              src="images/mathdesk-home.png"
-              alt="MathDesk homepage"
-              onclick="event.stopPropagation(); openLightbox(this.src, this.alt)"
-            />
+            <div class="featured-container">
+              <img
+                id="featured-mathdesk"
+                class="screenshot-featured"
+                src="images/mathdesk-home.png"
+                alt="MathDesk homepage"
+                onclick="event.stopPropagation(); openLightbox(this.src, this.alt)"
+              />
+              <button class="gallery-arrow gallery-arrow-left" onclick="event.stopPropagation(); navigateGallery('mathdesk', -1)">‹</button>
+              <button class="gallery-arrow gallery-arrow-right" onclick="event.stopPropagation(); navigateGallery('mathdesk', 1)">›</button>
+            </div>
             <div class="screenshot-thumbs">
               <img class="screenshot-thumb active" src="images/mathdesk-home.png" alt="Homepage" onclick="event.stopPropagation(); switchScreenshot('mathdesk', this.src, this); openLightbox(this.src, this.alt)" />
               <img class="screenshot-thumb" src="images/mathdesk-chat.png" alt="AI chatbox with input options" onclick="event.stopPropagation(); switchScreenshot('mathdesk', this.src, this); openLightbox(this.src, this.alt)" />
@@ -1502,10 +1575,182 @@
 <!-- LIGHTBOX OVERLAY -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">ESC / CLOSE</button>
+  <button class="lightbox-arrow lightbox-arrow-left" id="lightboxPrev">‹</button>
+  <button class="lightbox-arrow lightbox-arrow-right" id="lightboxNext">›</button>
   <img class="lightbox-img" id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
 </div>
 
 <script>
+  // Gallery data storage
+  const galleries = {};
+
+  // ---- Helper: build gallery data ----
+  function buildGalleryData(galleryId) {
+    const gallery = document.getElementById('gallery-' + galleryId);
+    if (!gallery) return;
+    const thumbs = gallery.querySelectorAll('.screenshot-thumb');
+    const featured = gallery.querySelector('.screenshot-featured');
+    const images = [];
+    thumbs.forEach(img => {
+      images.push({ src: img.src, alt: img.alt });
+    });
+    // If there's a featured image, ensure it's first
+    if (featured) {
+      const featuredSrc = featured.src;
+      const featuredAlt = featured.alt;
+      // Remove duplicates if the featured is already in thumbs
+      const existing = images.find(i => i.src === featuredSrc);
+      if (!existing) {
+        images.unshift({ src: featuredSrc, alt: featuredAlt });
+      } else {
+        // make sure the first item matches featured
+        const idx = images.indexOf(existing);
+        if (idx > 0) {
+          images.splice(idx, 1);
+          images.unshift(existing);
+        }
+      }
+      // Update featured src to match first image
+      featured.src = images[0].src;
+      featured.alt = images[0].alt;
+    }
+    // Update thumb active state to match featured
+    thumbs.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === 0);
+    });
+    galleries[galleryId] = {
+      images: images,
+      currentIndex: 0,
+      featured: featured,
+      thumbs: thumbs
+    };
+  }
+
+  // ---- Navigate gallery on main screen ----
+  function navigateGallery(galleryId, delta) {
+    const data = galleries[galleryId];
+    if (!data || data.images.length === 0) return;
+    const newIndex = (data.currentIndex + delta + data.images.length) % data.images.length;
+    data.currentIndex = newIndex;
+    const imgData = data.images[newIndex];
+    if (data.featured) {
+      data.featured.src = imgData.src;
+      data.featured.alt = imgData.alt;
+    }
+    data.thumbs.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === newIndex);
+    });
+  }
+
+  // ---- Switch screenshot (triggered by thumb click) ----
+  function switchScreenshot(galleryId, src, thumbEl) {
+    const data = galleries[galleryId];
+    if (!data) return;
+    // find index
+    const idx = data.images.findIndex(img => img.src === src);
+    if (idx === -1) return;
+    data.currentIndex = idx;
+    if (data.featured) {
+      data.featured.src = src;
+      data.featured.alt = thumbEl ? thumbEl.alt : '';
+    }
+    data.thumbs.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === idx);
+    });
+  }
+
+  // ---- Lightbox navigation ----
+  let currentLightboxGallery = null;
+  let currentLightboxIndex = 0;
+
+  function openLightbox(src, alt) {
+    // Find which gallery this image belongs to
+    let foundGallery = null;
+    let foundIndex = -1;
+    for (const [id, data] of Object.entries(galleries)) {
+      const idx = data.images.findIndex(img => img.src === src);
+      if (idx !== -1) {
+        foundGallery = id;
+        foundIndex = idx;
+        break;
+      }
+    }
+    if (foundGallery === null) {
+      // fallback: just open the image without navigation
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // hide arrows if no gallery
+      document.getElementById('lightboxPrev').style.display = 'none';
+      document.getElementById('lightboxNext').style.display = 'none';
+      return;
+    }
+    currentLightboxGallery = foundGallery;
+    currentLightboxIndex = foundIndex;
+    updateLightbox();
+    document.getElementById('lightboxPrev').style.display = 'block';
+    document.getElementById('lightboxNext').style.display = 'block';
+  }
+
+  function updateLightbox() {
+    const data = galleries[currentLightboxGallery];
+    if (!data) return;
+    const imgData = data.images[currentLightboxIndex];
+    if (!imgData) return;
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = imgData.src;
+    lbImg.alt = imgData.alt;
+    // Show the lightbox if not already active
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('active')) {
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function navigateLightbox(delta) {
+    if (!currentLightboxGallery) return;
+    const data = galleries[currentLightboxGallery];
+    if (!data || data.images.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex + delta + data.images.length) % data.images.length;
+    updateLightbox();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+    currentLightboxGallery = null;
+  }
+
+  // ---- Build galleries on page load ----
+  document.addEventListener('DOMContentLoaded', function() {
+    // Find all screenshot galleries
+    document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
+      const id = gallery.id.replace('gallery-', '');
+      if (id) buildGalleryData(id);
+    });
+    // Attach lightbox navigation events
+    document.getElementById('lightboxPrev').addEventListener('click', function(e) {
+      e.stopPropagation();
+      navigateLightbox(-1);
+    });
+    document.getElementById('lightboxNext').addEventListener('click', function(e) {
+      e.stopPropagation();
+      navigateLightbox(1);
+    });
+    // Keyboard navigation in lightbox
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); navigateLightbox(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); navigateLightbox(1); }
+      }
+    });
+  });
+
+  // ---- Existing functions (filter, toggle, popup, etc.) ----
   // FILTER LOGIC
   const filterButtons = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.case-card');
@@ -1555,6 +1800,11 @@
     
     popup.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Rebuild gallery data for the cloned galleries (they have same IDs)
+    document.querySelectorAll('.screenshot-gallery').forEach(g => {
+      const id = g.id.replace('gallery-', '');
+      if (id) buildGalleryData(id);
+    });
   }
 
   function closeProjectPopup() {
@@ -1568,31 +1818,6 @@
       closeLightbox();
     }
   });
-
-  // LIGHTBOX
-  function openLightbox(src, alt) {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    img.alt = alt || '';
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  function switchScreenshot(galleryId, src, thumbEl) {
-    const featured = document.getElementById('featured-' + galleryId);
-    if (featured) {
-      featured.src = src;
-      if (thumbEl) featured.alt = thumbEl.alt;
-    }
-    document.querySelectorAll('#gallery-' + galleryId + ' .screenshot-thumb').forEach(t => t.classList.remove('active'));
-    if (thumbEl) thumbEl.classList.add('active');
-  }
 
   // TOGGLE CASE (for Skills expandable)
   function toggleCase(id) {
