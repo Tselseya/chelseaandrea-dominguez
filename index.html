@@ -675,7 +675,7 @@
     width: 100%;
     border: 1px solid var(--border);
     display: block;
-    object-fit: cover;
+    object-fit: contain; /* <--- THIS IS THE FIX */
     max-height: 280px;
     cursor: zoom-in;
     transition: opacity 0.2s;
