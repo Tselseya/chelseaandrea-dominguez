@@ -1121,7 +1121,7 @@
   </div>
 </section>
 
-<!-- PHILOSOPHY (UPDATED COPY) -->
+<!-- PHILOSOPHY -->
 <section class="philosophy" id="philosophy">
   <div class="container">
     <p class="section-label">Design Philosophy</p>
@@ -1584,46 +1584,44 @@
   // Gallery data storage
   const galleries = {};
 
-  // ---- Helper: build gallery data ----
-  function buildGalleryData(galleryId) {
-    const gallery = document.getElementById('gallery-' + galleryId);
-    if (!gallery) return;
-    const thumbs = gallery.querySelectorAll('.screenshot-thumb');
-    const featured = gallery.querySelector('.screenshot-featured');
-    const images = [];
-    thumbs.forEach(img => {
-      images.push({ src: img.src, alt: img.alt });
-    });
-    // If there's a featured image, ensure it's first
-    if (featured) {
-      const featuredSrc = featured.src;
-      const featuredAlt = featured.alt;
-      // Remove duplicates if the featured is already in thumbs
-      const existing = images.find(i => i.src === featuredSrc);
-      if (!existing) {
-        images.unshift({ src: featuredSrc, alt: featuredAlt });
-      } else {
-        // make sure the first item matches featured
-        const idx = images.indexOf(existing);
-        if (idx > 0) {
-          images.splice(idx, 1);
-          images.unshift(existing);
+  // ---- Build gallery data from a specific container ----
+  function buildGalleryDataForContainer(container) {
+    const galleriesInContainer = container.querySelectorAll('.screenshot-gallery');
+    galleriesInContainer.forEach(gallery => {
+      const id = gallery.id.replace('gallery-', '');
+      const thumbs = gallery.querySelectorAll('.screenshot-thumb');
+      const featured = gallery.querySelector('.screenshot-featured');
+      const images = [];
+      thumbs.forEach(img => {
+        images.push({ src: img.src, alt: img.alt });
+      });
+      if (featured) {
+        const featuredSrc = featured.src;
+        const featuredAlt = featured.alt;
+        const existing = images.find(i => i.src === featuredSrc);
+        if (!existing) {
+          images.unshift({ src: featuredSrc, alt: featuredAlt });
+        } else {
+          const idx = images.indexOf(existing);
+          if (idx > 0) {
+            images.splice(idx, 1);
+            images.unshift(existing);
+          }
         }
+        featured.src = images[0].src;
+        featured.alt = images[0].alt;
       }
-      // Update featured src to match first image
-      featured.src = images[0].src;
-      featured.alt = images[0].alt;
-    }
-    // Update thumb active state to match featured
-    thumbs.forEach((thumb, i) => {
-      thumb.classList.toggle('active', i === 0);
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === 0);
+      });
+      galleries[id] = {
+        images: images,
+        currentIndex: 0,
+        featured: featured,
+        thumbs: thumbs,
+        container: gallery
+      };
     });
-    galleries[galleryId] = {
-      images: images,
-      currentIndex: 0,
-      featured: featured,
-      thumbs: thumbs
-    };
   }
 
   // ---- Navigate gallery on main screen ----
@@ -1646,7 +1644,6 @@
   function switchScreenshot(galleryId, src, thumbEl) {
     const data = galleries[galleryId];
     if (!data) return;
-    // find index
     const idx = data.images.findIndex(img => img.src === src);
     if (idx === -1) return;
     data.currentIndex = idx;
@@ -1664,7 +1661,6 @@
   let currentLightboxIndex = 0;
 
   function openLightbox(src, alt) {
-    // Find which gallery this image belongs to
     let foundGallery = null;
     let foundIndex = -1;
     for (const [id, data] of Object.entries(galleries)) {
@@ -1676,14 +1672,12 @@
       }
     }
     if (foundGallery === null) {
-      // fallback: just open the image without navigation
       const lb = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
       img.src = src;
       img.alt = alt || '';
       lb.classList.add('active');
       document.body.style.overflow = 'hidden';
-      // hide arrows if no gallery
       document.getElementById('lightboxPrev').style.display = 'none';
       document.getElementById('lightboxNext').style.display = 'none';
       return;
@@ -1703,7 +1697,6 @@
     const lbImg = document.getElementById('lightbox-img');
     lbImg.src = imgData.src;
     lbImg.alt = imgData.alt;
-    // Show the lightbox if not already active
     const lb = document.getElementById('lightbox');
     if (!lb.classList.contains('active')) {
       lb.classList.add('active');
@@ -1725,14 +1718,9 @@
     currentLightboxGallery = null;
   }
 
-  // ---- Build galleries on page load ----
+  // ---- Build galleries on page load and on popup open/close ----
   document.addEventListener('DOMContentLoaded', function() {
-    // Find all screenshot galleries
-    document.querySelectorAll('.screenshot-gallery').forEach(gallery => {
-      const id = gallery.id.replace('gallery-', '');
-      if (id) buildGalleryData(id);
-    });
-    // Attach lightbox navigation events
+    buildGalleryDataForContainer(document);
     document.getElementById('lightboxPrev').addEventListener('click', function(e) {
       e.stopPropagation();
       navigateLightbox(-1);
@@ -1741,7 +1729,6 @@
       e.stopPropagation();
       navigateLightbox(1);
     });
-    // Keyboard navigation in lightbox
     document.addEventListener('keydown', function(e) {
       if (document.getElementById('lightbox').classList.contains('active')) {
         if (e.key === 'ArrowLeft') { e.preventDefault(); navigateLightbox(-1); }
@@ -1750,36 +1737,7 @@
     });
   });
 
-  // ---- Existing functions (filter, toggle, popup, etc.) ----
-  // FILTER LOGIC
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.case-card');
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-
-      cards.forEach(card => {
-        const tags = card.dataset.tags.split(' ');
-        if (filter === 'all' || tags.includes(filter)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  });
-
-  // EXPERIENCE INLINE TOGGLE
-  function toggleDetails(btn) {
-    const details = btn.nextElementSibling;
-    details.style.display = details.style.display === 'block' ? 'none' : 'block';
-    btn.textContent = details.style.display === 'block' ? 'Read less ↑' : 'Read more →';
-  }
-
-  // PROJECT POPUP
+  // ---- Project popup overrides ----
   function openProjectPopup(cardElement) {
     const details = cardElement.querySelector('.case-details');
     if (!details) return;
@@ -1798,18 +1756,18 @@
     `;
     body.appendChild(clone);
     
+    // Rebuild gallery data from the popup's content
+    buildGalleryDataForContainer(body);
+    
     popup.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Rebuild gallery data for the cloned galleries (they have same IDs)
-    document.querySelectorAll('.screenshot-gallery').forEach(g => {
-      const id = g.id.replace('gallery-', '');
-      if (id) buildGalleryData(id);
-    });
   }
 
   function closeProjectPopup() {
     document.getElementById('projectPopup').classList.remove('active');
     document.body.style.overflow = '';
+    // Restore main page gallery data
+    buildGalleryDataForContainer(document);
   }
 
   document.addEventListener('keydown', function(e) {
@@ -1819,7 +1777,32 @@
     }
   });
 
-  // TOGGLE CASE (for Skills expandable)
+  // ---- Existing functions (filter, toggle, etc.) ----
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.case-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const tags = card.dataset.tags.split(' ');
+        if (filter === 'all' || tags.includes(filter)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  function toggleDetails(btn) {
+    const details = btn.nextElementSibling;
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+    btn.textContent = details.style.display === 'block' ? 'Read less ↑' : 'Read more →';
+  }
+
   function toggleCase(id) {
     const card = document.getElementById(id);
     card.classList.toggle('open');
@@ -1831,7 +1814,6 @@
     }
   }
 
-  // MOBILE MENU
   function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('open');
@@ -1845,7 +1827,6 @@
     }
   });
 
-  // FADE IN
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
