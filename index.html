@@ -1056,7 +1056,7 @@
   </div>
 </section>
 
-<!-- PHILOSOPHY (MERGED FROM ORIGINAL) -->
+<!-- PHILOSOPHY (UPDATED COPY) -->
 <section class="philosophy" id="philosophy">
   <div class="container">
     <p class="section-label">Design Philosophy</p>
@@ -1068,10 +1068,16 @@
       </div>
       <div class="philosophy-body">
         <p>
-          The most consequential decision in any AI workflow is not which model to use — it is how sparingly to use AI at all. Every inference call carries latency, cost, and failure risk. Rule-based logic is fast, free, and deterministic.
+          The most consequential decision in an AI workflow isn't always which model to use. It's deciding where AI is actually necessary.
         </p>
         <p>
-          A well-designed system reserves AI for genuine ambiguity: multi-turn conversations, context-dependent responses, and judgment calls. Everything predictable gets a rule. The result scales cleanly, fails predictably, and is easy to audit.
+          Every unnecessary inference call adds latency, cost, and another potential failure point. Predictable decisions can often be handled more efficiently with rules and deterministic logic.
+        </p>
+        <p>
+          I design workflows around that distinction: AI for tasks that require interpretation, context, or generation; rules for things that can be explicitly defined.
+        </p>
+        <p>
+          The goal isn't to make everything "AI-powered." It's to make the overall system simpler, more predictable, and easier to reason about.
         </p>
       </div>
     </div>
@@ -1080,27 +1086,27 @@
       <div class="principle-card">
         <p class="principle-num">01</p>
         <h3>Separate decision logic from generation</h3>
-        <p>Rule-based systems handle predictable decisions. AI is reserved for tasks that require interpretation, context, or generation.</p>
+        <p>Rule-based logic handles predictable decisions. AI is reserved for tasks that require interpretation, context, or generation.</p>
       </div>
       <div class="principle-card">
         <p class="principle-num">02</p>
         <h3>Use AI only where variability exists</h3>
-        <p>Simple interactions are handled with fixed responses. AI activates only when the input is genuinely unpredictable.</p>
+        <p>Simple, predictable interactions use fixed responses or rules. AI is introduced when the input genuinely requires interpretation.</p>
       </div>
       <div class="principle-card">
         <p class="principle-num">03</p>
         <h3>Define clear completion states</h3>
-        <p>Systems do not rely on "good enough." A process is complete only when it meets explicit, structural criteria.</p>
+        <p>A workflow should not depend on something being "good enough." Each stage should have explicit conditions that determine whether the process is complete.</p>
       </div>
       <div class="principle-card">
         <p class="principle-num">04</p>
         <h3>Design for failure, not just success</h3>
-        <p>Identify where failure can occur, then isolate those points to prevent full workflow breakdown.</p>
+        <p>Identify where failures can occur, then isolate those points so one failed component does not unnecessarily break the entire workflow.</p>
       </div>
       <div class="principle-card">
         <p class="principle-num">05</p>
         <h3>Control cost through architecture</h3>
-        <p>A lightweight classifier handles the majority of interactions. Heavy agents only trigger when necessary.</p>
+        <p>Use lightweight models or deterministic logic for simpler tasks, and reserve more capable models for tasks that actually require them.</p>
       </div>
     </div>
   </div>
@@ -1125,7 +1131,7 @@
     <!-- CARDS GRID -->
     <div class="cards-grid fade-in" id="cardsGrid">
 
-      <!-- CARD 1: Scroll & Tell (SMM + Video + Design + AI) -->
+      <!-- CARD 1: Scroll & Tell (UPDATED) -->
       <div class="case-card" data-tags="smm video design ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Personal Project</span>
@@ -1135,24 +1141,26 @@
           <span class="tag tag-ai">AI</span>
         </div>
         <h3 class="case-title">Scroll & Tell: Social Media Experiment</h3>
-        <p class="case-subtitle">Reddit-style storytelling brand across Instagram, Facebook, TikTok & YouTube Shorts. Content strategy, community engagement, and AI-assisted operations.</p>
+        <p class="case-subtitle">A personal short-form storytelling project built around Reddit-style stories across Instagram, Facebook, TikTok, and YouTube Shorts.</p>
         
         <div class="case-details">
-          <p><strong>Brand:</strong> "Reddit Stories with a Twist. Short, sharp, satisfying stories."</p>
-          <p><strong>Role:</strong> Independent Creator & Workflow Designer</p>
-          <p><strong>Platforms:</strong> Instagram, Facebook, TikTok, YouTube Shorts</p>
-          <div class="highlight-box">
-            <p><strong>Core concept:</strong> Turn community-submitted stories into short-form content with a focus on hooks, pacing, and platform-specific adaptation.</p>
-          </div>
+          <p>The project combines content strategy, short-form production, community engagement, and AI-assisted workflow design.</p>
+          <p><strong>Brand concept:</strong> "Reddit Stories with a Twist. Short, sharp, satisfying stories."</p>
+          <p><strong>Role:</strong> Creator & Workflow Designer — Personal Project</p>
+          <p><strong>Platforms:</strong> Instagram · Facebook · TikTok · YouTube Shorts</p>
+          <p><strong>Core concept:</strong> Turn community-submitted stories into short-form content, with an emphasis on hooks, pacing, storytelling, and adapting content for different platforms.</p>
+          
           <p><strong>What I worked on:</strong></p>
           <ul>
-            <li>Full content strategy (pillars, hooks, CTAs, repurposing)</li>
-            <li>Short-form video production & editing (CapCut, InShot)</li>
-            <li>Community management (comment replies, DM engagement, story submissions)</li>
-            <li>Social media graphics & brand assets (Canva)</li>
-            <li>AI-assisted content workflows (ChatGPT for scripts, ideation)</li>
-            <li>Automation pipeline design (n8n, Meta Graph API, Ollama)</li>
+            <li>Developed content pillars, hooks, CTAs, and repurposing approaches</li>
+            <li>Produced and edited short-form videos using CapCut and InShot</li>
+            <li>Managed comments, DMs, and story submissions</li>
+            <li>Created social media graphics and brand assets in Canva</li>
+            <li>Used ChatGPT for ideation, scripting, and content development</li>
+            <li>Designed AI-assisted workflows using n8n, Meta Graph API, and Ollama</li>
+            <li>Organized content assets and project workflows using Google Sheets, PostgreSQL, Telegram, Notion, and Trello</li>
           </ul>
+          
           <p><strong>Tools:</strong></p>
           <div class="tech-stack">
             <span>CapCut</span><span>Canva</span><span>ChatGPT</span><span>InShot</span>
@@ -1172,7 +1180,7 @@
               id="featured-scrolltell"
               class="screenshot-featured"
               src="images/scrolltell-architecture.png"
-              alt="AI-Driven Instagram DM & Comment Automation System Architecture"
+              alt="Instagram DM & Comment Automation — System Architecture"
               onclick="event.stopPropagation(); openLightbox(this.src, this.alt)"
             />
             <div class="screenshot-thumbs">
@@ -1186,22 +1194,30 @@
         </div>
       </div>
 
-      <!-- CARD 2: 4-Module AI Pipeline (AI) -->
+      <!-- CARD 2: 4-Module AI Pipeline (UPDATED) -->
       <div class="case-card" data-tags="ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Personal Project</span>
           <span class="tag tag-ai">AI</span>
         </div>
         <h3 class="case-title">4-Module AI Content Pipeline</h3>
-        <p class="case-subtitle">Intake → Generation → Approval → Distribution. Four isolated n8n workflows with self-hosted LLMs (TinyLlama, Phi-3 Mini) and human approval via Telegram.</p>
+        <p class="case-subtitle">A modular n8n workflow architecture that separates intake, content generation, human approval, and distribution into four independent workflows.</p>
         <div class="case-details">
-          <p><strong>Why four workflows:</strong> Each module has a different trigger, different dependencies, and different failure behavior. Splitting them isolates problems.</p>
+          <p>The system combines rules, APIs, local LLMs, databases, and human approval rather than relying on AI for every step.</p>
+          <p><strong>Why four workflows:</strong> Each module has different triggers, dependencies, and failure points. Separating them makes individual stages easier to develop, debug, and change without treating the entire system as one unit.</p>
+          
           <ul>
-            <li><strong>Module 1 (Intake):</strong> Instagram webhook → intent classification (TinyLlama) → story collection agent (Phi-3 Mini) → Google Sheets</li>
-            <li><strong>Module 2 (Generation):</strong> Duplicate check → Phi-3 generates JSON (hook, caption, hashtags) → PostgreSQL (pending_approval)</li>
-            <li><strong>Module 3 (Approval):</strong> Telegram message with Approve/Reject/Upload buttons → DB status update</li>
-            <li><strong>Module 4 (Distribution):</strong> Retrieves approved content → publishes to Instagram & Facebook via Meta Graph API</li>
+            <li><strong>Module 1 — Intake:</strong> Instagram webhook → intent classification → story collection → Google Sheets</li>
+            <li><strong>Module 2 — Generation:</strong> Duplicate check → AI-generated content package → PostgreSQL</li>
+            <li><strong>Module 3 — Approval:</strong> Telegram notification → Approve / Reject / Upload → database status update</li>
+            <li><strong>Module 4 — Distribution:</strong> Approved content → Meta Graph API → Instagram / Facebook</li>
           </ul>
+          
+          <p><strong>Module 1 — Intake:</strong> The original design uses a lightweight local model for intent classification and a larger local model for conversational story collection.</p>
+          <p><strong>Module 2 — Generation:</strong> Approved inputs are transformed into a structured content package containing elements such as the hook, caption, and hashtags.</p>
+          <p><strong>Module 3 — Approval:</strong> Content is sent to Telegram for human review. Approval status is then recorded in the database before the content can move forward.</p>
+          <p><strong>Module 4 — Distribution:</strong> The distribution stage handles approved content separately from the earlier workflow stages, allowing publishing logic to be modified independently.</p>
+          
           <div class="highlight-box">
             <p><strong>Design principle:</strong> "Use AI where ambiguity actually requires it, and use rules everywhere else."</p>
           </div>
@@ -1217,78 +1233,104 @@
         </div>
       </div>
 
-      <!-- CARD 3: AI-Assisted Short-Form Content (MERGED FROM ORIGINAL) -->
+      <!-- CARD 3: Short-Form Content Workflow (UPDATED - REMOVED 65% CLAIMS) -->
       <div class="case-card" data-tags="smm ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
-          <span class="tag tag-live">Live</span>
+          <span class="tag tag-live">Experiment</span>
           <span class="tag tag-smm">SMM</span>
           <span class="tag tag-ai">AI</span>
         </div>
-        <h3 class="case-title">AI-Assisted Short-Form Content Automation Workflow</h3>
-        <p class="case-subtitle">A modular, 5-stage prompt pipeline that transforms raw Reddit stories into production-ready video content packages, reducing prep time from 45 to 15 minutes.</p>
+        <h3 class="case-title">AI-Assisted Short-Form Content Workflow</h3>
+        <p class="case-subtitle">A modular, five-stage prompt workflow for transforming raw Reddit stories into structured short-form content assets.</p>
         <div class="case-details">
-          <p><strong>The Problem:</strong> Reddit storytelling content works on short-form video when it preserves emotional pacing, character clarity, and platform-specific voice. Most creators either post the raw thread unedited or pass it through a single AI prompt — both produce inconsistent results. A single pass cannot simultaneously optimize for caption length, hook strength, CTA relevance, and hashtag fit.</p>
+          <p>The workflow was designed to separate different content-processing tasks rather than asking one prompt to handle the entire transformation at once.</p>
           
-          <p><strong>Why Modular Over Single-Prompt?</strong> Each stage enforces a different constraint: chronological logic, character-count awareness, taxonomy thinking. Combining these in one prompt creates conflicts — the model optimizes for too many things at once and drops constraints at the edges.</p>
+          <p><strong>The Problem:</strong> Reddit-style storytelling content requires more than simply rewriting the original post. A usable short-form adaptation needs to preserve the story's sequence and emotional arc while also considering elements such as hook structure, pacing, captions, CTAs, and platform-specific constraints.</p>
+          
+          <p>Instead of asking one AI prompt to optimize everything simultaneously, I experimented with breaking the process into smaller stages with defined inputs and outputs.</p>
+
+          <p><strong>Why Modular Instead of One Prompt?</strong> Each stage has a different responsibility and constraint. Separating them makes it easier to inspect outputs, adjust individual prompts, and identify where an error was introduced. It also keeps the workflow human-in-the-loop rather than treating the model's output as automatically correct.</p>
 
           <p><strong>The 5-Stage Pipeline:</strong></p>
-          <div class="arch-layer"><p class="arch-layer-name">Stage 1: Story Extraction & Restructuring</p><p>Strips filler, reorders events chronologically, preserves emotional arc. Output: beat-based narration script and editor notes.</p></div>
+          <div class="arch-layer"><p class="arch-layer-name">Stage 1: Story Extraction & Restructuring</p><p>Extracts the important events, removes unnecessary filler, and restructures the story into a clearer chronological sequence. Output: beat-based narration structure and editor notes.</p></div>
           <div class="arch-arrow">↓</div>
-          <div class="arch-layer"><p class="arch-layer-name">Stage 2: Script Adaptation</p><p>Converts restructured story into short-form script timed for TikTok/Reels/Shorts pacing (60 to 90 seconds).</p></div>
+          <div class="arch-layer"><p class="arch-layer-name">Stage 2: Script Adaptation</p><p>Adapts the restructured story into a short-form narration format designed around short-form pacing.</p></div>
           <div class="arch-arrow">↓</div>
-          <div class="arch-layer"><p class="arch-layer-name">Stage 3: Caption Generation</p><p>Produces hook, body, and CTA captions within platform character limits. Maintains brand voice, avoids spoilers.</p></div>
+          <div class="arch-layer"><p class="arch-layer-name">Stage 3: Caption Generation</p><p>Generates structured caption components such as the hook, body, and CTA while maintaining the intended brand voice.</p></div>
           <div class="arch-arrow">↓</div>
-          <div class="arch-layer"><p class="arch-layer-name">Stage 4: CTA Selection</p><p>Chooses the appropriate call-to-action based on story type (relate, share, react, follow). One CTA only.</p></div>
+          <div class="arch-layer"><p class="arch-layer-name">Stage 4: CTA Selection</p><p>Selects a CTA based on the type of interaction the content is intended to encourage.</p></div>
           <div class="arch-arrow">↓</div>
-          <div class="arch-layer"><p class="arch-layer-name">Stage 5: Hashtag Classification</p><p>Outputs curated hashtag set organized by discovery tier (broad, niche, branded). Topic-aligned, not trend-chasing.</p></div>
+          <div class="arch-layer"><p class="arch-layer-name">Stage 5: Hashtag Classification</p><p>Organizes relevant hashtags into broad, niche, and branded categories rather than relying exclusively on trending tags.</p></div>
 
-          <p><strong>Honest Limitations:</strong> This is a human-in-the-loop workflow, not an autonomous pipeline — a human reviews each stage before the next runs. It requires reasonably coherent input; heavily fragmented posts need manual cleanup before Stage 1 produces usable output. There is no feedback loop yet between content performance and prompt refinement.</p>
+          <p><strong>Honest Limitations:</strong> This is a human-in-the-loop experiment, not an autonomous content pipeline. The quality of the output depends heavily on the quality and coherence of the source material. Fragmented or poorly structured stories may require manual cleanup before processing. There is also no feedback loop yet connecting content-performance data back into prompt refinement.</p>
 
-          <p><strong>Impact:</strong></p>
+          <p><strong>Workflow Characteristics:</strong></p>
           <div class="impact-stats">
-            <div class="stat-box"><p class="stat-num">65%</p><p class="stat-label">Reduction in per-video content prep time</p></div>
-            <div class="stat-box"><p class="stat-num">5</p><p class="stat-label">Isolated stages, errors stay contained</p></div>
-            <div class="stat-box"><p class="stat-num">3</p><p class="stat-label">Platforms: Instagram, TikTok, YouTube Shorts</p></div>
-            <div class="stat-box"><p class="stat-num">↑</p><p class="stat-label">Output consistency across batches significantly improved</p></div>
+            <div class="stat-box"><p class="stat-num">5</p><p class="stat-label">Stages, each with a defined responsibility and output</p></div>
+            <div class="stat-box"><p class="stat-num">Human</p><p class="stat-label">In-the-loop — outputs are reviewed before continuing</p></div>
+            <div class="stat-box"><p class="stat-num">Modular</p><p class="stat-label">Individual prompts can be changed without rewriting the entire workflow</p></div>
+            <div class="stat-box"><p class="stat-num">Multi-platform</p><p class="stat-label">Designed for short-form formats across Instagram, TikTok, and YouTube Shorts</p></div>
           </div>
+
+          <p><strong>What this experiment taught me:</strong></p>
+          <ul>
+            <li>Breaking a complex generation task into smaller stages makes individual outputs easier to inspect.</li>
+            <li>Explicit constraints are easier to reason about when each stage has one primary responsibility.</li>
+            <li>AI output still needs human review, particularly when preserving story meaning and tone.</li>
+            <li>Modular prompts make experimentation easier because individual stages can be changed without rewriting the entire process.</li>
+          </ul>
 
           <p><strong>Design Principles Applied:</strong></p>
           <ul>
-            <li>No stage does more than one thing, each has a defined input, a constrained output, and a specific job.</li>
-            <li>Guardrails maintain story-specific tone, the hook reflects what actually makes the story shareable, not a template phrase.</li>
-            <li>The output of each stage feeds the next, so errors stay contained and adjustments are isolated.</li>
-            <li>Final assembly produces a production-ready package for direct handoff into video editing and publishing.</li>
+            <li>No stage is responsible for everything; each has a defined input, a constrained output, and a specific job.</li>
+            <li>Guardrails help maintain story-specific tone and keep generated hooks connected to the actual story.</li>
+            <li>The output of each stage feeds the next, making adjustments easier to isolate.</li>
+            <li>Final assembly produces a structured content package that can be reviewed and prepared for editing and publishing.</li>
           </ul>
 
           <div class="highlight-box">
-            <p><strong>Key Takeaway:</strong> This is not a content brand case study. It is a workflow design case study demonstrating how modular AI systems can transform unstructured inputs into consistent, production-ready outputs under real platform constraints, with a human in the loop to catch what the system cannot.</p>
+            <p><strong>Key Takeaway:</strong> This project demonstrates how a modular AI workflow can transform unstructured inputs into more consistent, structured content assets while keeping human review in the process. The interesting part isn't simply using AI for content generation; it's deciding which parts of the process should be handled by AI, which should remain rule-based, and where human judgment is still necessary.</p>
           </div>
 
-          <p><strong>Tools:</strong> ChatGPT, Google Veo, CapCut, Notion & Trello</p>
+          <p><strong>Tools:</strong> ChatGPT · Google Veo · CapCut · Notion · Trello</p>
         </div>
       </div>
 
-      <!-- CARD 4: MathDesk (AI) -->
+      <!-- CARD 4: MathDesk (UPDATED) -->
       <div class="case-card" data-tags="ai" onclick="openProjectPopup(this)">
         <div class="card-tags">
           <span class="tag tag-live">Live Project</span>
           <span class="tag tag-ai">AI</span>
         </div>
-        <h3 class="case-title">MathDesk: AI-Assisted Math Tool</h3>
-        <p class="case-subtitle">A free math learning platform with 4 AI modes (Solve, Learn, Practice, Deskbot), camera/handwriting input, and a self-hosted n8n backend using Groq APIs.</p>
+        <h3 class="case-title">MathDesk: AI-Assisted Math Learning Tool</h3>
+        <p class="case-subtitle">A personal AI-assisted math learning tool built around a simple idea: show the reasoning behind the answer, not just the final result.</p>
         <div class="case-details">
+          <p>The project combines a vanilla HTML/CSS/JavaScript frontend, n8n workflows, Groq LLM APIs, and Supabase for optional authentication and chat history.</p>
+          
           <p><strong>Core idea:</strong> Show the reasoning behind the answer, not just the final result.</p>
           <ul>
             <li><strong>Solve:</strong> Step-by-step solutions with explanations</li>
-            <li><strong>Learn:</strong> Concept-first tutor mode with examples</li>
-            <li><strong>Practice:</strong> Generates 5 problems by difficulty</li>
-            <li><strong>Deskbot:</strong> App FAQ, cannot solve math</li>
+            <li><strong>Learn:</strong> Concept-focused explanations and examples</li>
+            <li><strong>Practice:</strong> Generates practice problems by difficulty</li>
+            <li><strong>FAQ / Deskbot:</strong> Answers questions about using the application; does not solve mathematics problems</li>
           </ul>
-          <p><strong>Input methods:</strong> Text (with math symbols panel), Camera scan, Handwriting canvas (Pointer Events API), Upload / paste / drag-and-drop</p>
-          <p><strong>Tech stack:</strong> Vanilla HTML/CSS/JS (single-file frontend), n8n (self-hosted), Groq API (llama-3.3-70b + llama-4-scout), Supabase (auth + RLS), GitHub Pages, Docker, ngrok</p>
+          
+          <p><strong>Input methods:</strong> Text input with math symbols, camera/image input, handwriting canvas, upload, paste, and drag-and-drop</p>
+          <p><strong>Model routing:</strong> Text-only requests use a text model, while image-based inputs are routed to a vision-capable model.</p>
+          <p><strong>Tech stack:</strong> Vanilla HTML/CSS/JavaScript · n8n (self-hosted) · Groq API (Llama 3.3 70B for text · Llama 4 Scout for vision-capable inputs) · Supabase (authentication + RLS + chat history) · Docker · GitHub Pages · ngrok</p>
+          
           <div class="highlight-box">
-            <p><strong>My role:</strong> Designed the system architecture, built the frontend, configured n8n workflows, integrated Groq APIs, implemented Supabase auth, handled deployment & DNS.</p>
+            <p><strong>My role:</strong> Designed the system architecture, built the frontend, configured n8n workflows, integrated Groq APIs, implemented Supabase authentication, and handled deployment, DNS configuration, debugging, and system integration. I also used AI-assisted development tools during iteration while handling the overall architecture and integration myself.</p>
           </div>
+          
+          <p><strong>Current limitations:</strong></p>
+          <ul>
+            <li>The current deployment relies on ngrok for the n8n webhook connection.</li>
+            <li>Public webhook authentication is still being hardened.</li>
+            <li>Groq usage is subject to available API limits.</li>
+            <li>There is not yet a feedback loop for evaluating and improving AI responses.</li>
+          </ul>
+
           <div class="external-links" style="margin-top:0.75rem;">
             <a href="https://app.mathdesk.page.gd" target="_blank">Live App</a>
             <a href="https://github.com/Tselseya/MathDesk" target="_blank">GitHub</a>
@@ -1323,11 +1365,11 @@
   <div class="container">
     <p class="section-label">Background</p>
     <h2 class="section-title fade-in">Experience &amp; <em>Education</em></h2>
-    <p class="section-desc fade-in">Professional roles and academic background. These also appear when you filter by the relevant track.</p>
+    <p class="section-desc fade-in">Professional roles and academic background.</p>
 
     <div class="fade-in" style="display:flex; flex-direction:column; gap:2px; background:var(--border); border:1px solid var(--border);">
 
-      <!-- Exp Card 1: Astrogen (Video) -->
+      <!-- Exp Card 1: Astrogen -->
       <div class="case-card" data-tags="experience video" style="cursor:default;">
         <div class="card-tags">
           <span class="tag tag-live">Professional</span>
@@ -1347,7 +1389,7 @@
         </div>
       </div>
 
-      <!-- Exp Card 2: Academic Support (Design) -->
+      <!-- Exp Card 2: Academic Support -->
       <div class="case-card" data-tags="experience design" style="cursor:default;">
         <div class="card-tags">
           <span class="tag">Freelance</span>
@@ -1383,7 +1425,7 @@
   </div>
 </section>
 
-<!-- SKILLS (Expandable Icon Grid from ORIGINAL) -->
+<!-- SKILLS (Expandable Icon Grid) -->
 <section class="skills-expand-section" id="skills">
   <div class="container">
     <p class="section-label">Technical Proficiencies</p>
@@ -1556,7 +1598,6 @@
   function toggleCase(id) {
     const card = document.getElementById(id);
     card.classList.toggle('open');
-    // Handle the body display manually since it's a generic toggle
     const body = card.querySelector('.case-body');
     const arrow = card.querySelector('.case-arrow');
     if (body) {
