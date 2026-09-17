@@ -8,7 +8,7 @@ This checklist matches the updated `index.html` against the repository at commit
 |---|---:|---|
 | Already present | 29 | Four Poppins font files, favicon, `images/og-image.png`, and 23 tool SVGs |
 | Added from existing repository asset | 1 | `profile.png`, copied from the existing `portfolio.png` portrait |
-| Still needed | 44 | Project reel/thumbnail assets and expanded project-detail screenshots |
+| Still needed | 60 | Four dynamically generated project thumbnails, AI-build visuals, certification badges, and expanded project-detail screenshots |
 
 ## Still-needed files
 
