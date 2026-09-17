@@ -100,3 +100,7 @@ The repository already contains older assets such as `images/mathdesk-home.png`,
 3. Keep sensitive certificate details out of public screenshots.
 4. Test the site locally and check the browser console for 404 errors before publishing.
 5. Commit the assets and push them to `main` together with the updated `index.html`.
+
+## Certification badge upload completed
+
+The seven certification image slots are now populated in `images/certs/`. The two Canva files use the repository's existing Canva brand mark; the other files use public brand/logo artwork normalized to 600×600 PNGs. These are **brand/badge logos**, not personal credential verification documents. If a specific credential platform provides your personal badge artwork, it can replace the corresponding file later without changing `index.html`.
