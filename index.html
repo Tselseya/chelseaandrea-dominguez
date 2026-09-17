@@ -1258,17 +1258,30 @@ const FAQS=[
   });
 })();
 
-/* VISIT COUNTER — CounterAPI v2 uses GET and returns data.up_count */
+/* VISIT COUNTER — CounterAPI v2; cache-busted GET with one retry */
 (function(){
   const el = document.getElementById('visitCount');
   if(!el) return;
-  fetch('https://api.counterapi.dev/v2/portfolio-v3/visits-v1/up?t=' + Date.now(), { method: 'GET', cache: 'no-store', credentials: 'omit' })
-    .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
-    .then(data => {
-      const value = data && data.data ? data.data.up_count : null;
-      el.textContent = (value !== null && value !== undefined) ? Number(value).toLocaleString() : '—';
-    })
-    .catch(() => { el.textContent = '—'; });
+  const endpoint = 'https://api.counterapi.dev/v2/portfolio-v3/visits-v1/up';
+  const render = data => {
+    const value = data && data.data ? data.data.up_count : null;
+    if(value !== null && value !== undefined && Number.isFinite(Number(value))){
+      el.textContent = Number(value).toLocaleString();
+      el.dataset.counterStatus = 'loaded';
+      return true;
+    }
+    return false;
+  };
+  const load = attempt => fetch(endpoint + '?client=portfolio&v=2&ts=' + Date.now(), {
+    method:'GET', mode:'cors', cache:'no-store', credentials:'omit',
+    headers:{'Accept':'application/json'}
+  }).then(res => { if(!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+    .then(data => { if(!render(data)) throw new Error('CounterAPI response missing data.up_count'); })
+    .catch(() => {
+      if(attempt < 1) return new Promise(resolve => setTimeout(resolve, 500)).then(() => load(attempt + 1));
+      el.dataset.counterStatus = 'error';
+    });
+  load(0);
 })();
 
 /* TOOLS MARQUEE */
