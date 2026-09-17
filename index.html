@@ -1262,7 +1262,7 @@ const FAQS=[
 (function(){
   const el = document.getElementById('visitCount');
   if(!el) return;
-  fetch('https://api.counterapi.dev/v2/portfolio-v3/visits-v1/up', { method: 'GET', cache: 'no-store' })
+  fetch('https://api.counterapi.dev/v2/portfolio-v3/visits-v1/up?t=' + Date.now(), { method: 'GET', cache: 'no-store', credentials: 'omit' })
     .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
     .then(data => {
       const value = data && data.data ? data.data.up_count : null;
