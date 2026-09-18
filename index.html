@@ -574,6 +574,39 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .gallery-shot .modal-url{flex:1 1 auto;font-size:.78rem;padding:5px 16px;margin-left:14px;background:rgba(0,0,0,.05);color:#4a5468;border:1px solid rgba(0,0,0,.06)}
 .gallery-shot img{display:block;width:100%;height:520px;object-fit:cover;object-position:top center;flex:0 0 auto}
 
+
+/* ============ FRAMED PROJECT-SITE ARTICLES ============ */
+.modal-article.project-site-article{padding:0;background:#eef3ff;color:#071435}
+.project-site-article .project-site-shell{max-width:980px;margin:0 auto;padding:2.5rem clamp(1.15rem,4vw,3.6rem) 4rem}
+.project-site-article .project-site-hero{padding:clamp(1.6rem,4vw,3.3rem);margin-bottom:1.2rem;border:1px solid rgba(0,56,255,.15);border-radius:24px;background:linear-gradient(135deg,#fff 0%,#f5f7ff 58%,#e4edff 100%);box-shadow:0 22px 55px -35px rgba(0,56,255,.38);position:relative;overflow:hidden}
+.project-site-article .project-site-hero::after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-120px;border-radius:50%;background:rgba(0,56,255,.09);pointer-events:none}
+.project-site-article .project-site-kicker{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#b48810;margin-bottom:.65rem}
+.project-site-article .modal-title{font-size:clamp(2.1rem,5vw,4rem);letter-spacing:-.06em;margin:0 0 .65rem;color:#071435;position:relative;z-index:1}
+.project-site-article .modal-subtitle{max-width:720px;font-size:clamp(1rem,1.8vw,1.25rem);line-height:1.55;color:#52617b;margin:0 0 1.25rem;position:relative;z-index:1}
+.project-site-article .highlight-box{margin:0;border:1px solid rgba(0,56,255,.13);border-left:4px solid #b48810;border-radius:14px;background:rgba(255,255,255,.72);padding:.85rem 1rem;position:relative;z-index:1}
+.project-site-article .highlight-box p{font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:#071435}
+.project-site-article .project-site-section{margin:1.15rem 0;padding:clamp(1.15rem,2.8vw,2rem);border:1px solid rgba(0,56,255,.12);border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 16px 40px -32px rgba(0,56,255,.42)}
+.project-site-article .project-site-section:first-of-type{border-top:3px solid #0038ff}
+.project-site-article .project-site-section h4{font-size:clamp(1.2rem,2.2vw,1.6rem);line-height:1.2;color:#071435;margin:0 0 .9rem;letter-spacing:-.03em}
+.project-site-article .modal-body{max-width:900px;margin:0}
+.project-site-article .modal-body p,.project-site-article .modal-body li{font-size:.94rem;line-height:1.75;color:#52617b}
+.project-site-article .modal-body p+p{margin-top:.8rem}
+.project-site-article .modal-body strong{color:#071435}
+.project-site-article .modal-figure{margin:1.25rem 0 .25rem;padding:.65rem;border:1px solid rgba(0,56,255,.11);border-radius:16px;background:#f5f7ff}
+.project-site-article .modal-figure img{max-height:360px;width:100%;object-fit:contain;object-position:center;border:0;border-radius:10px;background:#fff}
+.project-site-article .modal-figure--grid{padding:.65rem;gap:.65rem}
+.project-site-article .modal-figure--grid img{height:170px;max-height:none;object-fit:contain;background:#fff}
+.project-site-article .modal-figure figcaption{font-size:.75rem;color:#71809a;padding:.35rem .4rem 0}
+.project-site-article .tech-stack{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.3rem;padding-top:1.2rem;border-top:1px solid rgba(0,56,255,.12)}
+.project-site-article .tech-stack span{font-size:.72rem!important;font-weight:600;padding:.35rem .65rem;border-radius:999px;background:#e4edff;border:1px solid rgba(0,56,255,.16);color:#29467f!important}
+@media(max-width:700px){
+ .project-site-article .project-site-shell{padding:1.2rem .85rem 3rem}
+ .project-site-article .project-site-hero{border-radius:18px}
+ .project-site-article .project-site-section{border-radius:16px;padding:1rem}
+ .project-site-article .modal-figure--grid{grid-template-columns:1fr}
+ .project-site-article .modal-figure--grid img{height:auto;max-height:220px}
+}
+
 /* ============ MOBILE ============ */
 @media(max-width:900px){
   body{display:flex;flex-direction:column;height:100dvh;overflow:hidden;overflow-x:hidden}
@@ -1386,6 +1419,42 @@ function setExternalLink(url) {
   if (url) { modalExternal.href = url; modalExternal.hidden = false; }
   else { modalExternal.href = '#'; modalExternal.hidden = true; }
 }
+function formatProjectArticle() {
+  modalArticle.classList.add('project-site-article');
+  const source = modalArticle.querySelector('.modal-body');
+  if (!source || source.dataset.formatted === 'true') return;
+  source.dataset.formatted = 'true';
+  const hero = document.createElement('header');
+  hero.className = 'project-site-hero';
+  const title = modalArticle.querySelector('.modal-title');
+  const subtitle = modalArticle.querySelector('.modal-subtitle');
+  const highlight = modalArticle.querySelector('.highlight-box');
+  const kicker = document.createElement('div');
+  kicker.className = 'project-site-kicker';
+  kicker.textContent = 'Project case study';
+  if (title) hero.append(title);
+  if (subtitle) hero.append(subtitle);
+  if (highlight) hero.append(highlight);
+  hero.prepend(kicker);
+  const shell = document.createElement('div');
+  shell.className = 'project-site-shell';
+  shell.append(hero);
+  source.parentNode.insertBefore(shell, source);
+  const headings = Array.from(source.querySelectorAll(':scope > h4'));
+  headings.forEach((heading, index) => {
+    const section = document.createElement('section');
+    section.className = 'project-site-section';
+    source.insertBefore(section, heading);
+    section.append(heading);
+    let node = section.nextSibling;
+    while (node && !(node.nodeType === 1 && node.matches('h4'))) {
+      const next = node.nextSibling;
+      section.append(node);
+      node = next;
+    }
+  });
+  shell.append(source);
+}
 function openProject(id) {
   const p = PROJECTS.filter(x => x.id === id)[0]; if (!p) return;
   modalContent.classList.remove('gallery-mode');
@@ -1393,6 +1462,7 @@ function openProject(id) {
   browserUrl.textContent = 'chelseaandrea.dev/projects/' + p.id;
   setExternalLink(null);
   modalArticle.innerHTML = p.article;
+  formatProjectArticle();
   overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
   // Reset after the new article is attached and laid out so every project starts at the top.
