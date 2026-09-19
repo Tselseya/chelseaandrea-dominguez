@@ -773,7 +773,101 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 
   .cred-two-col{grid-template-columns:1fr;gap:1.5rem}
   .cred-explore-grid{grid-template-columns:1fr}
-  .aib-grid-3{grid-template-columns:1fr}
+
+  /* AI Builds: 3-column grid that scales down to any phone width */
+  .aib-grid-3{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.4rem;
+    margin-top:.6rem;
+  }
+  .aib-card{
+    border-radius:14px;
+  }
+  /* Visual: shorter aspect so cards stay compact */
+  .aib-card-visual{
+    aspect-ratio:4/3;
+  }
+  .aib-card-visual--multi{
+    gap:1px;
+  }
+  .aib-card-badge{
+    top:5px;right:5px;
+    padding:2px 6px;
+    font-size:clamp(.42rem,1.3vw,.55rem);
+    letter-spacing:.08em;
+    border-radius:999px;
+    box-shadow:0 3px 8px rgba(34,197,94,.35);
+  }
+  /* Body: tiny padding + fluid text so nothing overflows */
+  .aib-card-body{
+    padding:.5rem .55rem .55rem;
+    gap:.2rem;
+    min-width:0;
+  }
+  .aib-card-tag{
+    font-size:clamp(.42rem,1.3vw,.55rem);
+    letter-spacing:.08em;
+    margin-bottom:.1rem;
+    line-height:1.1;
+  }
+  .aib-card-title{
+    font-size:clamp(.62rem,2vw,.82rem);
+    line-height:1.15;
+    margin-bottom:.12rem;
+    word-break:break-word;
+  }
+  .aib-card-tagline{
+    font-size:clamp(.5rem,1.5vw,.66rem);
+    line-height:1.25;
+    margin-bottom:.15rem;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .aib-card-desc{
+    font-size:clamp(.46rem,1.4vw,.62rem);
+    line-height:1.35;
+    margin-bottom:.3rem;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .aib-card-meta{
+    gap:.15rem;
+  }
+  .aib-card-meta span{
+    font-size:clamp(.4rem,1.2vw,.52rem);
+    padding:.1rem .32rem;
+    letter-spacing:.02em;
+    line-height:1.2;
+  }
+  /* CTA: full-width pill so it doesn't get clipped */
+  .aib-card-cta{
+    width:100%;
+    justify-content:center;
+    padding:.32rem .4rem;
+    font-size:clamp(.5rem,1.4vw,.62rem);
+    gap:.2rem;
+    margin-top:.35rem;
+    text-align:center;
+    line-height:1.1;
+  }
+  /* Social icons shrink to fit */
+  .aib-card-socials{
+    gap:.25rem;
+    margin-top:.35rem;
+    justify-content:center;
+  }
+  .aib-card-socials a{
+    width:clamp(20px,6vw,26px);
+    height:clamp(20px,6vw,26px);
+  }
+  .aib-card-socials svg{
+    width:clamp(10px,3vw,12px);
+    height:clamp(10px,3vw,12px);
+  }
 
   .contact-grid{grid-template-columns:1fr;gap:1.5rem}
   .contact-right .section-desc{max-width:none}
@@ -799,6 +893,94 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 @media(max-width:380px){
   .sidebar-nav a{font-size:.58rem}
   .sidebar-nav .nav-icon svg{width:20px;height:20px}
+}
+
+/* ============ MOBILE EXPLORE TILES (hidden on desktop) ============ */
+.hsec,
+.htiles{display:none}
+
+@media(max-width:900px){
+  /* Hide the desktop bento grid on mobile */
+  .outer-frame--bento{display:none!important}
+
+  /* "Explore / Swipe" header */
+  .hsec{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin:1.25rem .25rem .35rem;
+  }
+  .hsec__title{
+    font-size:15px;font-weight:700;color:var(--text);
+    margin:0;letter-spacing:-.01em;
+  }
+  .hsec__aside{font-size:12.5px;font-weight:600;color:var(--accent2)}
+
+  /* Horizontal-scroll track */
+  .htiles{
+    display:flex;gap:12px;list-style:none;
+    margin:0 -1rem;padding:8px 1rem 18px;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-padding-inline:1rem;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .htiles::-webkit-scrollbar{display:none}
+  .htiles>li{flex:0 0 auto;scroll-snap-align:start;list-style:none}
+
+  /* Individual tile */
+  .htile{
+    position:relative;display:flex;flex-direction:column;
+    width:min(236px,66vw);height:290px;
+    border-radius:22px;overflow:hidden;
+    background:var(--surface);border:1px solid var(--border);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.06) inset,
+      0 24px 50px -30px rgba(0,0,0,.5);
+    color:var(--text);text-decoration:none;
+    transition:transform .3s var(--ease);
+  }
+  .htile:active{transform:scale(.97)}
+
+  /* Numbered pill badge */
+  .htile__n{
+    position:absolute;top:12px;left:12px;z-index:1;
+    padding:5px 10px;border-radius:999px;
+    background:var(--text);color:var(--bg);
+    font-size:10.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;
+  }
+
+  /* Visual area: image OR glyph */
+  .htile__img{
+    display:block;width:100%;height:170px;
+    object-fit:cover;object-position:top center;
+  }
+  .htile__glyph{
+    display:grid;place-items:center;height:170px;
+    color:var(--accent2);background:var(--surface2);
+  }
+  .htile__glyph svg{width:56px;height:56px;opacity:.9}
+
+  /* Text body */
+  .htile__body{padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+  .htile__title{
+    font-size:16px;font-weight:700;line-height:1.2;
+    letter-spacing:-.01em;
+  }
+  .htile__desc{
+    font-size:12.5px;line-height:1.45;color:var(--muted);
+    padding-right:30px;
+    display:-webkit-box;-webkit-line-clamp:2;
+    -webkit-box-orient:vertical;overflow:hidden;
+  }
+
+  /* Round arrow button bottom-right */
+  .htile__go{
+    position:absolute;right:12px;bottom:12px;
+    display:grid;place-items:center;
+    width:34px;height:34px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    box-shadow:0 8px 20px -8px rgba(0,56,255,.6);
+  }
+  .htile__go svg{width:14px;height:14px}
 }
 </style>
 </head>
@@ -1005,6 +1187,87 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
         </a>
       </div>
     </div>
+
+    <!-- Mobile-only Explore tiles (hidden on desktop) -->
+    <div class="hsec">
+      <h2 class="hsec__title">Explore</h2>
+      <span class="hsec__aside">Swipe</span>
+    </div>
+
+    <ul class="htiles" role="list">
+
+      <!-- 01 · Projects -->
+      <li>
+        <a class="htile" href="#" onclick="switchPage('projects');return false;">
+          <span class="htile__n">01 Projects</span>
+          <img class="htile__img" src="images/projects/1.png" alt="" loading="lazy" />
+          <span class="htile__body">
+            <span class="htile__title">Projects</span>
+            <span class="htile__desc">Personal projects and technical experiments across content, AI, automation, and web development.</span>
+          </span>
+          <span class="htile__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+      </li>
+
+      <!-- 02 · AI Builds -->
+      <li>
+        <a class="htile" href="#" onclick="switchPage('aibuilds');return false;">
+          <span class="htile__n">02 AI Builds</span>
+          <img class="htile__img" src="images/og-image.png" alt="" loading="lazy" />
+          <span class="htile__body">
+            <span class="htile__title">AI Builds</span>
+            <span class="htile__desc">Tools, experiments, and systems I've built with AI.</span>
+          </span>
+          <span class="htile__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+      </li>
+
+      <!-- 03 · About -->
+      <li>
+        <a class="htile" href="#" onclick="switchPage('about');return false;">
+          <span class="htile__n">03 About</span>
+          <span class="htile__glyph" aria-hidden="true">
+            <svg viewBox="0 0 432 576" fill="currentColor">
+              <path class="slab__2" d="M216 90C146 90 90 146 90 216V252C90 281 99 307 115 328C90 340 69 356 53 372C34 391 16 415 5 441C2 450 0 459 0 468V504C0 518 4 532 12 544C26 564 48 576 72 576H360C384 576 406 564 420 544C428 532 432 518 432 504V468C432 459 430 450 427 441C416 415 398 391 379 372C363 356 343 340 317 328C333 307 342 280 342 252V216C342 146 286 90 216 90ZM216 342C281 342 326 370 354 398C371 414 385 434 394 455C398 466 397 478 390 488C383 498 372 504 360 504H72C60 504 49 498 42 488C36 478 34 466 39 455C47 434 61 414 78 398C106 370 151 342 216 342ZM306 216C306 266 266 306 216 306C166 306 126 266 126 216C126 166 166 126 216 126C266 126 306 166 306 216Z"/>
+              <path class="slab__1" d="M216 90C146 90 90 146 90 216V252C90 281 99 307 115 328C90 340 69 356 53 372C34 391 16 415 5 441C2 450 0 459 0 468V504C0 518 4 532 12 544C26 564 48 576 72 576H360C384 576 406 564 420 544C428 532 432 518 432 504V468C432 459 430 450 427 441C416 415 398 391 379 372C363 356 343 340 317 328C333 307 342 280 342 252V216C342 146 286 90 216 90ZM306 216C306 266 266 306 216 306C166 306 126 266 126 216C126 166 166 126 216 126C266 126 306 166 306 216ZM78 398C106 370 151 342 216 342C281 342 326 370 354 398C371 414 385 434 394 455C398 466 397 478 390 488C383 498 372 504 360 504H72C60 504 49 498 42 488C36 478 34 466 39 455C47 434 61 414 78 398Z"/>
+            </svg>
+          </span>
+          <span class="htile__body">
+            <span class="htile__title">About</span>
+            <span class="htile__desc">The background behind what I build.</span>
+          </span>
+          <span class="htile__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+      </li>
+
+      <!-- 04 · Credentials -->
+      <li>
+        <a class="htile" href="#" onclick="switchPage('about');return false;">
+          <span class="htile__n">04 Credentials</span>
+          <span class="htile__glyph" aria-hidden="true">
+            <svg viewBox="0 0 432 576" fill="currentColor">
+              <path class="slab__2" d="M40 170C15 182 0 207 0 234V270C0 487 140 568 177 585C191 592 205 594 216 594C228 594 241 592 255 585C292 568 432 487 432 270V234C432 207 417 182 392 170L248 98C228 88 204 88 184 98L40 170ZM234 131 376 202C388 208 396 220 396 234C396 339 346 482 234 519V131ZM198 519C86 482 36 339 36 234C36 220 44 208 56 202L198 131V519Z"/>
+              <path class="slab__1" d="M188 96C207 88 229 88 248 98L392 170C417 182 432 207 432 234V270C432 487 292 568 255 585C241 592 227 594 216 594C205 594 191 592 177 585C140 568 0 487 0 270V234C0 207 15 182 40 170L184 98V97L187 96C187 96 188 96 188 96ZM56 202C44 208 36 220 36 234C36 431 162 503 192 517C194 518 196 518 198 519V131L56 202ZM234 519C236 519 238 518 240 517C240 517 240 517 240 517C270 503 396 431 396 234C396 220 388 208 376 202L234 131V519Z"/>
+            </svg>
+          </span>
+          <span class="htile__body">
+            <span class="htile__title">Credentials</span>
+            <span class="htile__desc">Education, experience, and how I learn.</span>
+          </span>
+          <span class="htile__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+
   </div>
 
   <div id="page-projects" class="page page-projects">
@@ -1662,7 +1925,7 @@ window.addEventListener('resize', refreshScrollFades);
     if(el.closest('input, textarea, select, label')) return 'hidden';
     if(el.closest('[data-cursor="none"]')) return 'hidden';
     if(el.closest('.gallery-wrap')) return 'big';
-    if(el.closest('.bento__card, .project-card, .aib-card, .cred-exp-card, .cert-row, .cred-explore-card')) return 'card';
+    if(el.closest('.bento__card, .project-card, .aib-card, .cred-exp-card, .cert-row, .cred-explore-card, .htile')) return 'card';
     if(el.closest('a, button, [role="button"]')) return 'grow';
     return 'default';
   }
