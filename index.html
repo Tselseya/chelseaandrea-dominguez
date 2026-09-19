@@ -540,19 +540,18 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .modal-figure--animated .modal-figure__frame{
   position:relative;
   width:100%;
-  aspect-ratio:16/9;
   border-radius:10px;
   overflow:hidden;
   background:#0b1120;
 }
 .modal-figure--animated .modal-figure__frame iframe{
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  top:0;
+  left:0;
   border:0;
   display:block;
-  background:transparent;
+  transform-origin:0 0;
+  background:#fff;
 }
 .modal-figure--animated figcaption{font-size:.75rem;color:#71809a;padding:.35rem .4rem 0}
 
@@ -814,7 +813,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .cred-two-col{grid-template-columns:1fr;gap:1.5rem}
   .cred-explore-grid{grid-template-columns:1fr}
 
-  /* AI Builds: 3-column grid that scales down to any phone width */
   .aib-grid-3{
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:.4rem;
@@ -926,10 +924,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .gallery-track{gap:1.4rem}
   .cursor-ring{display:none!important}
 
-  /* Animated figure frame on mobile */
-  .modal-figure--animated .modal-figure__frame{aspect-ratio:4/3}
-
-  /* Lightbox close button on mobile */
   .img-lightbox__close{width:42px;height:42px}
   .img-lightbox__close svg{width:18px;height:18px}
 }
@@ -938,7 +932,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .sidebar-nav .nav-icon svg{width:20px;height:20px}
 }
 
-/* ============ MOBILE EXPLORE TILES (hidden on desktop) ============ */
 .hsec,
 .htiles{display:none}
 
@@ -1615,7 +1608,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   </div>
 </div>
 
-<!-- Full-size image lightbox (used for clickable figures inside project modals) -->
 <div class="img-lightbox" id="imgLightbox" role="dialog" aria-modal="true" aria-label="Image preview">
   <button class="img-lightbox__close" id="imgLightboxClose" aria-label="Close image">
     <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -1640,7 +1632,6 @@ article:`<h2 class="modal-title">AI Content Automation Pipeline</h2><p class="mo
 tags:[{t:'Experiment',c:'tag-smm'},{t:'SMM',c:'tag-smm'},{t:'AI',c:'tag-ai'}],
 article:`<h2 class="modal-title">AI-Assisted Short-Form Content Workflow</h2><p class="modal-subtitle">I started with one giant prompt. Breaking it apart made the process easier to control.</p><div class="highlight-box"><p><strong>Workflow Experiment · ChatGPT · Veo · CapCut · Notion · Trello</strong></p></div><div class="modal-body"><p>Before building the larger n8n automation pipeline, I experimented with a simpler question: <strong>Could I make the preparation of short-form Reddit stories more consistent by breaking the process into smaller AI tasks?</strong> Instead of asking AI to do everything in one prompt, I separated the workflow into five stages.</p><h4>The Original Process</h4><p>A typical story could require several different decisions: what parts matter, what the narration should sound like, where the hook happens, what belongs in the caption, what the CTA should ask people to do, and which hashtags fit the topic. Trying to answer all of those in one prompt made the output harder to control. So I separated them.</p><figure class="modal-figure"><img src="images/projects/shortform-visual-1.png" alt="Before / after workflow" /><figcaption>Before: one large prompt. After: five smaller stages.</figcaption></figure><h4>Stage 1 — Story Extraction</h4><p>The first stage takes the raw Reddit post and restructures it. The goal is to remove unnecessary filler while preserving chronological order, important characters, the emotional arc, and the events that actually matter to the story. The output becomes a cleaner foundation for the next stage.</p><h4>Stage 2 — Script Adaptation</h4><p>The cleaned story is then adapted into a short-form narration — around 60–90 seconds with attention to pacing and the placement of the hook.</p><h4>Stage 3 — Caption Generation</h4><p>The next stage creates the social caption: hook, body, CTA space, platform constraints, and brand voice. Separating this step meant I could change caption strategy without changing the story script.</p><h4>Stage 4 — CTA Selection</h4><p>The CTA gets its own stage. Depending on the type of story, the system can choose a different interaction goal — relate, share, react, or follow — rather than adding the same generic CTA to every post.</p><h4>Stage 5 — Hashtag Classification</h4><p>The final stage organizes hashtags into broad, niche, and branded categories. The purpose isn't to chase whatever is trending; it's to keep the hashtags relevant to the actual subject of the story.</p><figure class="modal-figure"><img src="images/projects/shortform-visual-2.png" alt="Five-stage pipeline" /><figcaption>Extract → Script → Caption → CTA → Hashtags.</figcaption></figure><h4>Why Separate the Stages?</h4><p>Each stage has a different job. That's important because every additional requirement added to one large prompt creates another thing the model can misunderstand or forget. By separating the workflow, I could change one part without rewriting everything else. If the caption format changed, I didn't need to touch the extraction process.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/shortform-visual-3a.png" alt="Raw → extracted" /><img src="images/projects/shortform-visual-3b.png" alt="Extracted → script" /><img src="images/projects/shortform-visual-3c.png" alt="Script → caption" /><figcaption>Prompt/output examples — raw → extracted → script → caption.</figcaption></figure><h4>Human-in-the-Loop</h4><p>This wasn't designed to run completely autonomously. I still reviewed output between stages. AI was useful for speeding up repetitive transformations, but I still wanted to decide whether the story worked, whether the hook was interesting, and whether the final content still sounded appropriate for the account.</p><h4>What Worked</h4><p>Breaking the workflow into smaller tasks made the process easier to reason about and adjust. Instead of <em>"the AI output isn't good"</em>, I could ask: <em>"Is the problem happening during extraction, scripting, caption generation, CTA selection, or hashtag selection?"</em></p><h4>What Didn't</h4><p>The workflow still depended heavily on human review. Poorly written or fragmented source material could still require manual cleanup before the first stage. There also wasn't a proper feedback loop connecting content performance back into the prompts. It wasn't an autonomous content engine.</p><h4>Where It Led Next</h4><p>This experiment eventually influenced the larger automation architecture I built later. The five-stage workflow taught me the value of separating responsibilities. The later n8n project took that same idea further by separating <strong>intake → generation → approval → distribution</strong>. This one is about <strong>content transformation</strong>. The later pipeline is about <strong>workflow orchestration</strong>.</p><figure class="modal-figure"><img src="images/projects/shortform-visual-4.png" alt="Connection to next project" /><figcaption>5-stage content workflow → modular n8n automation.</figcaption></figure><h4>Takeaway</h4><p>The biggest lesson from this experiment was simple: <strong>A better AI workflow isn't necessarily a bigger prompt.</strong> Sometimes the useful part is deciding what <em>not</em> to ask the model to do at the same time.</p><div class="tech-stack"><span>ChatGPT</span><span>Google Veo</span><span>CapCut</span><span>Notion</span><span>Trello</span></div></div>`}];
 
-/* FAQ CONTENT */
 const FAQS=[
   {q:"What kind of work do you do?",a:"My work sits somewhere between AI-assisted development, workflow design, content systems, and creative digital work. I've built things ranging from social-media content systems and n8n workflows to AI-assisted web tools like MathDesk. I'm still exploring exactly where that intersection takes me, so I don't try to force everything into one job title."},
   {q:"Are these real projects or portfolio exercises?",a:"They're real personal projects and experiments. Some started from problems I encountered while creating content. Others started from ideas I wanted to turn into working tools. They're not client case studies, so I use them to document what I actually built, what I tested, what didn't work, and what I would improve."},
@@ -1650,7 +1641,6 @@ const FAQS=[
   {q:"Can I see the code or try the projects?",a:"Whenever a project is public and the code or demo can be shared, I've linked it from the project page. Some projects are documented more extensively than others, and some experiments contain pieces that aren't currently packaged as a public repository. The project pages are the best place to start."}
 ];
 
-/* RENDER FAQ LIST */
 (function(){
   const list = document.getElementById('faqList');
   if(!list) return;
@@ -1678,7 +1668,6 @@ const FAQS=[
   });
 })();
 
-/* VISIT COUNTER — CounterAPI v2; cache-busted GET with one retry */
 (function(){
   const el = document.getElementById('visitCount');
   if(!el) return;
@@ -1704,14 +1693,12 @@ const FAQS=[
   load(0);
 })();
 
-/* TOOLS MARQUEE */
 (function(){
   const t = document.getElementById('toolsTrack'); if(!t) return;
   const list = TOOLS.concat(TOOLS);
   t.innerHTML = list.map(x => '<span class="tools-marquee__item"><img class="tools-marquee__img" src="images/' + x.file + '" alt="' + x.name + '" loading="lazy" /><span>' + x.name + '</span></span>').join('');
 })();
 
-/* HOME PROJECTS REEL — modal screenshots (1.png – 4.png) */
 (function(){
   const t = document.getElementById('homeProjectsReel'); if(!t) return;
   const imgs = ['images/projects/1.png','images/projects/2.png','images/projects/3.png','images/projects/4.png'];
@@ -1719,7 +1706,6 @@ const FAQS=[
   t.innerHTML = list.map(src => '<span class="bento__shot"><img src="' + src + '" alt="" loading="lazy" /></span>').join('');
 })();
 
-/* ABOUT CARD CONSTELLATION */
 (function(){
   const card = document.querySelector('.bento__card--about');
   if(!card) return;
@@ -1741,7 +1727,6 @@ const FAQS=[
   });
 })();
 
-/* PROJECTS GRID — card banners use dedicated banner-*.png files (no animation) */
 (function(){
   const g = document.getElementById('projectsGrid'); if(!g) return;
   g.innerHTML = PROJECTS.map(p => {
@@ -1757,7 +1742,6 @@ const FAQS=[
   g.querySelectorAll('.project-card').forEach(c => c.addEventListener('click', () => openProject(c.dataset.project)));
 })();
 
-/* FILTERS */
 (function(){
   const chips = document.querySelectorAll('#filterChips .filter-chip');
   const g = document.getElementById('projectsGrid');
@@ -1780,7 +1764,6 @@ const FAQS=[
   }));
 })();
 
-/* MODAL */
 const overlay = document.getElementById('modalOverlay');
 const modalContent = document.getElementById('modalContent');
 const modalArticle = document.getElementById('modalArticle');
@@ -1843,16 +1826,32 @@ function formatProjectArticle() {
 
 /* ==========================================
    ANIMATED FIGURES + IMAGE LIGHTBOX
+   Each entry defines the "design viewport" the HTML file was authored for.
+   The iframe is set to that exact size, then scaled down (or up) with
+   transform: scale() so its content fits the frame without cropping.
    ========================================== */
 const ANIMATED_FIGURES = {
-  'mathdesk-visual-5': '2 / 1',
-  'scrolltell-visual-3': '16 / 9',
-  'shortform-visual-1': '4 / 3',
-  'shortform-visual-4': '16 / 9',
-  'pipeline-visual-1': '16 / 9'
+  'mathdesk-visual-5':   { w: 920,  h: 470 },  // ~2:1  – diagram-container is 900x450
+  'scrolltell-visual-3': { w: 1420, h: 630 },  // card row + header + padding
+  'shortform-visual-1':  { w: 1380, h: 760 },  // two-column, chaos web tallest
+  'shortform-visual-4':  { w: 1420, h: 520 },  // two stacked rows + footer
+  'pipeline-visual-1':   { w: 1340, h: 610 }   // four module cards + header/footer
 };
 
+const figureFitObservers = [];
+
+function clearFigureFitObservers(){
+  while (figureFitObservers.length) {
+    const entry = figureFitObservers.pop();
+    try {
+      if (entry.observer) entry.observer.disconnect();
+      if (entry.listener) window.removeEventListener('resize', entry.listener);
+    } catch(e){}
+  }
+}
+
 function replaceAnimatedFigures(){
+  clearFigureFitObservers();
   Object.keys(ANIMATED_FIGURES).forEach(function(base){
     const img = modalArticle.querySelector('img[src*="' + base + '.png"]');
     if (!img) return;
@@ -1860,21 +1859,46 @@ function replaceAnimatedFigures(){
     if (!figure) return;
     const rawSrc = img.getAttribute('src') || '';
     const htmlSrc = rawSrc.replace(/\.png$/i, '.html');
+    const cfg = ANIMATED_FIGURES[base];
+
     figure.classList.add('modal-figure--animated');
-    // Remove the old pulse spans from the architecture figure if present
     figure.querySelectorAll('.architecture-pulse').forEach(function(p){ p.remove(); });
     figure.classList.remove('architecture-figure');
-    // Build frame + iframe
+
     const frame = document.createElement('div');
     frame.className = 'modal-figure__frame';
-    frame.style.aspectRatio = ANIMATED_FIGURES[base];
+    frame.style.aspectRatio = cfg.w + ' / ' + cfg.h;
+
     const iframe = document.createElement('iframe');
     iframe.src = htmlSrc;
     iframe.setAttribute('loading','lazy');
     iframe.setAttribute('title', base.replace(/-/g,' ') + ' animation');
     iframe.setAttribute('scrolling','no');
     iframe.setAttribute('frameborder','0');
+    iframe.style.width = cfg.w + 'px';
+    iframe.style.height = cfg.h + 'px';
+
     frame.appendChild(iframe);
+
+    function fit(){
+      const fw = frame.clientWidth;
+      const fh = frame.clientHeight;
+      if (!fw || !fh) return;
+      const s = Math.min(fw / cfg.w, fh / cfg.h);
+      iframe.style.transform = 'scale(' + s + ')';
+    }
+    fit();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(fit);
+      ro.observe(frame);
+      figureFitObservers.push({ observer: ro });
+    } else {
+      const listener = function(){ fit(); };
+      window.addEventListener('resize', listener);
+      figureFitObservers.push({ listener: listener });
+    }
+
     figure.insertBefore(frame, figure.firstChild);
     img.remove();
   });
@@ -1942,6 +1966,7 @@ function openProject(id) {
 }
 function closeModal() {
   closeLightbox();
+  clearFigureFitObservers();
   overlay.classList.remove('active');
   overlay.classList.remove('gallery-mode');
   modalContent.classList.remove('gallery-mode');
@@ -1958,7 +1983,6 @@ document.addEventListener('keydown', e => {
   closeModal();
 });
 
-/* PAGE SWITCH */
 function switchPage(name, options) {
   options = options || {};
   const validPages = ['home','projects','about','aibuilds','contact'];
@@ -1981,7 +2005,6 @@ try {
   if (savedPage) switchPage(savedPage, { skipSave: true });
 } catch(e) {}
 
-/* SCROLL FADES */
 var scrollFadeMap = new Map();
 function initScrollFades() {
   document.querySelectorAll('.outer-frame--page').forEach(function(frame){
