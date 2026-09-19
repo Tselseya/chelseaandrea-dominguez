@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos vs Order Animation</title>
+    
+    <!-- ==========================================
+         ANIMATION LIBRARY CSS (From provided files)
+         ========================================== -->
+    <style>
+        /* ------------------------------------------------------------
+           1. PAGE FADE-IN
+           ------------------------------------------------------------ */
+        @keyframes page-fadein { from { opacity: 0 } to { opacity: 1 } }
+        .anim-page-fade { animation: page-fadein .45s cubic-bezier(.22,1,.36,1) both; }
+
+        /* ------------------------------------------------------------
+           3. SCROLL REVEAL (fade-up)
+           ------------------------------------------------------------ */
+        .anim-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition:
+                opacity .75s cubic-bezier(.22,1,.36,1),
+                transform .75s cubic-bezier(.22,1,.36,1);
+        }
+        .anim-reveal.is-revealed { opacity: 1; transform: none; }
+
+        /* ------------------------------------------------------------
+           14. ENTRANCE POP (spring scale + fade)
+           ------------------------------------------------------------ */
+        @keyframes anim-pop-in {
+            0%   { opacity: 0; transform: scale(.6) translateY(10px) }
+            100% { opacity: 1; transform: none }
+        }
+        .anim-pop-in { animation: anim-pop-in .42s cubic-bezier(.34,1.56,.64,1) both; }
+
+        /* ------------------------------------------------------------
+           18. REDUCED MOTION SAFETY
+           ------------------------------------------------------------ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        /* ==========================================
+           CUSTOM STYLES FOR THE DIAGRAM
+           ========================================== */
+        :root {
+            --bg: #0f1115;
+            --text: #f8fafc;
+            --accent: #3b82f6;
+            --box-bg: rgba(30, 41, 59, 0.8);
+            --border: rgba(148, 163, 184, 0.2);
+            --glow: rgba(59, 130, 246, 0.4);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 60px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Add the dividing line */
+        .main-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-50%);
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .column-label {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* --- Common Box Styles --- */
+        .box {
+            background: var(--box-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 24px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .box-glow {
+            box-shadow: 0 0 15px var(--glow), inset 0 0 10px rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        /* --- BEFORE Column (Chaos) --- */
+        .before-col .doc-box {
+            width: 200px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .doc-lines {
+            margin-top: 10px;
+        }
+        .doc-line {
+            height: 1px;
+            background: var(--border);
+            margin: 8px 0;
+        }
+        .doc-line.short { width: 60%; }
+
+        .before-col .prompt-box {
+            width: 220px;
+            margin-bottom: 60px;
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .chaos-container {
+            position: relative;
+            width: 300px;
+            height: 280px;
+        }
+
+        .chaos-web {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .chaos-web path {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            opacity: 0.4;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .is-revealed .chaos-web path {
+            stroke-dashoffset: 0;
+        }
+
+        .output-node {
+            position: absolute;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        .node-story { top: 30px; left: 10px; }
+        .node-script { top: 70px; right: 0px; }
+        .node-caption { bottom: 50px; left: 20px; }
+        .node-cta { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .node-hashtags { bottom: 50px; right: 20px; }
+
+        /* --- AFTER Column (Order) --- */
+        .after-col .pipeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .pipeline-step {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pipeline-arrow {
+            width: 2px;
+            height: 30px;
+            background: var(--accent);
+            position: relative;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        .is-revealed .pipeline-arrow {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        .pipeline-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid var(--accent);
+        }
+
+        /* Staggered Delays for Pipeline */
+        .pipeline-step:nth-child(1) .pipeline-arrow { transition-delay: 0.2s; }
+        .pipeline-step:nth-child(2) .pipeline-arrow { transition-delay: 0.6s; }
+        .pipeline-step:nth-child(3) .pipeline-arrow { transition-delay: 1.0s; }
+        .pipeline-step:nth-child(4) .pipeline-arrow { transition-delay: 1.4s; }
+        .pipeline-step:nth-child(5) .pipeline-arrow { transition-delay: 1.8s; }
+        .pipeline-step:nth-child(6) .pipeline-arrow { transition-delay: 2.2s; }
+
+    </style>
+</head>
+<body class="anim-page-fade">
+
+    <div class="main-container">
+        
+        <!-- ================= BEFORE COLUMN ================= -->
+        <div class="column before-col">
+            <div class="column-label">BEFORE</div>
+
+            <div class="box doc-box anim-reveal" data-reveal style="transition-delay: 0.1s;">
+                Reddit Story Document
+                <div class="doc-lines">
+                    <div class="doc-line"></div>
+                    <div class="doc-line"></div>
+                    <div class="doc-line short"></div>
+                </div>
+            </div>
+
+            <!-- Down Arrow -->
+            <svg width="20" height="40" viewBox="0 0 20 40" style="margin-bottom: 20px; opacity: 0; transform: translateY(-10px); transition: all 0.4s ease-out;" class="anim-reveal" data-reveal>
+                <path d="M10 0 L10 30 M5 25 L10 35 L15 25" stroke="var(--accent)" stroke-width="2" fill="none" />
+            </svg>
+
+            <div class="box prompt-box box-glow anim-reveal" data-reveal style="transition-delay: 0.3s;">
+                Single AI Prompt
+            </div>
+
+            <!-- Chaos Web -->
+            <div class="chaos-container anim-reveal" data-reveal>
+                <svg class="chaos-web" viewBox="0 0 300 300">
+                    <!-- Messy paths connecting center top to scattered nodes -->
+                    <path d="M150,20 Q50,100 30,60" />
+                    <path d="M150,20 Q200,80 280,90" />
+                    <path d="M150,20 Q80,150 50,240" />
+                    <path d="M150,20 Q150,150 150,280" />
+                    <path d="M150,20 Q220,150 260,240" />
+                    <!-- Crossing lines to add chaos -->
+                    <path d="M150,20 Q100,200 150,280" />
+                    <path d="M150,20 Q200,200 50,240" />
+                    <path d="M150,20 Q120,100 280,90" />
+                    <path d="M150,20 Q80,50 280,90" />
+                    <path d="M150,20 Q180,100 50,240" />
+                </svg>
+
+                <div class="output-node node-story anim-pop-in" style="animation-delay: 1.0s;">story</div>
+                <div class="output-node node-script anim-pop-in" style="animation-delay: 1.2s;">script</div>
+                <div class="output-node node-caption anim-pop-in" style="animation-delay: 1.4s;">caption</div>
+                <div class="output-node node-cta anim-pop-in" style="animation-delay: 1.6s;">CTA</div>
+                <div class="output-node node-hashtags anim-pop-in" style="animation-delay: 1.8s;">hashtags</div>
+            </div>
+        </div>
+
+        <!-- ================= AFTER COLUMN ================= -->
+        <div class="column after-col">
+            <div class="column-label">AFTER</div>
+
+            <div class="pipeline">
+                
+                <!-- Step 1 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 0.2s;">
+                    <div class="box box-glow" style="width: 100%;">Story</div>
+                    <div class="pipeline-arrow"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 0.6s;">
+                    <div class="box box-glow" style="width: 100%;">01 Extract</div>
+                    <div class="pipeline-arrow"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 1.0s;">
+                    <div class="box box-glow" style="width: 100%;">02 Script</div>
+                    <div class="pipeline-arrow"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 1.4s;">
+                    <div class="box box-glow" style="width: 100%;">03 Caption</div>
+                    <div class="pipeline-arrow"></div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 1.8s;">
+                    <div class="box box-glow" style="width: 100%;">04 CTA</div>
+                    <div class="pipeline-arrow"></div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="pipeline-step anim-reveal" data-reveal style="transition-delay: 2.2s;">
+                    <div class="box box-glow" style="width: 100%;">05 Hashtags</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         ANIMATION LIBRARY JS (From provided files)
+         ========================================== -->
+    <script>
+        /* ------------------------------------------------------------
+           2. SCROLL REVEAL
+           ------------------------------------------------------------ */
+        function initScrollReveal() {
+          var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+          if (!els.length) return;
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            els.forEach(function (el) { el.classList.add('is-revealed'); });
+            return;
+          }
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-revealed');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
+          els.forEach(function (el) { io.observe(el); });
+        }
+
+        /* ------------------------------------------------------------
+           6. PERF TIER DETECTION
+           ------------------------------------------------------------ */
+        var PERF_KEY = 'portfolio-perf-tier';
+        function animRestorePerfTier() {
+          try {
+            var t = sessionStorage.getItem(PERF_KEY);
+            if (t === 'mid' || t === 'low') document.documentElement.dataset.perf = t;
+          } catch (e) {}
+        }
+        function animGetPerfTier() {
+          var t = document.documentElement.dataset.perf;
+          return (t === 'mid' || t === 'low') ? t : 'high';
+        }
+        function animSetPerfTier(tier) {
+          if (tier === animGetPerfTier()) return;
+          document.documentElement.dataset.perf = tier;
+          try { sessionStorage.setItem(PERF_KEY, tier); } catch (e) {}
+          window.dispatchEvent(new CustomEvent('perftierchange', { detail: tier }));
+        }
+        async function animRunPerfDetection() {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          if (sessionStorage.getItem(PERF_KEY) === 'low') return;
+          await new Promise(function (r) {
+            if (document.readyState === 'complete') r();
+            else window.addEventListener('load', r, { once: true });
+          });
+          if (animGetPerfTier() === 'low') return;
+          var samples = [], start = performance.now(), minEnd = start + 1500, maxEnd = start + 5000, last = start;
+          var median = await new Promise(function (resolve) {
+            function loop(now) {
+              if (document.visibilityState === 'hidden') { resolve(null); return; }
+              var d = now - last;
+              if (d < 100) samples.push(d);
+              last = now;
+              if (now >= minEnd && samples.length >= 8) {
+                samples.sort(function (a, b) { return a - b; });
+                resolve(samples[samples.length >> 1]); return;
+              }
+              if (now >= maxEnd) { resolve(null); return; }
+              requestAnimationFrame(loop);
+            }
+            requestAnimationFrame(loop);
+          });
+          if (median === null || median <= 22) return;
+          animSetPerfTier(animGetPerfTier() === 'high' ? 'mid' : 'low');
+        }
+
+        /* ------------------------------------------------------------
+           8. AUTO WIRE-UP
+           ------------------------------------------------------------ */
+        function animBoot() {
+          animRestorePerfTier();
+          initScrollReveal();
+          animRunPerfDetection();
+        }
+        
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', animBoot);
+        else animBoot();
+
+        // Loop the animation by resetting the classes every 5 seconds
+        setInterval(() => {
+            const elements = document.querySelectorAll('[data-reveal]');
+            elements.forEach(el => el.classList.remove('is-revealed'));
+            
+            // Force reflow to restart CSS animations
+            void document.body.offsetWidth;
+            
+            // Re-trigger the reveal
+            initScrollReveal();
+        }, 5000);
+    </script>
+</body>
+</html>

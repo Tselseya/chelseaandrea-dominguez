@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Content to Automation Animation</title>
+    
+    <!-- Google Fonts for the specific typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           VARIABLES & RESET
+           ========================================== */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0b1120 0%, #1a1a2e 100%);
+            --card-bg: rgba(20, 25, 40, 0.8);
+            --card-border: rgba(59, 130, 246, 0.3);
+            --card-border-gold: rgba(251, 191, 36, 0.5);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-gold: #fbbf24;
+            --box-bg: rgba(30, 41, 59, 0.9);
+            --box-border: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 40px;
+        }
+
+        /* ==========================================
+           LAYOUT
+           ========================================== */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            gap: 50px;
+        }
+
+        .header {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .header-sub {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .header-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* ==========================================
+           CARD STYLES
+           ========================================== */
+        .card {
+            width: 260px;
+            height: 380px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            backdrop-filter: blur(10px);
+        }
+
+        .card.gold {
+            border-color: var(--card-border-gold);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .card-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        /* ==========================================
+           CONNECTOR ARROWS
+           ========================================== */
+        .connector {
+            width: 30px;
+            height: 2px;
+            background: var(--text-muted);
+            position: relative;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: drawArrow 0.4s ease-out forwards;
+        }
+
+        .connector::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -3px;
+            border-left: 6px solid var(--text-muted);
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+
+        /* ==========================================
+           CARD 01: CONTENT CREATION VISUALS
+           ========================================== */
+        .doc-group {
+            position: relative;
+            width: 120px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .doc {
+            position: absolute;
+            width: 45px;
+            height: 55px;
+            background: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 6px;
+            gap: 4px;
+            opacity: 0;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .doc-line { height: 2px; background: #94a3b8; border-radius: 1px; width: 100%; }
+        .doc-line.short { width: 60%; }
+        
+        .doc-1 { top: 0; left: 10px; transform: rotate(-15deg); animation-delay: 1.0s; }
+        .doc-2 { top: 10px; right: 10px; transform: rotate(15deg); animation-delay: 1.2s; }
+        .doc-3 { top: 20px; left: 40px; transform: rotate(0deg); animation-delay: 1.4s; }
+        .doc-3 .doc-line { background: var(--accent-blue); }
+
+        .mini-boxes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: 1.6s;
+        }
+        .mini-box {
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 6px;
+            padding: 6px;
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mini-box-header { display: flex; gap: 4px; align-items: center; }
+        .mini-icon { width: 10px; height: 10px; border-radius: 2px; background: var(--accent-blue); }
+        .mini-icon.red { background: #ef4444; }
+        .mini-bar { height: 3px; background: var(--accent-blue); border-radius: 2px; width: 80%; }
+        .mini-bar.red { background: #ef4444; width: 60%; }
+        .mini-bar.grey { background: #64748b; width: 100%; margin-top: 2px; }
+
+        /* ==========================================
+           CARD 02: REPETITIVE TASKS VISUALS
+           ========================================== */
+        .loop-container {
+            position: relative;
+            width: 160px;
+            height: 180px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: 2.0s;
+        }
+        .loop-line {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: 140px;
+            border: 2px dashed var(--accent-blue);
+            border-radius: 12px;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-top-color: transparent;
+        }
+        .loop-arrow {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid var(--accent-blue);
+            border-right: 2px solid var(--accent-blue);
+            transform: rotate(45deg);
+        }
+        .loop-arrow.top { top: 18px; right: 20px; }
+        .loop-arrow.bottom { bottom: 18px; left: 20px; transform: rotate(-135deg); }
+        
+        .task-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 100px;
+        }
+        .task-box {
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 6px;
+            padding: 6px 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideInRight 0.4s ease-out forwards;
+        }
+        .task-box:nth-child(1) { animation-delay: 2.2s; }
+        .task-box:nth-child(2) { animation-delay: 2.4s; }
+        .task-box:nth-child(3) { animation-delay: 2.6s; }
+        
+        .task-icon { width: 12px; height: 12px; background: var(--accent-blue); border-radius: 3px; flex-shrink: 0; }
+        .task-lines { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+        .task-line { height: 2px; background: #64748b; border-radius: 1px; }
+        .task-line.short { width: 60%; }
+
+        .chat-bubble {
+            position: absolute;
+            top: 60px;
+            right: -10px;
+            width: 40px;
+            height: 30px;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: popIn 0.4s ease-out forwards;
+            animation-delay: 2.8s;
+        }
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 10px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--box-bg);
+        }
+        .chat-dots { display: flex; gap: 4px; }
+        .chat-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-blue); }
+
+        /* ==========================================
+           CARD 03: WORKFLOW DESIGN VISUALS
+           ========================================== */
+        .workflow-container {
+            position: relative;
+            width: 180px;
+            height: 160px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: 3.2s;
+        }
+        .wf-node-center {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-blue);
+            background: var(--box-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wf-dot-inner {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+        }
+        .wf-node-right {
+            position: absolute;
+            right: 10px;
+            width: 60px;
+            height: 24px;
+            border-radius: 4px;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            gap: 4px;
+            opacity: 0;
+            animation: popIn 0.4s ease-out forwards;
+        }
+        .wf-node-right:nth-child(2) { top: 20px; animation-delay: 3.6s; }
+        .wf-node-right:nth-child(3) { top: 50%; transform: translateY(-50%); animation-delay: 3.7s; }
+        .wf-node-right:nth-child(4) { bottom: 20px; animation-delay: 3.8s; }
+        
+        .wf-line {
+            position: absolute;
+            height: 2px;
+            background: var(--text-muted);
+            left: 50px;
+            opacity: 0;
+            animation: drawLine 0.4s ease-out forwards;
+        }
+        .wf-line:nth-child(5) { top: 30px; width: 50px; animation-delay: 3.5s; }
+        .wf-line:nth-child(6) { top: 50%; width: 50px; animation-delay: 3.5s; }
+        .wf-line:nth-child(7) { bottom: 30px; width: 50px; animation-delay: 3.5s; }
+
+        /* ==========================================
+           CARD 04: AUTOMATION VISUALS
+           ========================================== */
+        .automation-graphic {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 4.0s;
+        }
+        .gear-svg {
+            width: 100px;
+            height: 100px;
+            animation: spin 4s linear infinite;
+        }
+        .check-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            opacity: 0;
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 4.4s;
+        }
+        .check-badge svg { width: 14px; height: 14px; stroke: #000; stroke-width: 3; fill: none; }
+
+        /* ==========================================
+           KEYFRAMES
+           ========================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.6); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes drawArrow {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+
+        @keyframes drawLine {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==========================================
+           ANIMATION DELAYS (Staggered Sequence)
+           ========================================== */
+        
+        /* Card Entrances */
+        .card:nth-child(1) { animation-delay: 0.4s; }
+        .card:nth-child(2) { animation-delay: 0.6s; }
+        .card:nth-child(3) { animation-delay: 0.8s; }
+        .card:nth-child(4) { animation-delay: 1.0s; }
+
+        /* Connector Arrows */
+        .connector:nth-child(2) { animation-delay: 1.2s; }
+        .connector:nth-child(4) { animation-delay: 1.4s; }
+        .connector:nth-child(6) { animation-delay: 1.6s; }
+
+        /* ==========================================
+           REDUCED MOTION SAFETY
+           ========================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="header-sub">SCROLL AND TELL</div>
+            <div class="header-main">From Content to Automation</div>
+        </div>
+
+        <!-- Cards and Connectors -->
+        <div class="cards-wrapper">
+            
+            <!-- Card 01 -->
+            <div class="card">
+                <div class="card-number">01</div>
+                <div class="card-content">
+                    <!-- Documents Visual -->
+                    <div class="doc-group">
+                        <div class="doc doc-1">
+                            <div class="doc-line"></div>
+                            <div class="doc-line"></div>
+                            <div class="doc-line short"></div>
+                        </div>
+                        <div class="doc doc-2">
+                            <div class="doc-line"></div>
+                            <div class="doc-line"></div>
+                            <div class="doc-line short"></div>
+                        </div>
+                        <div class="doc doc-3">
+                            <div class="doc-line"></div>
+                            <div class="doc-line"></div>
+                            <div class="doc-line short"></div>
+                        </div>
+                    </div>
+                    <!-- Mini Boxes -->
+                    <div class="mini-boxes">
+                        <div class="mini-box">
+                            <div class="mini-box-header">
+                                <div class="mini-icon"></div>
+                                <div class="mini-bar"></div>
+                            </div>
+                            <div class="mini-bar grey"></div>
+                        </div>
+                        <div class="mini-box">
+                            <div class="mini-box-header">
+                                <div class="mini-icon red"></div>
+                                <div class="mini-bar red"></div>
+                            </div>
+                            <div class="mini-bar grey"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-title">Content Creation</div>
+                <div class="card-desc">Create stories and short-form content</div>
+            </div>
+
+            <!-- Connector 1 -->
+            <div class="connector"></div>
+
+            <!-- Card 02 -->
+            <div class="card">
+                <div class="card-number">02</div>
+                <div class="card-content">
+                    <!-- Loop Visual -->
+                    <div class="loop-container">
+                        <div class="loop-line"></div>
+                        <div class="loop-arrow top"></div>
+                        <div class="loop-arrow bottom"></div>
+                        <div class="task-boxes">
+                            <div class="task-box">
+                                <div class="task-icon"></div>
+                                <div class="task-lines">
+                                    <div class="task-line"></div>
+                                    <div class="task-line short"></div>
+                                </div>
+                            </div>
+                            <div class="task-box">
+                                <div class="task-icon"></div>
+                                <div class="task-lines">
+                                    <div class="task-line"></div>
+                                    <div class="task-line short"></div>
+                                </div>
+                            </div>
+                            <div class="task-box">
+                                <div class="task-icon"></div>
+                                <div class="task-lines">
+                                    <div class="task-line"></div>
+                                    <div class="task-line short"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-bubble">
+                            <div class="chat-dots">
+                                <div class="chat-dot"></div>
+                                <div class="chat-dot"></div>
+                                <div class="chat-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-title">Repetitive Tasks</div>
+                <div class="card-desc">Repeat edits, posts and replies</div>
+            </div>
+
+            <!-- Connector 2 -->
+            <div class="connector"></div>
+
+            <!-- Card 03 -->
+            <div class="card">
+                <div class="card-number">03</div>
+                <div class="card-content">
+                    <!-- Workflow Visual -->
+                    <div class="workflow-container">
+                        <div class="wf-node-center">
+                            <div class="wf-dot-inner"></div>
+                        </div>
+                        <div class="wf-node-right">
+                            <div class="mini-icon" style="width:8px; height:8px;"></div>
+                            <div class="mini-bar" style="width:30px;"></div>
+                        </div>
+                        <div class="wf-node-right">
+                            <div class="mini-icon" style="width:8px; height:8px;"></div>
+                            <div class="mini-bar" style="width:30px;"></div>
+                        </div>
+                        <div class="wf-node-right">
+                            <div class="mini-icon" style="width:8px; height:8px;"></div>
+                            <div class="mini-bar" style="width:30px;"></div>
+                        </div>
+                        <!-- Lines connecting center to right nodes -->
+                        <div class="wf-line"></div>
+                        <div class="wf-line"></div>
+                        <div class="wf-line"></div>
+                    </div>
+                </div>
+                <div class="card-title">Workflow Design</div>
+                <div class="card-desc">Map triggers, rules and actions</div>
+            </div>
+
+            <!-- Connector 3 -->
+            <div class="connector"></div>
+
+            <!-- Card 04 -->
+            <div class="card gold">
+                <div class="card-number">04</div>
+                <div class="card-content">
+                    <!-- Automation Visual -->
+                    <div class="automation-graphic">
+                        <svg class="gear-svg" viewBox="0 0 100 100" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Gear Teeth -->
+                            <path d="M50 10 L50 20 M50 80 L50 90 M10 50 L20 50 M80 50 L90 50 M22 22 L29 29 M71 71 L78 78 M22 78 L29 71 M71 29 L78 22" />
+                            <!-- Gear Body -->
+                            <circle cx="50" cy="50" r="30" fill="#334155" />
+                            <!-- Lightning Bolt -->
+                            <path d="M55 30 L45 55 L55 55 L45 80 L60 50 L50 50 Z" fill="#fbbf24" stroke="none" />
+                        </svg>
+                        <div class="check-badge">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-title">Automation</div>
+                <div class="card-desc">Let connected systems handle the routine</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Restart the animation loop every 10 seconds
+        setInterval(() => {
+            const container = document.querySelector('.container');
+            const clone = container.cloneNode(true);
+            container.parentNode.replaceChild(clone, container);
+        }, 10000);
+    </script>
+</body>
+</html>

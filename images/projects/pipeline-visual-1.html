@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll & Tell — Automation Pipeline</title>
+    
+    <!-- Google Fonts for a clean, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           VARIABLES & RESET
+           ========================================== */
+        :root {
+            --bg: #f4f5f7;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --text-light: #999999;
+            
+            --module1-color: #1e60b8;
+            --module2-color: #3f8e46;
+            --module3-color: #d99100;
+            --module4-color: #b53e3e;
+            
+            --arrow-color: #a0a0a0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 40px 20px;
+        }
+
+        /* ==========================================
+           LAYOUT
+           ========================================== */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            gap: 50px;
+        }
+
+        .header {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .header-sub {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-sub .arrow-text {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pipeline-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+        }
+
+        /* ==========================================
+           CARD STYLES
+           ========================================== */
+        .card {
+            width: 260px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .card-header {
+            padding: 12px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Specific Card Colors */
+        .card.module-1 .card-header { background-color: var(--module1-color); }
+        .card.module-1 .card-title { color: var(--module1-color); }
+        
+        .card.module-2 .card-header { background-color: var(--module2-color); }
+        .card.module-2 .card-title { color: var(--module2-color); }
+        
+        .card.module-3 .card-header { background-color: var(--module3-color); }
+        .card.module-3 .card-title { color: var(--module3-color); }
+        
+        .card.module-4 .card-header { background-color: var(--module4-color); }
+        .card.module-4 .card-title { color: var(--module4-color); }
+
+        /* ==========================================
+           ARROW STYLES
+           ========================================== */
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: drawArrow 0.4s ease-out forwards;
+        }
+
+        .arrow-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--arrow-color);
+            position: relative;
+        }
+
+        .arrow-line::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: -4px;
+            border-left: 8px solid var(--arrow-color);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        .footer {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-light);
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 3.0s;
+            margin-top: 10px;
+        }
+
+        /* ==========================================
+           KEYFRAMES
+           ========================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes drawArrow {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+
+        /* ==========================================
+           ANIMATION DELAYS (Staggered Sequence)
+           ========================================== */
+        
+        /* Card 1 */
+        .card:nth-child(1) { animation-delay: 0.6s; }
+        
+        /* Arrow 1 */
+        .arrow-container:nth-child(2) { animation-delay: 0.9s; }
+        
+        /* Card 2 */
+        .card:nth-child(3) { animation-delay: 1.2s; }
+        
+        /* Arrow 2 */
+        .arrow-container:nth-child(4) { animation-delay: 1.5s; }
+        
+        /* Card 3 */
+        .card:nth-child(5) { animation-delay: 1.8s; }
+        
+        /* Arrow 3 */
+        .arrow-container:nth-child(6) { animation-delay: 2.1s; }
+        
+        /* Card 4 */
+        .card:nth-child(7) { animation-delay: 2.4s; }
+
+        /* ==========================================
+           REDUCED MOTION SAFETY
+           ========================================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1100px) {
+            .pipeline-wrapper {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+            }
+            .arrow-container {
+                transform: rotate(90deg);
+                margin: -10px 0;
+            }
+            .arrow-line::after {
+                transform: rotate(-90deg);
+                top: 0;
+                right: -4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">Scroll &amp; Tell — Automation Pipeline</div>
+            <div class="header-sub">
+                <span>Module 1 Intake</span>
+                <span class="arrow-text">→</span>
+                <span>Module 2 Generation</span>
+                <span class="arrow-text">→</span>
+                <span>Module 3 Approval</span>
+                <span class="arrow-text">→</span>
+                <span>Module 4 Distribution</span>
+            </div>
+        </div>
+
+        <!-- Pipeline -->
+        <div class="pipeline-wrapper">
+            
+            <!-- Module 1 -->
+            <div class="card module-1">
+                <div class="card-header">Module 1</div>
+                <div class="card-body">
+                    <div class="card-title">Intake</div>
+                    <div class="card-subtitle">Instagram DM &amp; Comment<br>Automation</div>
+                    <div class="card-desc">Classifies intent, collects raw stories via AI chat</div>
+                </div>
+            </div>
+
+            <!-- Arrow 1 -->
+            <div class="arrow-container">
+                <div class="arrow-line"></div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="card module-2">
+                <div class="card-header">Module 2</div>
+                <div class="card-body">
+                    <div class="card-title">Generation</div>
+                    <div class="card-subtitle">Content Engine</div>
+                    <div class="card-desc">AI drafts hook, script, caption, hashtags</div>
+                </div>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div class="arrow-container">
+                <div class="arrow-line"></div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="card module-3">
+                <div class="card-header">Module 3</div>
+                <div class="card-body">
+                    <div class="card-title">Approval</div>
+                    <div class="card-subtitle">Approval System</div>
+                    <div class="card-desc">Telegram review — approve / reject / add audio</div>
+                </div>
+            </div>
+
+            <!-- Arrow 3 -->
+            <div class="arrow-container">
+                <div class="arrow-line"></div>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="card module-4">
+                <div class="card-header">Module 4</div>
+                <div class="card-body">
+                    <div class="card-title">Distribution</div>
+                    <div class="card-subtitle">Distribution Engine</div>
+                    <div class="card-desc">Publishes to IG, Facebook, TikTok, YouTube</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Single merged n8n workflow &nbsp;•&nbsp; Story text → published post
+        </div>
+
+    </div>
+
+    <script>
+        // Restart the animation loop every 8 seconds
+        setInterval(() => {
+            const container = document.querySelector('.container');
+            const clone = container.cloneNode(true);
+            container.parentNode.replaceChild(clone, container);
+        }, 8000);
+    </script>
+</body>
+</html>
