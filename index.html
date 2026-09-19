@@ -77,15 +77,12 @@
 html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;display:flex;min-height:100dvh;overflow:hidden;letter-spacing:-.02em;font-size:1rem}
 
-/* ============ SLAB ICON SHADING ============ */
 .slab__1{opacity:1}
 .slab__2{opacity:.32}
 
-/* ============ PAGE FADE-IN ============ */
 @keyframes page-fadein { from { opacity: 0 } to { opacity: 1 } }
 body { animation: page-fadein .45s cubic-bezier(.22,1,.36,1) both; }
 
-/* ============ THEME SWEEP ============ */
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-old(root){z-index:1}
 ::view-transition-new(root){z-index:2}
@@ -95,15 +92,12 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
   to{clip-path:circle(var(--sweep-r,150vmax) at var(--sweep-x,50%) var(--sweep-y,50%))}
 }
 
-/* ============ CURSOR RING ============ */
 .cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;display:block;border:1.5px solid #fff;border-radius:50%;background:transparent!important;mix-blend-mode:difference;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
 @media (hover:none),(pointer:coarse){.cursor-ring{display:none!important}}
 
-/* ============ SCROLL REVEAL ============ */
 [data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
 [data-reveal].is-revealed{opacity:1;transform:none}
 
-/* ============ SCROLL FADE ============ */
 .outer-frame--page{position:relative}
 .outer-frame--page::before,
 .outer-frame--page::after{
@@ -127,16 +121,13 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .outer-frame--page.has-top-fade::before{opacity:1}
 .outer-frame--page.has-bottom-fade::after{opacity:1}
 
-/* ============ BENTO CARD MICRO-ANIMATIONS ============ */
 .bento__card:hover .bento__icon{transform:translateY(-2px) rotate(-4deg)}
 .bento__arrow{position:absolute;top:14px;right:16px;color:var(--accent2);opacity:0;transform:translate(-4px,4px);transition:opacity .18s var(--ease),transform .45s cubic-bezier(.34,1.56,.64,1);pointer-events:none;z-index:2}
 .bento__card:hover .bento__arrow{opacity:1;transform:none}
 
-/* ============ RAIL ICON ANIMATIONS ============ */
 .ricon__whole{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
 .sidebar-nav a:hover .ricon__whole{transform:translateY(-1.5px) rotate(-6deg) scale(1.08)}
 
-/* ============ SUN/MOON TOGGLE MORPH ============ */
 .tg{display:block;overflow:hidden;transform:rotate(0);transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
 .tg__cut,.tg__disc,.tg__rays{transform-box:fill-box;transform-origin:center;transition:transform .6s cubic-bezier(.34,1.56,.64,1),opacity .3s var(--ease)}
 .tg__cut{fill:var(--tg-bg,var(--surface));transform:translate(4.5px,-4.5px)}
@@ -147,12 +138,10 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .tg[data-theme="dark"] .tg__rays{opacity:1;transform:none}
 .theme-toggle{--tg-bg:var(--surface)}
 
-/* ============ MARQUEE KEYFRAMES ============ */
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes bento-drift-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
 @keyframes galleryLTR{from{transform:translateX(calc(-50% - 1rem))}to{transform:translateX(0)}}
 
-/* ============ BENTO PROJECT REEL ============ */
 .bento__reel{overflow:hidden;border-radius:14px;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
 .bento__reel-track{display:flex;flex-direction:column;gap:10px;animation:bento-drift-up 22s linear infinite;animation-play-state:paused}
 .bento__card:hover .bento__reel-track{animation-play-state:running}
@@ -160,7 +149,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .bento__shot::before{content:"";position:absolute;top:7px;left:9px;width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:10px 0 0 var(--border),20px 0 0 var(--border)}
 .bento__shot img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top;border-radius:7px}
 
-/* ============ MODAL CHROME ============ */
 .modal-browser-chrome{height:46px;display:flex;align-items:center;gap:12px;padding:0 12px 0 14px;background:var(--chrome-bg);border-bottom:1px solid var(--chrome-border);flex:0 0 auto}
 .modal-traffic{display:flex;gap:8px;flex:0 0 auto}
 .modal-traffic i{width:12px;height:12px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
@@ -180,11 +168,9 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .modal-close--floating svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round}
 .modal-overlay.gallery-mode .modal-close--floating{display:grid}
 
-/* ============ PROJECTS HINT PILL ============ */
 .projects-hint{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);z-index:3;display:inline-flex;align-items:center;gap:6px;padding:6px 14px 6px 10px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:var(--surface);border:1px solid var(--border);box-shadow:0 8px 20px -12px rgba(0,0,0,.6),0 0 0 6px var(--bg);white-space:nowrap;pointer-events:none}
 .projects-hint::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px rgba(212,175,55,.6)}
 
-/* ============ REDUCED MOTION + PERF ============ */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   body{animation:none;opacity:1}
@@ -200,7 +186,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 :root[data-perf="low"] .tools-marquee__track,
 :root[data-perf="low"] .gallery-track{animation:none!important}
 
-/* ============ SIDEBAR ============ */
 .sidebar{position:fixed;top:0;left:0;width:var(--sidebar-width);height:100dvh;padding:2.4rem 2rem 1.6rem;display:flex;flex-direction:column;z-index:100}
 .sidebar-top{display:flex;flex-direction:column;align-items:stretch;flex:0 0 auto}
 .sidebar-brand{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:1.4rem}
@@ -226,7 +211,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .sidebar-nav .nav-icon svg{width:20px;height:20px;display:block;fill:currentColor;stroke:none}
 .sidebar-footer{flex:0 0 auto;font-size:.85rem;color:var(--dim);text-align:center;padding-top:1rem;border-top:1px solid var(--sidebar-divider);margin-top:1rem}
 
-/* ============ MAIN ============ */
 .main{margin-left:var(--sidebar-width);flex:1;height:100dvh;overflow:hidden;padding:1.4rem 2rem 1.2rem;display:flex;flex-direction:column;position:relative;background:var(--bg)}
 .page{display:none;flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}
 .page::-webkit-scrollbar{display:none}
@@ -240,7 +224,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 
 .outer-frame{background:var(--frame-tint),var(--outer-bg);border:1px solid var(--outer-border);border-radius:24px;padding:1rem 1.15rem;display:flex;flex-direction:column;min-height:0;flex:1 1 auto;overflow:hidden}
 
-/* ============ HOME ============ */
 .page-home{display:none;flex-direction:column;height:100%;min-height:0;overflow:hidden;padding-bottom:0}
 .page-home.active{display:flex}
 .home-hero{flex:0 0 auto;padding:0 210px 0 0;margin-bottom:.85rem}
@@ -259,7 +242,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .tools-marquee__item{display:inline-flex;align-items:center;gap:.6rem;flex-shrink:0;font-size:.95rem;font-weight:600;color:#071435;white-space:nowrap}
 .tools-marquee__img{width:22px;height:22px;object-fit:contain;display:block}
 
-/* ============ BENTO GRID ============ */
 .bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:.85rem;flex:1 1 auto;min-height:0}
 .bento__card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.35rem;display:flex;flex-direction:column;cursor:pointer;text-decoration:none;color:inherit;overflow:hidden;position:relative;transition:transform .3s var(--ease),border-color .25s,background .35s,box-shadow .35s var(--ease)}
 .bento__card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--card-hover-shadow)}
@@ -311,7 +293,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .bento__card--about .bento__media::after,
 .bento__card--credentials .bento__media::after{display:none}
 
-/* ============ ABOUT CARD: HOVER-ONLY IDEA CONSTELLATION ============ */
 .bento__card--about .bento__media--about{display:block;position:relative;isolation:isolate;overflow:visible;padding:0;background:transparent;border:0}
 .bento__card--about .bento__media--about::after{z-index:0}
 .idea-constellation{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible;color:var(--text)}
@@ -348,7 +329,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 @keyframes constellationCoreRotate{from{transform:perspective(320px) rotateY(0deg)}to{transform:perspective(320px) rotateY(360deg)}}
 @media(prefers-reduced-motion:reduce){.bento__card--about.is-constellation-active .idea-constellation__node{animation:none!important}.idea-constellation__orbit{transition:none}.bento__card--about:hover .idea-constellation__core{animation:none!important}}
 
-/* Credentials stack */
 .credentials-stack{position:absolute;inset:4% 2% 0;width:96%;height:96%;overflow:visible;filter:drop-shadow(0 13px 12px rgba(0,25,80,.18));transform-origin:50% 72%;transition:transform .65s var(--ease),filter .65s var(--ease)}
 .credentials-stack__line{fill:none;stroke:var(--accent2);stroke-width:1.25;stroke-dasharray:3 4;opacity:.62}
 .credentials-stack__stage{fill:var(--accent2);font-family:'Poppins',system-ui,sans-serif;font-size:5.1px;font-weight:700;letter-spacing:.1em}
@@ -378,7 +358,6 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .section-title em{font-style:italic;color:var(--accent2);font-weight:400}
 .section-desc{font-size:1rem;color:var(--muted);max-width:720px;margin-bottom:1rem;font-weight:300;line-height:1.55}
 
-/* ============ PROJECTS ============ */
 .page-projects{display:none;flex-direction:column;height:100%;min-height:0;overflow:hidden}
 .page-projects.active{display:flex;animation:pageIn .5s var(--ease)}
 .projects-head{flex:0 0 auto;padding-right:210px}
@@ -412,13 +391,11 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .project-banner--contain-light .project-banner-track img{object-fit:contain;padding:14px 24px;background:#fff}
 .project-banner--contain .project-banner-track img{object-fit:contain;padding:14px 24px;background:#070711}
 
-/* ============ SCROLLED PAGES ============ */
 .page-scrolled.active{display:flex;flex-direction:column;height:100%;min-height:0}
 .page-scrolled .outer-frame--page{flex:1 1 auto;min-height:0;padding:0;overflow:hidden;position:relative}
 .page-scrolled .outer-frame--page-inner{height:100%;overflow-y:auto;padding:2rem 2.25rem;scrollbar-width:none}
 .page-scrolled .outer-frame--page-inner::-webkit-scrollbar{display:none}
 
-/* ============ ABOUT (Credentials) ============ */
 .cred-section-title{font-size:1.4rem;font-weight:700;margin:2.2rem 0 .4rem;letter-spacing:-.02em}
 .cred-section-desc{font-size:.95rem;color:var(--muted);font-weight:300;margin-bottom:1rem;max-width:780px;line-height:1.6}
 .cred-education-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem 1.8rem;margin-top:.9rem}
@@ -463,7 +440,6 @@ a.cert-row:hover .cert-num{color:var(--accent)}
 .cred-explore-card h4{font-size:.95rem;font-weight:700;color:var(--accent2);margin-bottom:.35rem}
 .cred-explore-card p{font-size:.86rem;color:var(--muted);font-weight:300;line-height:1.6;margin:0}
 
-/* ============ AI BUILDS ============ */
 .aib-section-title{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--label-color);margin:2rem 0 1rem}
 .aib-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}
 .aib-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),border-color .25s,box-shadow .35s var(--ease);color:inherit}
@@ -489,7 +465,6 @@ a.cert-row:hover .cert-num{color:var(--accent)}
 .aib-card-socials a:hover{transform:translateY(-3px);color:var(--accent);background:var(--surface);box-shadow:0 4px 14px rgba(0,56,255,.2)}
 .aib-card-socials svg{width:16px;height:16px;display:block;fill:currentColor}
 
-/* ============ CONTACT ============ */
 .contact-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:2rem;align-items:stretch;margin-top:1rem}
 @media(min-width:901px){
   #page-contact .outer-frame--page-inner{display:flex;flex-direction:column}
@@ -533,7 +508,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .contact-row__arrow{color:var(--dim);font-size:1rem;transition:transform .25s var(--ease),color .25s}
 .contact-row:hover .contact-row__arrow{color:var(--accent);transform:translateX(3px)}
 
-/* ============ MODAL ============ */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,7,15,.82);backdrop-filter:blur(14px);z-index:1000;align-items:stretch;justify-content:stretch;padding:clamp(36px,3.6vw,60px);overflow:hidden;animation:fadeIn .3s ease}
 .modal-overlay.active{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -561,6 +535,81 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .modal-figure--grid figcaption{grid-column:1/-1;margin-top:.3rem}
 .modal-article .tech-stack span{background:rgba(0,56,255,.06);border:1px solid rgba(0,56,255,.12);color:#4a5468}
 
+/* ============ ANIMATED FIGURES (iframe replaces png) ============ */
+.modal-figure--animated{padding:.65rem;border:1px solid rgba(0,56,255,.11);border-radius:16px;background:#f5f7ff}
+.modal-figure--animated .modal-figure__frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:10px;
+  overflow:hidden;
+  background:#0b1120;
+}
+.modal-figure--animated .modal-figure__frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:transparent;
+}
+.modal-figure--animated figcaption{font-size:.75rem;color:#71809a;padding:.35rem .4rem 0}
+
+/* ============ CLICKABLE PROJECT IMAGES ============ */
+.project-site-article .modal-body img{cursor:zoom-in;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .25s}
+.project-site-article .modal-body img:hover{transform:translateY(-2px);box-shadow:0 14px 32px -14px rgba(0,56,255,.35);border-color:rgba(0,56,255,.28)}
+.modal-article .modal-body img{cursor:zoom-in}
+
+/* ============ IMAGE LIGHTBOX ============ */
+.img-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:1500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(20px,4vw,60px);
+  background:rgba(4,7,15,.94);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  cursor:zoom-out;
+  animation:fadeIn .25s ease;
+}
+.img-lightbox.is-open{display:flex}
+.img-lightbox__img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:10px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.85);
+  cursor:default;
+  animation:imgLightboxIn .32s cubic-bezier(.34,1.4,.64,1) both;
+  background:#fff;
+}
+@keyframes imgLightboxIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.img-lightbox__close{
+  position:fixed;
+  top:clamp(14px,2vw,28px);
+  right:clamp(14px,2vw,28px);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  padding:0;
+  z-index:1;
+  transition:background .2s var(--ease),transform .25s var(--ease),border-color .2s;
+}
+.img-lightbox__close:hover{background:rgba(255,255,255,.22);transform:scale(1.06);border-color:rgba(255,255,255,.4)}
+.img-lightbox__close svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round}
+
 .modal-content.gallery-mode{background:transparent;border:none;box-shadow:none;overflow:visible}
 .modal-content.gallery-mode > .modal-browser-chrome{display:none}
 .modal-content.gallery-mode .modal-article{background:transparent;padding:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
@@ -574,8 +623,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .gallery-shot .modal-url{flex:1 1 auto;font-size:.78rem;padding:5px 16px;margin-left:14px;background:rgba(0,0,0,.05);color:#4a5468;border:1px solid rgba(0,0,0,.06)}
 .gallery-shot img{display:block;width:100%;height:520px;object-fit:cover;object-position:top center;flex:0 0 auto}
 
-
-/* ============ FRAMED PROJECT-SITE ARTICLES ============ */
 .modal-article.project-site-article{padding:0;background:#eef3ff;color:#071435}
 .project-site-article .project-site-shell{max-width:980px;margin:0 auto;padding:2.5rem clamp(1.15rem,4vw,3.6rem) 4rem}
 .project-site-article .project-site-hero{padding:clamp(1.6rem,4vw,3.3rem);margin-bottom:1.2rem;border:1px solid rgba(0,56,255,.15);border-radius:24px;background:linear-gradient(135deg,#fff 0%,#f5f7ff 58%,#e4edff 100%);box-shadow:0 22px 55px -35px rgba(0,56,255,.38);position:relative;overflow:hidden}
@@ -607,8 +654,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
  .project-site-article .modal-figure--grid img{height:auto;max-height:220px}
 }
 
-
-/* ============ INTERACTION MOTION ============ */
 .project-card{transform:translateZ(0);transition:transform .42s var(--ease),border-color .3s ease,box-shadow .42s var(--ease),background .35s ease}
 .project-card::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.18) 42%,transparent 62%);transform:translateX(-130%);transition:transform .7s var(--ease);z-index:3}
 .project-card:hover::after{transform:translateX(130%)}
@@ -635,7 +680,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 @keyframes architecturePulse{0%{transform:scale(.65);box-shadow:0 0 0 0 rgba(0,56,255,.45);opacity:.15}35%{opacity:1}70%{transform:scale(1);box-shadow:0 0 0 14px rgba(0,56,255,0);opacity:.85}100%{transform:scale(.65);box-shadow:0 0 0 18px rgba(0,56,255,0);opacity:.15}}
 @media(prefers-reduced-motion:reduce){.project-card,.project-card::after,.project-card:hover .project-banner-track img,.modal-content,.project-site-section,.architecture-figure::after,.architecture-pulse{animation:none!important;transition:none!important}.project-card:hover .project-banner-track img{transform:none!important}.project-card:hover::after{display:none}}
 
-/* ============ MOBILE ============ */
 @media(max-width:900px){
   body{display:flex;flex-direction:column;height:100dvh;overflow:hidden;overflow-x:hidden}
   .sidebar{position:relative;top:auto;left:auto;width:100%;height:auto;flex-direction:row;align-items:center;padding:.75rem 1rem;border-bottom:1px solid var(--sidebar-divider);z-index:200;gap:.75rem;background:var(--surface);flex:0 0 auto}
@@ -709,11 +753,9 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .tools-label{border-right:none;padding-right:0;border-bottom:1px solid var(--border);padding-bottom:.5rem;text-align:left}
   .tools-marquee__track{gap:2.4rem}
 
-  /* --- BENTO GRID: compact mobile layout --- */
   .bento{grid-template-columns:1fr;grid-template-rows:auto;gap:.65rem}
   .bento__card{min-height:auto}
 
-  /* Projects card: stack text above media, cap media height */
   .bento__card--projects{
     grid-column:auto;grid-row:auto;
     display:flex;flex-direction:column;
@@ -728,7 +770,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   }
   .bento__card--projects .bento__media img{object-fit:cover;object-position:center 30%}
 
-  /* AI Builds card: stack text + media, cap height */
   .bento__card--ai{
     grid-column:auto;grid-row:auto;
     display:flex;flex-direction:column;
@@ -745,7 +786,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     align-self:flex-start;
   }
 
-  /* About + Credentials: tighter */
   .bento__card--about,
   .bento__card--credentials{
     grid-column:auto;grid-row:auto;
@@ -783,7 +823,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .aib-card{
     border-radius:14px;
   }
-  /* Visual: shorter aspect so cards stay compact */
   .aib-card-visual{
     aspect-ratio:4/3;
   }
@@ -798,7 +837,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     border-radius:999px;
     box-shadow:0 3px 8px rgba(34,197,94,.35);
   }
-  /* Body: tiny padding + fluid text so nothing overflows */
   .aib-card-body{
     padding:.5rem .55rem .55rem;
     gap:.2rem;
@@ -843,7 +881,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     letter-spacing:.02em;
     line-height:1.2;
   }
-  /* CTA: full-width pill so it doesn't get clipped */
   .aib-card-cta{
     width:100%;
     justify-content:center;
@@ -854,7 +891,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     text-align:center;
     line-height:1.1;
   }
-  /* Social icons shrink to fit */
   .aib-card-socials{
     gap:.25rem;
     margin-top:.35rem;
@@ -889,6 +925,13 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .gallery-shot img{height:340px}
   .gallery-track{gap:1.4rem}
   .cursor-ring{display:none!important}
+
+  /* Animated figure frame on mobile */
+  .modal-figure--animated .modal-figure__frame{aspect-ratio:4/3}
+
+  /* Lightbox close button on mobile */
+  .img-lightbox__close{width:42px;height:42px}
+  .img-lightbox__close svg{width:18px;height:18px}
 }
 @media(max-width:380px){
   .sidebar-nav a{font-size:.58rem}
@@ -900,10 +943,8 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .htiles{display:none}
 
 @media(max-width:900px){
-  /* Hide the desktop bento grid on mobile */
   .outer-frame--bento{display:none!important}
 
-  /* "Explore / Swipe" header */
   .hsec{
     display:flex;align-items:baseline;justify-content:space-between;
     margin:1.25rem .25rem .35rem;
@@ -914,7 +955,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   }
   .hsec__aside{font-size:12.5px;font-weight:600;color:var(--accent2)}
 
-  /* Horizontal-scroll track */
   .htiles{
     display:flex;gap:12px;list-style:none;
     margin:0 -1rem;padding:8px 1rem 18px;
@@ -925,7 +965,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .htiles::-webkit-scrollbar{display:none}
   .htiles>li{flex:0 0 auto;scroll-snap-align:start;list-style:none}
 
-  /* Individual tile */
   .htile{
     position:relative;display:flex;flex-direction:column;
     width:min(236px,66vw);height:290px;
@@ -939,7 +978,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   }
   .htile:active{transform:scale(.97)}
 
-  /* Numbered pill badge */
   .htile__n{
     position:absolute;top:12px;left:12px;z-index:1;
     padding:5px 10px;border-radius:999px;
@@ -948,7 +986,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     letter-spacing:.12em;text-transform:uppercase;
   }
 
-  /* Visual area: image OR glyph */
   .htile__img{
     display:block;width:100%;height:170px;
     object-fit:cover;object-position:top center;
@@ -959,7 +996,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   }
   .htile__glyph svg{width:56px;height:56px;opacity:.9}
 
-  /* Text body */
   .htile__body{padding:14px 16px;display:flex;flex-direction:column;gap:4px}
   .htile__title{
     font-size:16px;font-weight:700;line-height:1.2;
@@ -972,7 +1008,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     -webkit-box-orient:vertical;overflow:hidden;
   }
 
-  /* Round arrow button bottom-right */
   .htile__go{
     position:absolute;right:12px;bottom:12px;
     display:grid;place-items:center;
@@ -1188,7 +1223,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
       </div>
     </div>
 
-    <!-- Mobile-only Explore tiles (hidden on desktop) -->
     <div class="hsec">
       <h2 class="hsec__title">Explore</h2>
       <span class="hsec__aside">Swipe</span>
@@ -1196,7 +1230,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 
     <ul class="htiles" role="list">
 
-      <!-- 01 · Projects -->
       <li>
         <a class="htile" href="#" onclick="switchPage('projects');return false;">
           <span class="htile__n">01 Projects</span>
@@ -1211,7 +1244,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
         </a>
       </li>
 
-      <!-- 02 · AI Builds -->
       <li>
         <a class="htile" href="#" onclick="switchPage('aibuilds');return false;">
           <span class="htile__n">02 AI Builds</span>
@@ -1226,7 +1258,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
         </a>
       </li>
 
-      <!-- 03 · About -->
       <li>
         <a class="htile" href="#" onclick="switchPage('about');return false;">
           <span class="htile__n">03 About</span>
@@ -1246,7 +1277,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
         </a>
       </li>
 
-      <!-- 04 · Credentials -->
       <li>
         <a class="htile" href="#" onclick="switchPage('about');return false;">
           <span class="htile__n">04 Credentials</span>
@@ -1585,6 +1615,14 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   </div>
 </div>
 
+<!-- Full-size image lightbox (used for clickable figures inside project modals) -->
+<div class="img-lightbox" id="imgLightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="img-lightbox__close" id="imgLightboxClose" aria-label="Close image">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <img class="img-lightbox__img" id="imgLightboxImg" alt="" />
+</div>
+
 <script>
 const TOOLS=[{name:'ChatGPT',file:'tool-chatgpt.svg'},{name:'Claude',file:'tool-claude.svg'},{name:'Claude Code',file:'tool-claude-code.svg'},{name:'n8n',file:'tool-n8n.svg'},{name:'Ollama',file:'tool-ollama.svg'},{name:'Google Flow',file:'tool-google-flow.svg'},{name:'Meta AI',file:'tool-meta.svg'},{name:'ElevenLabs',file:'tool-elevenlabs.svg'},{name:'Groq',file:'tool-groq.svg'},{name:'Supabase',file:'tool-supabase.svg'},{name:'Google Veo',file:'tool-google-veo.svg'},{name:'CapCut',file:'tool-capcut.svg'},{name:'Canva',file:'tool-canva.svg'},{name:'Notion',file:'tool-notion.svg'},{name:'Trello',file:'tool-trello.svg'},{name:'Slack',file:'tool-slack.svg'},{name:'Google Workspace',file:'tool-google-workspace.svg'},{name:'GitHub',file:'tool-github.svg'},{name:'DeepSeek',file:'tool-deepseek.svg'},{name:'LLM',file:'tool-llm.svg'},{name:'HTML5',file:'tool-html5.svg'},{name:'CSS',file:'tool-css.svg'},{name:'JavaScript',file:'tool-js.svg'},{name:'C++',file:'tool-cpp.svg'}];
 
@@ -1802,6 +1840,91 @@ function formatProjectArticle() {
   });
   shell.append(source);
 }
+
+/* ==========================================
+   ANIMATED FIGURES + IMAGE LIGHTBOX
+   ========================================== */
+const ANIMATED_FIGURES = {
+  'mathdesk-visual-5': '2 / 1',
+  'scrolltell-visual-3': '16 / 9',
+  'shortform-visual-1': '4 / 3',
+  'shortform-visual-4': '16 / 9',
+  'pipeline-visual-1': '16 / 9'
+};
+
+function replaceAnimatedFigures(){
+  Object.keys(ANIMATED_FIGURES).forEach(function(base){
+    const img = modalArticle.querySelector('img[src*="' + base + '.png"]');
+    if (!img) return;
+    const figure = img.closest('.modal-figure');
+    if (!figure) return;
+    const rawSrc = img.getAttribute('src') || '';
+    const htmlSrc = rawSrc.replace(/\.png$/i, '.html');
+    figure.classList.add('modal-figure--animated');
+    // Remove the old pulse spans from the architecture figure if present
+    figure.querySelectorAll('.architecture-pulse').forEach(function(p){ p.remove(); });
+    figure.classList.remove('architecture-figure');
+    // Build frame + iframe
+    const frame = document.createElement('div');
+    frame.className = 'modal-figure__frame';
+    frame.style.aspectRatio = ANIMATED_FIGURES[base];
+    const iframe = document.createElement('iframe');
+    iframe.src = htmlSrc;
+    iframe.setAttribute('loading','lazy');
+    iframe.setAttribute('title', base.replace(/-/g,' ') + ' animation');
+    iframe.setAttribute('scrolling','no');
+    iframe.setAttribute('frameborder','0');
+    frame.appendChild(iframe);
+    figure.insertBefore(frame, figure.firstChild);
+    img.remove();
+  });
+}
+
+function bindLightboxImages(){
+  const imgs = modalArticle.querySelectorAll('.modal-body img');
+  imgs.forEach(function(img){
+    if (img.dataset.lightboxBound === 'true') return;
+    if (img.closest('.modal-figure--animated')) return;
+    img.dataset.lightboxBound = 'true';
+    img.setAttribute('role','button');
+    img.setAttribute('tabindex','0');
+    img.addEventListener('click', function(){ openLightbox(img.src, img.alt); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img.src, img.alt);
+      }
+    });
+  });
+}
+
+function enhanceProjectArticle(){
+  replaceAnimatedFigures();
+  bindLightboxImages();
+}
+
+const imgLightbox = document.getElementById('imgLightbox');
+const imgLightboxImg = document.getElementById('imgLightboxImg');
+const imgLightboxClose = document.getElementById('imgLightboxClose');
+
+function openLightbox(src, alt){
+  if (!imgLightbox || !imgLightboxImg || !src) return;
+  imgLightboxImg.src = src;
+  imgLightboxImg.alt = alt || '';
+  imgLightbox.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  if (!imgLightbox) return;
+  imgLightbox.classList.remove('is-open');
+  if (imgLightboxImg) imgLightboxImg.src = '';
+  if (!overlay.classList.contains('active')) {
+    document.body.style.overflow = '';
+  }
+}
+if (imgLightboxClose) imgLightboxClose.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+if (imgLightbox) imgLightbox.addEventListener('click', function(e){ if (e.target === imgLightbox) closeLightbox(); });
+
 function openProject(id) {
   const p = PROJECTS.filter(x => x.id === id)[0]; if (!p) return;
   modalContent.classList.remove('gallery-mode');
@@ -1810,14 +1933,15 @@ function openProject(id) {
   setExternalLink(null);
   modalArticle.innerHTML = p.article;
   formatProjectArticle();
+  enhanceProjectArticle();
   overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
-  // Reset after the new article is attached and laid out so every project starts at the top.
   modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   requestAnimationFrame(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
   setTimeout(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }), 0);
 }
 function closeModal() {
+  closeLightbox();
   overlay.classList.remove('active');
   overlay.classList.remove('gallery-mode');
   modalContent.classList.remove('gallery-mode');
@@ -1828,7 +1952,11 @@ function closeModal() {
 document.getElementById('modalCloseChrome').addEventListener('click', closeModal);
 document.getElementById('modalCloseFloating').addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (imgLightbox && imgLightbox.classList.contains('is-open')) { closeLightbox(); return; }
+  closeModal();
+});
 
 /* PAGE SWITCH */
 function switchPage(name, options) {
