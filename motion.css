@@ -1,0 +1,233 @@
+/* Reference-inspired motion layer for Chelsea's existing portfolio.
+   Keeps the blue/gold identity and content; the mobile contact CTA moves into
+   the hero flow to prevent overlap. No template assets or JS dependencies. */
+
+/* Low-contrast contour field: a lightweight CSS interpretation of the
+   reference's drifting topographic background, behind the current content. */
+.main::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .28;
+  background:
+    radial-gradient(ellipse at 82% 20%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 42%),
+    repeating-radial-gradient(ellipse 68% 76% at 83% 18%, transparent 0 30px, color-mix(in srgb, var(--accent) 7%, transparent) 31px 32px, transparent 33px 54px);
+  transform-origin: 78% 22%;
+  animation: contour-drift 48s ease-in-out infinite alternate;
+}
+.main > .page {
+  position: relative;
+  z-index: 1;
+}
+[data-theme="dark"] .main::before { opacity: .2; }
+@keyframes contour-drift {
+  from { transform: translate3d(-.6%, 0, 0) rotate(-1.2deg) scale(1); }
+  to   { transform: translate3d(.7%, .6%, 0) rotate(1.2deg) scale(1.025); }
+}
+
+/* Restore Chelsea's blue/gold solid-circle portrait frame, with a soft halo and
+   fine outer ring rather than the reference's dissolving portrait mask. */
+.sidebar-avatar {
+  isolation: isolate;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--accent) 72%, var(--surface));
+  box-shadow:
+    0 0 0 5px var(--surface),
+    0 0 0 6px color-mix(in srgb, var(--accent2) 42%, transparent),
+    0 12px 28px -15px rgba(0, 20, 70, .48);
+  transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), box-shadow .4s var(--ease);
+}
+.sidebar-avatar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -16px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 62%, color-mix(in srgb, var(--accent2) 24%, transparent), transparent 68%);
+  filter: blur(12px);
+  opacity: .68;
+  pointer-events: none;
+  transition: opacity .4s var(--ease), transform .55s var(--ease);
+}
+.sidebar-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--surface) 74%, transparent);
+  pointer-events: none;
+  transition: inset .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+.sidebar-avatar img {
+  border-radius: 50%;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.sidebar-avatar .avatar-fallback { opacity: 0; }
+#sidebarAvatar.is-fallback .avatar-fallback { opacity: .35; }
+.sidebar-brand:hover .sidebar-avatar {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 0 0 5px var(--surface),
+    0 0 0 7px color-mix(in srgb, var(--accent2) 70%, transparent),
+    0 18px 34px -16px rgba(0, 20, 70, .55);
+}
+.sidebar-brand:hover .sidebar-avatar::before { opacity: .95; transform: scale(1.08); }
+.sidebar-brand:hover .sidebar-avatar::after {
+  inset: -10px;
+  border-color: color-mix(in srgb, var(--accent2) 68%, transparent);
+}
+
+/* Compact inline page-view count, echoing the reference rail without claiming
+   unique visitors: CounterAPI increments each time this page is loaded. */
+.sidebar-meta {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .38em;
+  margin-top: .2rem;
+  color: var(--dim);
+  font-size: .86rem;
+  line-height: 1.4;
+  white-space: normal;
+}
+.sidebar-meta__handle { color: var(--dim); }
+.sidebar-meta__separator { color: var(--accent2); font-size: .92em; }
+.sidebar-counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .22em;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.sidebar-counter__value {
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+}
+.sidebar-counter__label { color: var(--dim); font-size: .9em; }
+.sidebar-counter__value[data-counter-status="preview"] { opacity: .72; }
+.sidebar-counter__value[data-counter-status="error"] { color: var(--dim); }
+
+/* The blue check remains visible as requested, but is decorative rather than
+   an accessibility claim. Its small spring only plays on intentional hover. */
+.verified-badge { transform-origin: center; }
+.sidebar-brand:hover .verified-badge { animation: badge-pop .52s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes badge-pop {
+  0% { transform: scale(.78) rotate(-14deg); }
+  68% { transform: scale(1.2) rotate(4deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Small spring-like icon response on the existing rail controls. */
+.sidebar-nav .nav-icon svg {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), color .25s var(--ease);
+}
+.sidebar-nav a:hover .nav-icon svg { transform: translateY(-1.5px) rotate(-6deg) scale(1.06); }
+.sidebar-nav a:active,
+.sidebar-social a:active,
+.theme-toggle:active,
+.hero-cta:active,
+.bento__card:active,
+.project-card:active,
+.aib-card:active { transform: scale(.985); }
+.hero-cta--mobile { display: none; }
+
+/* Short, low-travel transitions keep refresh and route arrivals responsive. */
+.page.active { animation: reference-page-arrive .32s var(--ease) both; }
+@keyframes reference-page-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+[data-reveal] {
+  transform: translateY(12px);
+  transition: opacity .38s var(--ease), transform .38s var(--ease);
+}
+[data-reveal].is-revealed { opacity: 1; transform: none; }
+
+/* The existing project grid is one reveal target. Its cards now arrive in a
+   short, restrained stagger after that section enters view. */
+.outer-frame--grid[data-reveal] .project-card {
+  opacity: 0;
+  transform: translateY(14px) scale(.985);
+  transition:
+    opacity .38s var(--ease),
+    transform .38s var(--ease),
+    border-color .25s ease,
+    background .35s ease,
+    box-shadow .35s var(--ease);
+}
+.outer-frame--grid[data-reveal].is-revealed .project-card {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.outer-frame--grid[data-reveal].is-revealed .project-card:hover {
+  transform: translateY(-4px);
+  transition-delay: 0ms;
+}
+.outer-frame--grid[data-reveal] .project-card:nth-child(2) { --reveal-delay: 45ms; }
+.outer-frame--grid[data-reveal] .project-card:nth-child(3) { --reveal-delay: 90ms; }
+.outer-frame--grid[data-reveal] .project-card:nth-child(4) { --reveal-delay: 135ms; }
+.outer-frame--grid[data-reveal] .project-card:nth-child(5) { --reveal-delay: 180ms; }
+.outer-frame--grid[data-reveal] .project-card:nth-child(6) { --reveal-delay: 225ms; }
+
+/* Let existing showcase images respond to the same gentle hover lift. */
+.bento__media img { transition: transform .65s var(--ease); }
+.bento__card:hover .bento__media img { transform: scale(1.025); }
+
+@media (max-width: 900px) {
+  .sidebar-meta {
+    justify-content: flex-start;
+    gap: .32em;
+    margin-top: 0;
+    font-size: .78rem;
+  }
+  /* Retain the circle and accent rings in the compact mobile rail. */
+  .sidebar-avatar::before { inset: -5px; filter: blur(6px); opacity: .48; }
+  .sidebar-avatar::after { inset: -3px; }
+  .sidebar-avatar img {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  #sidebarAvatar.is-fallback .avatar-fallback { opacity: 1; }
+  .sidebar-brand:hover .sidebar-avatar { transform: translateY(-1px) scale(1.015); }
+  .sidebar-brand:hover .sidebar-avatar::after { inset: -4px; }
+  /* The fixed desktop CTA is replaced by the same action in the hero flow. */
+  #heroCta { display: none !important; }
+  .hero-cta--mobile {
+    display: flex;
+    position: static;
+    inset: auto;
+    z-index: auto;
+    width: max-content;
+    max-width: 100%;
+    margin: 1rem 0 0;
+    padding: .68rem 1.15rem;
+    font-size: .88rem;
+    box-shadow: 0 6px 20px rgba(0, 56, 255, .18);
+  }
+  .page.active { animation-duration: .28s; }
+  .main::before { inset: -4%; opacity: .2; animation-duration: 64s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main::before { animation: none !important; transform: none !important; }
+  .sidebar-brand:hover .sidebar-avatar { transform: none; }
+  .sidebar-brand:hover .verified-badge { animation: none; }
+  .main [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .outer-frame--grid[data-reveal] .project-card,
+  .outer-frame--grid[data-reveal].is-revealed .project-card { opacity: 1; transform: none; transition: none; }
+  .hero-cta--mobile:hover,
+  .hero-cta--mobile:active { transform: none; }
+}
