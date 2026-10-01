@@ -29,7 +29,7 @@
 (function(){try{var t=localStorage.getItem('portfolio-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" async></script>
 
 <style>
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('./fonts/Poppins-Regular.woff2')format('woff2'),url('https://cdn.jsdelivr.net/gh/Tselseya/chelseaandrea-dominguez@main/fonts/Poppins-Regular.woff2')format('woff2')}
@@ -81,7 +81,7 @@ body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(-
 .slab__2{opacity:.32}
 
 @keyframes page-fadein { from { opacity: 0 } to { opacity: 1 } }
-body { animation: page-fadein .45s cubic-bezier(.22,1,.36,1) both; }
+body { animation: page-fadein .22s cubic-bezier(.22,1,.36,1) both; }
 
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-old(root){z-index:1}
@@ -95,7 +95,7 @@ html[data-theme-sweep]::view-transition-new(root){animation:theme-sweep 1.2s cub
 .cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;display:block;border:1.5px solid #fff;border-radius:50%;background:transparent!important;mix-blend-mode:difference;pointer-events:none;z-index:9999;opacity:0;will-change:transform}
 @media (hover:none),(pointer:coarse){.cursor-ring{display:none!important}}
 
-[data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+[data-reveal]{opacity:0;transform:translateY(14px);transition:opacity .38s cubic-bezier(.22,1,.36,1),transform .38s cubic-bezier(.22,1,.36,1)}
 [data-reveal].is-revealed{opacity:1;transform:none}
 
 .outer-frame--page{position:relative}
@@ -1011,6 +1011,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .htile__go svg{width:14px;height:14px}
 }
 </style>
+<link rel="stylesheet" href="./motion.css" />
 </head>
 
 <body>
@@ -1022,17 +1023,24 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
     <div class="sidebar-brand">
       <div class="sidebar-avatar" id="sidebarAvatar">
         <span class="avatar-fallback">CA</span>
-        <img src="portfolio.png" alt="Chelsea Andrea" onerror="this.style.display='none'" />
+        <img src="portfolio.webp" width="512" height="512" decoding="async" fetchpriority="high" alt="Chelsea Andrea" onerror="this.style.display='none';this.parentElement.classList.add('is-fallback')" />
       </div>
       <div class="sidebar-brand-text">
         <span class="sidebar-name">
           Chelsea Andrea
-          <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified" role="img">
+          <svg class="verified-badge" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <circle cx="12" cy="12" r="10" fill="#1877F2"/>
             <path fill="#fff" d="M10.5 16.5l-3.5-3.5 1.4-1.4 2.1 2.1 5.6-5.6 1.4 1.4-7 7z"/>
           </svg>
         </span>
-        <span class="sidebar-meta">@tselseyaaa · <span id="visitCount">—</span> visits</span>
+        <span class="sidebar-meta">
+          <span class="sidebar-meta__handle">@tselseyaaa</span>
+          <span class="sidebar-meta__separator" aria-hidden="true">·</span>
+          <span class="sidebar-counter" role="status" aria-live="polite" aria-atomic="true" title="Page views">
+            <span id="visitCount" class="sidebar-counter__value">—</span>
+            <span class="sidebar-counter__label">views</span>
+          </span>
+        </span>
       </div>
     </div>
 
@@ -1102,12 +1110,16 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   </a>
 
   <div id="page-home" class="page page-home active">
-    <section class="home-hero">
+    <section class="home-hero" data-reveal>
       <h1 class="tagline">Building smarter systems,<br /><em>one experiment at a time.</em></h1>
       <p class="sub-line">I build AI-assisted workflows, web tools, and digital experiments that combine technology, problem-solving, and creative thinking. From content systems and automation pipelines to AI-powered learning tools, I like turning ideas into something I can actually build, test, and improve.</p>
+      <a class="hero-cta hero-cta--mobile" id="heroCtaMobile" href="#" onclick="switchPage('contact');return false;">
+        Get in Touch
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
     </section>
 
-    <div class="outer-frame outer-frame--tools">
+    <div class="outer-frame outer-frame--tools" data-reveal>
       <div class="tools-strip" aria-label="Tools I work with">
         <span class="tools-label">Tools I work with</span>
         <div class="tools-frame">
@@ -1671,6 +1683,11 @@ const FAQS=[
 (function(){
   const el = document.getElementById('visitCount');
   if(!el) return;
+  const host = window.location.hostname.toLowerCase();
+  if(host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host.endsWith('.manus.computer')){
+    el.dataset.counterStatus = 'preview';
+    return;
+  }
   const endpoint = 'https://api.counterapi.dev/v2/portfolio-v3/visits-v1/up';
   const render = data => {
     const value = data && data.data ? data.data.up_count : null;
@@ -2158,7 +2175,7 @@ window.addEventListener('resize', refreshScrollFades);
       entries.forEach(function(entry){
         if(entry.isIntersecting){entry.target.classList.add('is-revealed');io.unobserve(entry.target);}
       });
-    }, {threshold:0, rootMargin:'0px 0px -80px 0px'});
+    }, {threshold:0, rootMargin:'0px 0px -24px 0px'});
     els.forEach(function(el){io.observe(el);});
   }
 
