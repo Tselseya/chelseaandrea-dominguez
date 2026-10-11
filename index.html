@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Chelsea Andrea Dominguez — AI Workflow Designer</title>
+<title>Chelsea Andrea Dominguez | AI Workflow Designer</title>
 <meta name="description" content="AI Workflow Designer building AI workflows, n8n automation, content systems, and personal software projects." />
 <meta name="author" content="Chelsea Andrea Dominguez" />
 <link rel="canonical" href="https://tselseya.github.io/chelseaandrea-dominguez/" />
-<meta property="og:title" content="Chelsea Andrea Dominguez — AI Workflow Designer" />
+<meta property="og:title" content="Chelsea Andrea Dominguez | AI Workflow Designer" />
 <meta property="og:description" content="AI workflows, n8n automation, content systems, and personal software projects by Chelsea Andrea Dominguez." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://tselseya.github.io/chelseaandrea-dominguez/" />
 <meta property="og:site_name" content="Chelsea Andrea Dominguez" />
 <meta property="og:image" content="https://tselseya.github.io/chelseaandrea-dominguez/preview.jpg" />
-<meta property="og:image:alt" content="Chelsea Andrea Dominguez — AI Workflow Designer" />
+<meta property="og:image:alt" content="Chelsea Andrea Dominguez | AI Workflow Designer" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Chelsea Andrea Dominguez — AI Workflow Designer" />
+<meta name="twitter:title" content="Chelsea Andrea Dominguez | AI Workflow Designer" />
 <meta name="twitter:description" content="AI workflows, n8n automation, content systems, and personal software projects by Chelsea Andrea Dominguez." />
 <meta name="twitter:image" content="https://tselseya.github.io/chelseaandrea-dominguez/preview.jpg" />
-<meta name="twitter:image:alt" content="Chelsea Andrea Dominguez — AI Workflow Designer" />
+<meta name="twitter:image:alt" content="Chelsea Andrea Dominguez | AI Workflow Designer" />
 <link rel="icon" href="favicon.png" />
 <link rel="apple-touch-icon" href="favicon.png" />
 
@@ -1013,6 +1013,54 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   }
   .htile__go svg{width:14px;height:14px}
 }
+/* Portfolio revision: compact mobile frames, two-card builds, and framed credentials. */
+.projects-filter-preserved{display:none!important}
+.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr;gap:1rem}
+.projects-grid .project-card[data-tall="true"]{grid-row:auto}
+.aib-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+.cert-frame{padding:.35rem .75rem .75rem;border:1px solid var(--border);border-radius:18px;background:var(--surface2);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.cert-frame .cert-row{border:0;border-radius:0;background:transparent;margin:0;padding:.7rem .2rem;border-bottom:1px solid var(--border);position:relative}
+.cert-frame .cert-row:last-of-type{border-bottom:0}
+.cert-frame .cert-row:hover{transform:none;background:var(--surface);border-color:transparent;box-shadow:none}
+.cert-frame .cert-num{font-size:.68rem;letter-spacing:.12em;color:var(--dim)}
+.cert-frame .cert-name{font-size:.82rem;line-height:1.25}
+.cert-frame .cert-meta{font-size:.68rem}
+.cert-frame .cert-badge{width:36px;height:36px;flex-basis:36px}
+.aib-card-article{appearance:none;cursor:pointer;font-family:'Poppins',sans-serif}
+@media(max-width:900px){
+  .page-projects .outer-frame--grid{padding:1.25rem .55rem .55rem}
+  .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr;gap:.55rem;height:100%}
+  .project-card{min-height:0;--banner-h:clamp(78px,22vw,125px);padding:.65rem}
+  .project-card[data-tall="true"]{--banner-h:clamp(78px,22vw,125px)}
+  .project-banner{margin:-.65rem -.65rem .55rem}
+  .project-card h3{font-size:clamp(.78rem,3.6vw,1rem);line-height:1.15;margin-bottom:.25rem}
+  .project-card .subtitle{font-size:clamp(.56rem,2.5vw,.72rem);line-height:1.35;-webkit-line-clamp:5}
+  .project-tags{gap:.18rem;margin-bottom:.3rem}
+  .tag{font-size:clamp(.42rem,1.8vw,.56rem);padding:.12rem .35rem}
+  .page-aibuilds .outer-frame--page-inner{padding:1rem .55rem;overflow:hidden}
+  .page-aibuilds .section-title{font-size:clamp(1.45rem,7vw,2rem);margin-bottom:.3rem}
+  .page-aibuilds .section-desc{font-size:.62rem;line-height:1.35;margin-bottom:.45rem}
+  .aib-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem;margin-top:.35rem;align-items:stretch}
+  .aib-card{border-radius:10px}
+  .aib-card-visual{aspect-ratio:3/2}
+  .aib-card-body{padding:.35rem .38rem .4rem;gap:.08rem}
+  .aib-card-tag{font-size:clamp(.34rem,1.35vw,.48rem);letter-spacing:.04em;margin-bottom:.04rem;line-height:1.05}
+  .aib-card-title{font-size:clamp(.58rem,2.5vw,.76rem);line-height:1.08;margin-bottom:.08rem}
+  .aib-card-tagline{font-size:clamp(.42rem,1.65vw,.56rem);line-height:1.18;margin-bottom:.12rem;display:block;overflow:visible}
+  .aib-card-desc{font-size:clamp(.39rem,1.45vw,.5rem);line-height:1.22;margin-bottom:.2rem;display:block;overflow:visible}
+  .aib-card-meta{gap:.1rem}
+  .aib-card-meta span{font-size:clamp(.32rem,1.1vw,.43rem);padding:.07rem .2rem;letter-spacing:.01em;line-height:1.1}
+  .aib-card-cta{width:100%;justify-content:center;padding:.23rem .18rem;font-size:clamp(.4rem,1.4vw,.52rem);gap:.1rem;margin-top:.2rem;line-height:1.05;text-align:center}
+  .aib-card-socials{gap:.16rem;margin-top:.2rem;justify-content:center}
+  .aib-card-socials a{width:clamp(17px,5vw,22px);height:clamp(17px,5vw,22px)}
+  .aib-card-socials svg{width:clamp(8px,2.5vw,10px);height:clamp(8px,2.5vw,10px)}
+  .cert-frame{padding:.2rem .45rem .45rem;border-radius:13px}
+  .cert-frame .cert-row{grid-template-columns:auto minmax(0,1fr) auto;gap:.45rem;padding:.48rem .12rem}
+  .cert-frame .cert-badge{width:28px;height:28px;flex-basis:28px}
+  .cert-frame .cert-name{font-size:clamp(.55rem,2.2vw,.7rem);line-height:1.15}
+  .cert-frame .cert-meta{font-size:clamp(.46rem,1.7vw,.58rem)}
+  .cert-frame .cert-num{font-size:.52rem}
+}
 </style>
 <link rel="stylesheet" href="./motion.css" />
 </head>
@@ -1040,7 +1088,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
           <span class="sidebar-meta__handle">@tselseya.andreya</span>
           <span class="sidebar-meta__separator" aria-hidden="true">·</span>
           <span class="sidebar-counter" role="status" aria-live="polite" aria-atomic="true" title="Page views">
-            <span id="visitCount" class="sidebar-counter__value">—</span>
+            <span id="visitCount" class="sidebar-counter__value">-</span>
             <span class="sidebar-counter__label">views</span>
           </span>
         </span>
@@ -1310,12 +1358,11 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 
   <div id="page-projects" class="page page-projects">
     <div class="projects-head">
-      <div class="section-label">Portfolio</div>
-      <h2 class="section-title">Projects</h2>
+<h2 class="section-title">Projects</h2>
       <p class="section-desc">A mix of personal projects, experiments, and professional work across content, video, design, and AI workflows.</p>
     </div>
 
-    <div class="outer-frame outer-frame--filter" data-reveal>
+    <div class="outer-frame outer-frame--filter projects-filter-preserved" data-reveal>
       <div class="filter-bar">
         <span class="filter-title">Filter by</span>
         <div class="filter-chips" id="filterChips">
@@ -1340,11 +1387,10 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   <div id="page-about" class="page page-scrolled">
     <div class="outer-frame outer-frame--page" data-reveal>
       <div class="outer-frame--page-inner">
-        <div class="section-label">Background</div>
         <h2 class="section-title">The background behind<br /><em>what I build.</em></h2>
 
         <h3 class="cred-section-title">Introduction</h3>
-        <p class="section-desc">I studied pure mathematics and later explored content production, AI-assisted workflows, automation, and web-based tools. I learn best by applying ideas to real projects—building a first version, testing it, finding what breaks, and improving the result.</p>
+        <p class="section-desc">I studied pure mathematics and later explored content production, AI-assisted workflows, automation, and web-based tools. I learn best by applying ideas to real projects-building a first version, testing it, finding what breaks, and improving the result.</p>
 
         <div class="cred-two-col">
           <div class="cred-left">
@@ -1364,6 +1410,9 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
               <p class="cred-exp-company">Personal project</p>
               <p>Built a faceless short-form storytelling brand and experimented with content production, AI-assisted prompt workflows, and modular n8n automation. The automation work remains an evolving technical experiment rather than a fully validated publishing system.</p>
             </article>
+
+        <h3 class="cred-section-title">Current focus</h3>
+        <p class="section-desc">I'm focused on improving AI-assisted development, building more reliable n8n workflows, and turning project experiments into clearer, better-tested tools.</p>
           </div>
 
           <div class="cred-right">
@@ -1377,30 +1426,24 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 
             <h3 class="cred-section-title">Selected credentials</h3>
             <p class="cred-section-desc">A small selection of recent credentials, with additional certificates kept available in a compact format.</p>
-            <div class="cert-group">
+            <div class="cert-group cert-frame">
               <a class="cert-row" href="https://learn.kodekloud.com/certificate/7b5b303a-6b4b-4856-9ec5-4b5d497501bb" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/kodekloud-badge.png" alt="KodeKloud" />
-                <div class="cert-body"><div class="cert-name">FreeCodeCamp — n8n: Zero to Hero</div><div class="cert-meta">KodeKloud · April 2026</div></div>
-              </a>
+                <div class="cert-body"><div class="cert-name">FreeCodeCamp: n8n: Zero to Hero</div><div class="cert-meta">KodeKloud · April 2026</div></div><span class="cert-num" aria-hidden="true">01</span></a>
               <a class="cert-row" href="https://certificates.upgrad.com/9bde6d64-6f3d-42d3-b7f4-99b82a6d2382-Free%20Course%20Completion-QZavAIwTDco5Coaf.jpeg" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/upgrad-badge.png" alt="upGrad" />
-                <div class="cert-body"><div class="cert-name">Advanced Prompt Engineering with ChatGPT</div><div class="cert-meta">upGrad · January 2026</div></div>
-              </a>
+                <div class="cert-body"><div class="cert-name">Advanced Prompt Engineering with ChatGPT</div><div class="cert-meta">upGrad · January 2026</div></div><span class="cert-num" aria-hidden="true">02</span></a>
               <a class="cert-row" href="https://cdn.qwiklabs.com/dkQVGBYS8HvCJHFPxPExnP3JVKTEoe6CpEKnTq8o2fo%3D" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/googlecloud-badge.png" alt="Google Cloud" />
-                <div class="cert-body"><div class="cert-name">Introduction to Generative AI</div><div class="cert-meta">Google Cloud · January 2026</div></div>
-              </a>
+                <div class="cert-body"><div class="cert-name">Introduction to Generative AI</div><div class="cert-meta">Google Cloud · January 2026</div></div><span class="cert-num" aria-hidden="true">03</span></a>
               <a class="cert-row" href="https://cert.efset.org/33pCLh" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/efset-badge.png" alt="EF SET" />
-                <div class="cert-body"><div class="cert-name">EF SET English Certificate — C2 Proficient</div><div class="cert-meta">EF SET · August 2025</div></div>
-              </a>
+                <div class="cert-body"><div class="cert-name">EF SET English Certificate, C2 Proficient</div><div class="cert-meta">EF SET · August 2025</div></div><span class="cert-num" aria-hidden="true">04</span></a>
               <p class="cert-additional"><strong>Additional certificates:</strong> <a class="cert-inline-link" href="https://www.canva.com/en/design-school/certification-award/ed097142-64ac-4f82-9f15-7ddbbcd5fa50" target="_blank" rel="noopener">Canva Essentials</a> and <a class="cert-inline-link" href="https://www.canva.com/design-school/certification-award/432048bd-c687-48d8-a746-683e80b297cf" target="_blank" rel="noopener">Graphic Design Essentials</a> (2024); <a class="cert-inline-link" href="https://drive.google.com/file/d/1QQ21x6dmiLKzXMfmcSVyYc5T7CNganoL/view?usp=sharing" target="_blank" rel="noopener">Fundamentals of Digital Marketing</a>, Google Digital Garage (2021).</p>
             </div>
           </div>
         </div>
 
-        <h3 class="cred-section-title">Current focus</h3>
-        <p class="section-desc">I'm focused on improving AI-assisted development, building more reliable n8n workflows, and turning project experiments into clearer, better-tested tools.</p>
       </div>
     </div>
   </div>
@@ -1408,11 +1451,10 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   <div id="page-aibuilds" class="page page-scrolled">
     <div class="outer-frame outer-frame--page" data-reveal>
       <div class="outer-frame--page-inner">
-        <div class="section-label">AI Builds</div>
         <h2 class="section-title">Things I've built</h2>
         <p class="section-desc">A collection of AI-powered tools, workflow experiments, and technical builds I've made while exploring what AI can actually do inside a working system.</p>
 
-        <div class="aib-grid-3">
+        <div class="aib-grid-2">
           <article class="aib-card">
             <div class="aib-card-visual">
               <span class="aib-card-badge">Free</span>
@@ -1422,7 +1464,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
               <span class="aib-card-tag">AI Web Tool</span>
               <h4 class="aib-card-title">MathDesk</h4>
               <p class="aib-card-tagline">A math workspace built around understanding, not just answers.</p>
-              <p class="aib-card-desc">A free-to-use AI-assisted math learning tool with step-by-step solving, conversational learning, practice, graphing, and multiple ways to input math — including typing, handwriting, camera, and image upload.</p>
+              <p class="aib-card-desc">A free-to-use AI-assisted math learning tool with step-by-step solving, conversational learning, practice, graphing, and multiple ways to input math, including typing, handwriting, camera, and image upload.</p>
               <div class="aib-card-meta"><span>Live</span><span>Groq + n8n</span><span>Supabase</span></div>
               <a class="aib-card-cta" href="https://app.mathdesk.page.gd/" target="_blank" rel="noopener">Visit MathDesk →</a>
             </div>
@@ -1434,12 +1476,13 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
               <img src="images/aibuilds/scrolltell-automation-2.png" alt="n8n workflow" />
             </div>
             <div class="aib-card-body">
-              <span class="aib-card-tag">AI Workflow</span>
+              <span class="aib-card-tag">Content Systems + Automation</span>
               <h4 class="aib-card-title">Scroll &amp; Tell Automation</h4>
-              <p class="aib-card-tagline">A conversational workflow for collecting stories through Instagram.</p>
-              <p class="aib-card-desc">An n8n-based workflow that handles Instagram DMs and comments, identifies user intent, and guides story submissions through a conversational collection process using local AI.</p>
+              <p class="aib-card-tagline">A modular workflow for story intake, content preparation, human review, and distribution.</p>
+              <p class="aib-card-desc">A merged technical case study documenting the five-stage content workflow and four-module n8n architecture behind Scroll &amp; Tell.</p>
               <div class="aib-card-meta"><span>n8n</span><span>AI-assisted workflow</span><span>Instagram</span></div>
               <a class="aib-card-cta" href="https://chelseaandrea.substack.com/" target="_blank" rel="noopener">Case study →</a>
+              <button type="button" class="aib-card-cta aib-card-article" data-open-project="scrolltell">Project article →</button>
               <div class="aib-card-socials">
                 <a href="https://www.facebook.com/thescrolltell" target="_blank" rel="noopener" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.017 1.792-4.684 4.533-4.684 1.312 0 2.686.235 2.686.235v2.955h-1.513c-1.49 0-1.955.93-1.955 1.885v2.252h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
@@ -1457,16 +1500,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
             </div>
           </article>
 
-          <article class="aib-card">
-            <div class="aib-card-visual"><img src="images/aibuilds/pipeline-architecture.png" alt="Pipeline architecture" /></div>
-            <div class="aib-card-body">
-              <span class="aib-card-tag">Automation System</span>
-              <h4 class="aib-card-title">AI Content Automation Pipeline</h4>
-              <p class="aib-card-tagline">A modular pipeline from story intake through human review and distribution.</p>
-              <p class="aib-card-desc">A four-module n8n architecture that separates story intake, AI content generation, human approval, and distribution. Built as an experiment in making a repetitive content process more modular and easier to control.</p>
-              <div class="aib-card-meta"><span>4 Modules</span><span>n8n</span><span>Human-in-Loop</span></div>
-            </div>
-          </article>
         </div>
       </div>
     </div>
@@ -1475,7 +1508,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   <div id="page-contact" class="page page-scrolled">
     <div class="outer-frame outer-frame--page" data-reveal>
       <div class="outer-frame--page-inner">
-        <div class="section-label">Get in Touch</div>
         <div class="contact-grid">
           <div class="contact-faq">
             <div class="contact-faq__card">
@@ -1546,12 +1578,12 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 const TOOLS=[{name:'ChatGPT',file:'tool-chatgpt.svg'},{name:'Claude',file:'tool-claude.svg'},{name:'Manus',file:'tool-manus.svg'},{name:'n8n',file:'tool-n8n.svg'},{name:'Groq',file:'tool-groq.svg'},{name:'Supabase',file:'tool-supabase.svg'},{name:'GitHub',file:'tool-github.svg'},{name:'HTML5',file:'tool-html5.svg'},{name:'CSS',file:'tool-css.svg'},{name:'JavaScript',file:'tool-js.svg'},{name:'Google Veo',file:'tool-google-veo.svg'},{name:'CapCut',file:'tool-capcut.svg'},{name:'Canva',file:'tool-canva.svg'},{name:'Google Workspace',file:'tool-google-workspace.svg'}];
 
 const PROJECTS=[
-{id:'mathdesk',banner:'banner-mathdesk.png',tall:true,categories:['ai','web-app','automation'],title:'MathDesk',subtitle:'A free-to-use AI-assisted math learning tool that combines step-by-step solving, conversational explanations, practice, and multiple ways to work with math — from typing and handwriting to camera and image input.',fit:'cover',
+{id:'mathdesk',banner:'banner-mathdesk.png',tall:true,categories:['ai','web-app','automation'],title:'MathDesk',subtitle:'A free-to-use AI-assisted math learning tool that combines step-by-step solving, conversational explanations, practice, and multiple ways to work with math, from typing and handwriting to camera and image input.',fit:'cover',
 tags:[{t:'Live Project',c:'tag-live'},{t:'AI',c:'tag-ai'}],
-article:`<h2 class="modal-title">MathDesk</h2><p class="modal-subtitle">What if a math tool didn't stop at giving you the answer?</p><div class="highlight-box"><p><strong>Personal Project · 2026 · Live</strong></p></div><div class="modal-body"><p>MathDesk started from a frustration I had while studying mathematics. I used tools such as Photomath and Symbolab throughout college, and they were genuinely useful for getting through difficult problems. But I often found myself asking a second question:</p><p><strong>"Okay, but why did it do that?"</strong></p><p>Sometimes I wanted to understand the method, the rule being used, or whether there was another way to solve the same problem. That became the starting point for MathDesk.</p><h4>The Idea</h4><p>The original idea was simple: <strong>Don't just give me the answer. Help me understand how I got there.</strong></p><p>As I built it, the idea grew into something broader. Instead of making MathDesk only a solver, I wanted one place where someone could solve a specific problem, ask how or why something works, practice, work with handwritten math, use a camera or image, calculate, graph, and ask questions about using the app itself. So MathDesk gradually became less like a single-purpose calculator and more like a small math-learning workspace.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-1.png" alt="MathDesk hero screenshot" /><figcaption>MathDesk — the main workspace.</figcaption></figure><h4>The Core Modes</h4><p><strong>Solve</strong> is designed for a specific math problem. The response is structured around the actual expression being worked on, followed by the reasoning behind each step. The goal isn't just <em>Answer → final number</em>, but <em>Step → operation → reason</em>.</p><p><strong>Learn</strong> is for questions about concepts rather than one specific problem. It behaves more like a conversational tutor.</p><p><strong>Practice</strong> generates problems that can be worked through independently. It can also check submitted answers.</p><p><strong>Desky</strong> is the general study companion inside MathDesk, separate from the math-solving modes.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-2a.png" alt="Solve mode" /><img src="images/projects/mathdesk-visual-2b.png" alt="Learn mode" /><img src="images/projects/mathdesk-visual-2c.png" alt="Practice mode" /><img src="images/projects/mathdesk-visual-2d.png" alt="Desky mode" /><figcaption>Four modes — Solve · Learn · Practice · Desky.</figcaption></figure><h4>Math Doesn't Always Start as Text</h4><p>One of the things I wanted to explore was input flexibility. MathDesk supports typed math input, math keyboard input, camera capture, handwriting, image upload, paste, and drag-and-drop. Camera, handwriting, and uploaded images can be routed to a vision-capable model when visual input is detected.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-3a.png" alt="Typed input" /><img src="images/projects/mathdesk-visual-3b.png" alt="Camera capture" /><img src="images/projects/mathdesk-visual-3c.png" alt="Handwriting canvas" /><img src="images/projects/mathdesk-visual-3d.png" alt="Image upload" /><figcaption>Type · Camera · Handwrite · Upload.</figcaption></figure><h4>The Tools Around the AI</h4><p>The AI isn't the entire application. MathDesk also includes calculator, graphing, math topic selection, math keyboard, user accounts, saved chats, and image handling — kept in the same workspace instead of requiring a switch between separate tools.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-4a.png" alt="Calculator" /><img src="images/projects/mathdesk-visual-4b.png" alt="Graphing" /><img src="images/projects/mathdesk-visual-4c.png" alt="Saved chats" /><img src="images/projects/mathdesk-visual-4d.png" alt="Topic selector" /><figcaption>Calculator · Graphing · Saved chats · Topics.</figcaption></figure><h4>How I Built It</h4><p>MathDesk uses a deliberately simple frontend: <strong>Vanilla HTML + CSS + JavaScript</strong>. The frontend communicates with a self-hosted n8n workflow. Supabase handles optional accounts and saved chat history.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-5.png" alt="MathDesk system architecture" /><figcaption>Frontend → n8n → Groq, with Supabase on the storage side.</figcaption></figure><h4>The AI Routing</h4><p>The n8n workflow doesn't send every request through the same path. The request contains a mode, and the workflow uses that to route to the appropriate prompt and response structure. Visual input is routed toward a vision-capable model. That means the system isn't simply <em>User → AI</em> — there's application logic in between.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-6.png" alt="n8n routing workflow" /><figcaption>Webhook → Mode routing → model/API → response.</figcaption></figure><h4>Building It With AI</h4><p>MathDesk was developed through an <strong>AI-assisted, iterative coding workflow</strong>. I used AI heavily to generate and modify frontend code, while directing product architecture, feature behavior, workflow logic, API integrations, prompt design, testing, debugging, and deployment decisions.</p><p>This wasn't a case of asking AI to build an application and accepting whatever it produced. A large part of the learning came from taking generated code, testing it, finding what broke, and figuring out how the pieces actually connected.</p><h4>One Detail I Care About</h4><p>One of my favorite parts of MathDesk is the structure of the Solve response. Instead of hiding the calculation inside a paragraph, each step has its own place — closer to how I was expected to show work in college mathematics.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-7.png" alt="Full Solve response" /><figcaption>The structured Solve response — step, operation, reason.</figcaption></figure><h4>What I Learned</h4><p>MathDesk ended up teaching me more about software development than I expected: frontend state, APIs, webhooks, AI prompt routing, multimodal inputs, authentication, databases, deployment, DNS, and debugging. The useful skill in AI-assisted coding isn't generating code faster — it's understanding enough of the system to direct the AI, recognize when something is wrong, and decide what needs to change.</p><h4>What It Doesn't Do</h4><p>MathDesk uses an LLM rather than a dedicated symbolic mathematics engine, so answers aren't mathematically guaranteed. The n8n backend currently depends on a local/self-hosted setup and a public tunnel, and the system doesn't yet have a complete feedback loop for measuring which AI responses were actually helpful.</p><h4>Where It Is Now</h4><p>MathDesk is live and available to use for free. There's a Ko-fi support option for anyone who wants to support the project, but using MathDesk doesn't depend on paying.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-8a.png" alt="MathDesk live page" /><img src="images/projects/mathdesk-visual-8b.png" alt="Ko-fi support" /><figcaption>MathDesk live — free to use, optional support.</figcaption></figure><h4>Takeaway</h4><p>MathDesk started with a question about learning mathematics. It ended up becoming a bigger experiment in building software with AI. The part I'm most interested in isn't that it uses an LLM — it's that I took an idea I had as a mathematics student, turned it into an actual web application, connected the frontend to an AI workflow, deployed it, and kept figuring things out whenever something broke.</p><div class="tech-stack"><span>Vanilla HTML/CSS/JS</span><span>n8n (self-hosted)</span><span>Groq API</span><span>Supabase</span><span>Docker</span><span>GitHub Pages</span><span>ngrok</span></div></div>`},
+article:`<h2 class="modal-title">MathDesk</h2><p class="modal-subtitle">What if a math tool didn't stop at giving you the answer?</p><div class="highlight-box"><p><strong>Personal Project · 2026 · Live</strong></p></div><div class="modal-body"><p>MathDesk started from a frustration I had while studying mathematics. I used tools such as Photomath and Symbolab throughout college, and they were genuinely useful for getting through difficult problems. But I often found myself asking a second question:</p><p><strong>"Okay, but why did it do that?"</strong></p><p>Sometimes I wanted to understand the method, the rule being used, or whether there was another way to solve the same problem. That became the starting point for MathDesk.</p><h4>The Idea</h4><p>The original idea was simple: <strong>Don't just give me the answer. Help me understand how I got there.</strong></p><p>As I built it, the idea grew into something broader. Instead of making MathDesk only a solver, I wanted one place where someone could solve a specific problem, ask how or why something works, practice, work with handwritten math, use a camera or image, calculate, graph, and ask questions about using the app itself. So MathDesk gradually became less like a single-purpose calculator and more like a small math-learning workspace.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-1.png" alt="MathDesk hero screenshot" /><figcaption>MathDesk: the main workspace.</figcaption></figure><h4>The Core Modes</h4><p><strong>Solve</strong> is designed for a specific math problem. The response is structured around the actual expression being worked on, followed by the reasoning behind each step. The goal isn't just <em>Answer → final number</em>, but <em>Step → operation → reason</em>.</p><p><strong>Learn</strong> is for questions about concepts rather than one specific problem. It behaves more like a conversational tutor.</p><p><strong>Practice</strong> generates problems that can be worked through independently. It can also check submitted answers.</p><p><strong>Desky</strong> is the general study companion inside MathDesk, separate from the math-solving modes.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-2a.png" alt="Solve mode" /><img src="images/projects/mathdesk-visual-2b.png" alt="Learn mode" /><img src="images/projects/mathdesk-visual-2c.png" alt="Practice mode" /><img src="images/projects/mathdesk-visual-2d.png" alt="Desky mode" /><figcaption>Four modes: Solve · Learn · Practice · Desky.</figcaption></figure><h4>Math Doesn't Always Start as Text</h4><p>One of the things I wanted to explore was input flexibility. MathDesk supports typed math input, math keyboard input, camera capture, handwriting, image upload, paste, and drag-and-drop. Camera, handwriting, and uploaded images can be routed to a vision-capable model when visual input is detected.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-3a.png" alt="Typed input" /><img src="images/projects/mathdesk-visual-3b.png" alt="Camera capture" /><img src="images/projects/mathdesk-visual-3c.png" alt="Handwriting canvas" /><img src="images/projects/mathdesk-visual-3d.png" alt="Image upload" /><figcaption>Type · Camera · Handwrite · Upload.</figcaption></figure><h4>The Tools Around the AI</h4><p>The AI isn't the entire application. MathDesk also includes calculator, graphing, math topic selection, math keyboard, user accounts, saved chats, and image handling, kept in the same workspace instead of requiring a switch between separate tools.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-4a.png" alt="Calculator" /><img src="images/projects/mathdesk-visual-4b.png" alt="Graphing" /><img src="images/projects/mathdesk-visual-4c.png" alt="Saved chats" /><img src="images/projects/mathdesk-visual-4d.png" alt="Topic selector" /><figcaption>Calculator · Graphing · Saved chats · Topics.</figcaption></figure><h4>How I Built It</h4><p>MathDesk uses a deliberately simple frontend: <strong>Vanilla HTML + CSS + JavaScript</strong>. The frontend communicates with a self-hosted n8n workflow. Supabase handles optional accounts and saved chat history.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-5.png" alt="MathDesk system architecture" /><figcaption>Frontend → n8n → Groq, with Supabase on the storage side.</figcaption></figure><h4>The AI Routing</h4><p>The n8n workflow doesn't send every request through the same path. The request contains a mode, and the workflow uses that to route to the appropriate prompt and response structure. Visual input is routed toward a vision-capable model. That means the system isn't simply <em>User → AI</em>, there's application logic in between.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-6.png" alt="n8n routing workflow" /><figcaption>Webhook → Mode routing → model/API → response.</figcaption></figure><h4>Building It With AI</h4><p>MathDesk was developed through an <strong>AI-assisted, iterative coding workflow</strong>. I used AI heavily to generate and modify frontend code, while directing product architecture, feature behavior, workflow logic, API integrations, prompt design, testing, debugging, and deployment decisions.</p><p>This wasn't a case of asking AI to build an application and accepting whatever it produced. A large part of the learning came from taking generated code, testing it, finding what broke, and figuring out how the pieces actually connected.</p><h4>One Detail I Care About</h4><p>One of my favorite parts of MathDesk is the structure of the Solve response. Instead of hiding the calculation inside a paragraph, each step has its own place, closer to how I was expected to show work in college mathematics.</p><figure class="modal-figure"><img src="images/projects/mathdesk-visual-7.png" alt="Full Solve response" /><figcaption>The structured Solve response, step, operation, reason.</figcaption></figure><h4>What I Learned</h4><p>MathDesk ended up teaching me more about software development than I expected: frontend state, APIs, webhooks, AI prompt routing, multimodal inputs, authentication, databases, deployment, DNS, and debugging. The useful skill in AI-assisted coding isn't generating code faster, it's understanding enough of the system to direct the AI, recognize when something is wrong, and decide what needs to change.</p><h4>What It Doesn't Do</h4><p>MathDesk uses an LLM rather than a dedicated symbolic mathematics engine, so answers aren't mathematically guaranteed. The n8n backend currently depends on a local/self-hosted setup and a public tunnel, and the system doesn't yet have a complete feedback loop for measuring which AI responses were actually helpful.</p><h4>Where It Is Now</h4><p>MathDesk is live and available to use for free. There's a Ko-fi support option for anyone who wants to support the project, but using MathDesk doesn't depend on paying.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/mathdesk-visual-8a.png" alt="MathDesk live page" /><img src="images/projects/mathdesk-visual-8b.png" alt="Ko-fi support" /><figcaption>MathDesk live, free to use, optional support.</figcaption></figure><h4>Takeaway</h4><p>MathDesk started with a question about learning mathematics. It ended up becoming a bigger experiment in building software with AI. The part I'm most interested in isn't that it uses an LLM; it's that I took an idea I had as a mathematics student, turned it into an actual web application, connected the frontend to an AI workflow, deployed it, and kept figuring things out whenever something broke.</p><div class="tech-stack"><span>Vanilla HTML/CSS/JS</span><span>n8n (self-hosted)</span><span>Groq API</span><span>Supabase</span><span>Docker</span><span>GitHub Pages</span><span>ngrok</span></div></div>`},
 {id:'scrolltell',banner:'banner-scrolltell.png',tall:false,categories:['content','video','social-media','ai','automation'],title:'Scroll & Tell',subtitle:'A faceless short-form storytelling project that grew into experiments in AI-assisted content workflows and n8n automation.',fit:'cover',
 tags:[{t:'Personal Project',c:'tag-smm'},{t:'Content Systems',c:'tag-smm'},{t:'Automation Experiment',c:'tag-ai'}],
-article:`<h2 class="modal-title">Scroll &amp; Tell</h2><p class="modal-subtitle">A faceless short-form storytelling project that grew into experiments in AI-assisted content workflows and n8n automation.</p><div class="highlight-box"><p><strong>Personal Project · June 2025 onward</strong></p></div><div class="modal-body"><h4>Overview</h4><p>Scroll &amp; Tell began as a faceless social-media experiment focused on Reddit-style stories: petty revenge, funny situations, bizarre confessions, and other shareable experiences.</p><p>As I worked on the content, I became interested in the repeatable steps behind each post: shaping a story, adapting narration, preparing captions, creating visuals, assembling a video, reviewing the result, and preparing it for different platforms. That led me to explore a structured AI-assisted content-preparation workflow and a modular n8n automation pipeline.</p><h4>Content and format experiments</h4><p>I tested different short-form formats and production approaches instead of committing to one style immediately. These included gameplay-style backgrounds, mascot concepts, AI-generated story visuals, voiceover variations, and edited narration videos. I also adapted content for Instagram, Facebook, TikTok, and YouTube Shorts, each with slightly different requirements.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/scrolltell-visual-1a.png" alt="Published Reel" /><img src="images/projects/scrolltell-visual-1b.png" alt="Gameplay-style video" /><img src="images/projects/scrolltell-visual-1c.png" alt="Mascot concept" /><img src="images/projects/scrolltell-visual-1d.png" alt="AI-generated story scene" /><img src="images/projects/scrolltell-visual-1e.png" alt="Alternate narrator voice" /><img src="images/projects/scrolltell-visual-1f.png" alt="Format experiment" /><figcaption>Early content and visual-format experiments.</figcaption></figure><figure class="modal-figure modal-figure--grid"><img src="images/projects/scrolltell-visual-2a.png" alt="Instagram content" /><img src="images/projects/scrolltell-visual-2b.png" alt="Facebook content" /><img src="images/projects/scrolltell-visual-2c.png" alt="TikTok content" /><img src="images/projects/scrolltell-visual-2d.png" alt="YouTube Shorts content" /><figcaption>Examples prepared for Instagram, Facebook, TikTok, and YouTube Shorts.</figcaption></figure><h4>The AI-assisted content-preparation workflow</h4><p>Before building the n8n pipeline, I broke content preparation into five prompt-driven stages:</p><ol><li><strong>Story extraction:</strong> remove filler and organize events while preserving sequence and emotional arc.</li><li><strong>Script adaptation:</strong> turn the cleaned story into short-form narration.</li><li><strong>Caption generation:</strong> prepare a platform-aware caption with a hook and call to action.</li><li><strong>CTA selection:</strong> choose a call to action that fits the story and intended interaction.</li><li><strong>Hashtag classification:</strong> group relevant tags by broad, niche, and branded themes.</li></ol><p>Each stage has a separate responsibility, making it easier to review or adjust one part without rewriting the entire prompt. This is a human-reviewed workflow, not an autonomous software pipeline.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/shortform-visual-1.png" alt="Short-form workflow before and after" /><img src="images/projects/shortform-visual-2.png" alt="Five-stage content preparation workflow" /><img src="images/projects/shortform-visual-3a.png" alt="Raw to extracted story example" /><img src="images/projects/shortform-visual-3c.png" alt="Script to caption example" /><figcaption>Prompt examples and the five-stage content-preparation process.</figcaption></figure><h4>From repeatable steps to automation</h4><p>I then explored whether some repetitive steps could be connected into a structured workflow. I built four n8n modules with separate responsibilities.</p><p><strong>Module 1 — Story intake:</strong> routes Instagram DM/comment events, classifies intent, and collects story submissions through a guided conversation.</p><p><strong>Module 2 — Content and media preparation:</strong> checks for duplicates, generates a structured content package, retrieves an image, generates voiceover, creates word timings, assembles captions, and renders a video file.</p><p><strong>Module 3 — Human review:</strong> routes content through a Telegram approval/rejection process rather than allowing generated content to publish without review.</p><p><strong>Module 4 — Distribution:</strong> contains platform-specific publishing branches and status/error-handling logic.</p><figure class="modal-figure"><img src="images/projects/pipeline-visual-1.png" alt="Four-module workflow overview" /><figcaption>Four-module workflow overview.</figcaption></figure><figure class="modal-figure modal-figure--grid"><img src="images/projects/pipeline-visual-2.png" alt="Story intake routing" /><img src="images/projects/pipeline-visual-3.png" alt="Structured content output" /><img src="images/projects/pipeline-visual-4.png" alt="Telegram human review" /><img src="images/projects/pipeline-visual-5.png" alt="Distribution branches" /><img src="images/projects/pipeline-visual-6.png" alt="Debugging and failure surfaces" /><figcaption>Intake, structured generation, approval, distribution, and debugging.</figcaption></figure><h4>Implementation status and limitations</h4><p>I built the modular workflow structure and connected several services, but I have not validated a real story all the way from intake through successful final publication. The latest export has publishing nodes disabled, so this should not be described as live automated multi-platform publishing.</p><p>The rendered video is assembled from a still image, voiceover, and captions. It is not scene-by-scene AI-generated video. The main engineering lessons have been about preserving state between stages, validating structured model output, handling media files, maintaining approval gates, and designing for failures across connected workflows.</p><h4>What I learned</h4><p>Scroll &amp; Tell connected content production with workflow design. The five-stage prompt process helped me separate editorial tasks; the n8n experiment pushed that separation into a modular system with defined responsibilities.</p><p>The most useful lesson was that automation is not just connecting services. It means deciding what should be deterministic, where AI interpretation is useful, where human review is needed, and how the system should behave when a stage fails.</p><div class="tech-stack"><span>ChatGPT</span><span>CapCut</span><span>Canva</span><span>Google Veo</span><span>n8n</span><span>Groq API</span><span>Meta Graph API</span><span>PostgreSQL</span><span>Google Sheets</span><span>Telegram</span><span>Unsplash</span><span>Self-hosted TTS</span><span>Whisper</span><span>FFmpeg</span><span>Docker</span><span>ngrok</span></div></div>`}];
+article:`<h2 class="modal-title">Scroll &amp; Tell</h2><p class="modal-subtitle">A faceless short-form storytelling project that grew into experiments in AI-assisted content workflows and n8n automation.</p><div class="highlight-box"><p><strong>Personal Project · June 2025 onward</strong></p></div><div class="modal-body"><h4>Overview</h4><p>Scroll &amp; Tell began as a faceless social-media experiment focused on Reddit-style stories: petty revenge, funny situations, bizarre confessions, and other shareable experiences.</p><p>As I worked on the content, I became interested in the repeatable steps behind each post: shaping a story, adapting narration, preparing captions, creating visuals, assembling a video, reviewing the result, and preparing it for different platforms. That led me to explore a structured AI-assisted content-preparation workflow and a modular n8n automation pipeline.</p><h4>Content and format experiments</h4><p>I tested different short-form formats and production approaches instead of committing to one style immediately. These included gameplay-style backgrounds, mascot concepts, AI-generated story visuals, voiceover variations, and edited narration videos. I also adapted content for Instagram, Facebook, TikTok, and YouTube Shorts, each with slightly different requirements.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/scrolltell-visual-1a.png" alt="Published Reel" /><img src="images/projects/scrolltell-visual-1b.png" alt="Gameplay-style video" /><img src="images/projects/scrolltell-visual-1c.png" alt="Mascot concept" /><img src="images/projects/scrolltell-visual-1d.png" alt="AI-generated story scene" /><img src="images/projects/scrolltell-visual-1e.png" alt="Alternate narrator voice" /><img src="images/projects/scrolltell-visual-1f.png" alt="Format experiment" /><figcaption>Early content and visual-format experiments.</figcaption></figure><figure class="modal-figure modal-figure--grid"><img src="images/projects/scrolltell-visual-2a.png" alt="Instagram content" /><img src="images/projects/scrolltell-visual-2b.png" alt="Facebook content" /><img src="images/projects/scrolltell-visual-2c.png" alt="TikTok content" /><img src="images/projects/scrolltell-visual-2d.png" alt="YouTube Shorts content" /><figcaption>Examples prepared for Instagram, Facebook, TikTok, and YouTube Shorts.</figcaption></figure><h4>The AI-assisted content-preparation workflow</h4><p>Before building the n8n pipeline, I broke content preparation into five prompt-driven stages:</p><ol><li><strong>Story extraction:</strong> remove filler and organize events while preserving sequence and emotional arc.</li><li><strong>Script adaptation:</strong> turn the cleaned story into short-form narration.</li><li><strong>Caption generation:</strong> prepare a platform-aware caption with a hook and call to action.</li><li><strong>CTA selection:</strong> choose a call to action that fits the story and intended interaction.</li><li><strong>Hashtag classification:</strong> group relevant tags by broad, niche, and branded themes.</li></ol><p>Each stage has a separate responsibility, making it easier to review or adjust one part without rewriting the entire prompt. This is a human-reviewed workflow, not an autonomous software pipeline.</p><figure class="modal-figure modal-figure--grid"><img src="images/projects/shortform-visual-1.png" alt="Short-form workflow before and after" /><img src="images/projects/shortform-visual-2.png" alt="Five-stage content preparation workflow" /><img src="images/projects/shortform-visual-3a.png" alt="Raw to extracted story example" /><img src="images/projects/shortform-visual-3c.png" alt="Script to caption example" /><figcaption>Prompt examples and the five-stage content-preparation process.</figcaption></figure><h4>From repeatable steps to automation</h4><p>I then explored whether some repetitive steps could be connected into a structured workflow. I built four n8n modules with separate responsibilities.</p><p><strong>Module 1, Story intake:</strong> routes Instagram DM/comment events, classifies intent, and collects story submissions through a guided conversation.</p><p><strong>Module 2, Content and media preparation:</strong> checks for duplicates, generates a structured content package, retrieves an image, generates voiceover, creates word timings, assembles captions, and renders a video file.</p><p><strong>Module 3, Human review:</strong> routes content through a Telegram approval/rejection process rather than allowing generated content to publish without review.</p><p><strong>Module 4, Distribution:</strong> contains platform-specific publishing branches and status/error-handling logic.</p><figure class="modal-figure"><img src="images/projects/pipeline-visual-1.png" alt="Four-module workflow overview" /><figcaption>Four-module workflow overview.</figcaption></figure><figure class="modal-figure modal-figure--grid"><img src="images/projects/pipeline-visual-2.png" alt="Story intake routing" /><img src="images/projects/pipeline-visual-3.png" alt="Structured content output" /><img src="images/projects/pipeline-visual-4.png" alt="Telegram human review" /><img src="images/projects/pipeline-visual-5.png" alt="Distribution branches" /><img src="images/projects/pipeline-visual-6.png" alt="Debugging and failure surfaces" /><figcaption>Intake, structured generation, approval, distribution, and debugging.</figcaption></figure><h4>Implementation status and limitations</h4><p>I built the modular workflow structure and connected several services, but I have not validated a real story all the way from intake through successful final publication. The latest export has publishing nodes disabled, so this should not be described as live automated multi-platform publishing.</p><p>The rendered video is assembled from a still image, voiceover, and captions. It is not scene-by-scene AI-generated video. The main engineering lessons have been about preserving state between stages, validating structured model output, handling media files, maintaining approval gates, and designing for failures across connected workflows.</p><h4>What I learned</h4><p>Scroll &amp; Tell connected content production with workflow design. The five-stage prompt process helped me separate editorial tasks; the n8n experiment pushed that separation into a modular system with defined responsibilities.</p><p>The most useful lesson was that automation is not just connecting services. It means deciding what should be deterministic, where AI interpretation is useful, where human review is needed, and how the system should behave when a stage fails.</p><div class="tech-stack"><span>ChatGPT</span><span>CapCut</span><span>Canva</span><span>Google Veo</span><span>n8n</span><span>Groq API</span><span>Meta Graph API</span><span>PostgreSQL</span><span>Google Sheets</span><span>Telegram</span><span>Unsplash</span><span>Self-hosted TTS</span><span>Whisper</span><span>FFmpeg</span><span>Docker</span><span>ngrok</span></div></div>`}];
 
 const FAQS=[
   {q:"What kind of work do you do?",a:"My work sits somewhere between AI-assisted development, workflow design, content systems, and creative digital work. I've built things ranging from social-media content systems and n8n workflows to AI-assisted web tools like MathDesk. I'm still exploring exactly where that intersection takes me, so I don't try to force everything into one job title."},
@@ -1887,6 +1919,9 @@ function openProject(id) {
   requestAnimationFrame(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
   setTimeout(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }), 0);
 }
+document.querySelectorAll('[data-open-project]').forEach(function(btn){
+  btn.addEventListener('click', function(e){ e.stopPropagation(); openProject(btn.dataset.openProject); });
+});
 function closeModal() {
   closeLightbox();
   clearFigureFitObservers();
