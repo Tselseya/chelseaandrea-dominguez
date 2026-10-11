@@ -1,106 +1,95 @@
 # Portfolio asset checklist
 
-This checklist matches the updated `index.html` against the repository at commit `9a3c735`. The updated HTML references local assets that are not currently present. Existing fonts, `favicon.png`, `images/og-image.png`, and the tool SVG files already match and do not need to be uploaded again.
+This checklist reflects the current portfolio structure after the Scroll & Tell merge and the latest audit cleanup. It is implementation guidance for the current repository, not a historical upload plan.
 
-## Asset status
+## Current implementation
 
-| Status | Count | Notes |
-|---|---:|---|
-| Already present | 29 | Four Poppins font files, favicon, `images/og-image.png`, and 23 tool SVGs |
-| Added from existing repository asset | 1 | `profile.png`, copied from the existing `portfolio.png` portrait |
-| Still needed | 60 | Four dynamically generated project thumbnails, AI-build visuals, certification badges, and expanded project-detail screenshots |
+| Area | Current state |
+|---|---|
+| Project cards | Two cards remain: MathDesk and Scroll & Tell. The older AI Content Automation Pipeline and Short-Form Workflow cards are no longer rendered in the Projects grid. |
+| AI Builds cards | Two cards remain: MathDesk and Scroll & Tell Automation. The Scroll & Tell card uses the Substack homepage as its only card CTA, labeled `Visit Substack →`. |
+| MathDesk status | The existing card wording is intentionally preserved while the app is being revised. Do not rewrite feature claims or replace its screenshots without checking the current build first. |
+| Scroll & Tell workflow | The case study distinguishes the five-stage content-preparation process from the four-module n8n architecture. It must not imply validated end-to-end autonomous publishing. |
+| Certifications | Four primary rows are shown in the framed credentials panel, with compact additional certificates below. Badge images are public brand/badge artwork, not private credential documents. |
 
-## Still-needed files
+## Referenced assets
 
-All paths below are relative to the repository root. Upload the files using exactly these names so the updated HTML resolves them without code changes.
+All paths below are relative to the repository root. Confirm that replacements match the current portfolio copy and do not expose private IDs, tokens, account data, or credentials.
 
-### Project reel and card thumbnails
+### Project cards and reel
 
-| File to upload | Used in updated HTML | How and where to get it |
-|---|---|---|
-| `images/projects/1.png` | Project reel and MathDesk card thumbnail | Export a 16:9 screenshot of the MathDesk landing page; use the same image as the MathDesk card cover. |
-| `images/projects/2.png` | Project reel and Scroll & Tell card thumbnail | Export a 16:9 screenshot of the Scroll & Tell experience or its primary visual. |
-| `images/projects/3.png` | Project reel and AI Content Automation Pipeline card thumbnail | Export a 16:9 screenshot of the n8n pipeline canvas or pipeline overview. |
-| `images/projects/4.png` | Project reel and Short-Form Workflow card thumbnail | Export a 16:9 screenshot of the five-stage workflow overview. |
+| File | Current use |
+|---|---|
+| `images/projects/banner-mathdesk.png` | MathDesk Projects card banner and MathDesk project modal hero asset |
+| `images/projects/banner-scrolltell.png` | Scroll & Tell Projects card banner and project modal hero asset |
+| `images/projects/1.png` through `images/projects/4.png` | Homepage project reel visuals |
 
-Recommended export: PNG, approximately 1600–2400 px wide, with the important content near the top because the card uses `object-position: top`.
+Project card banners are displayed edge-to-edge with `object-fit: cover`; cropping is intentional so the artwork fills the frame.
 
-### AI builds section
+### AI Builds
 
-| File to upload | Placement | How and where to get it |
-|---|---|---|
-| `images/aibuilds/mathdesk-hero.png` | AI builds → MathDesk visual | Capture the live MathDesk homepage at `https://mathdesk.vercel.app/` or the current MathDesk deployment, then crop/export the hero area. |
-| `images/aibuilds/scrolltell-automation-1.png` | AI builds → Scroll & Tell visual 1 | Export a screenshot of the Scroll & Tell Instagram/conversation flow from the project’s working files or live demo. |
-| `images/aibuilds/scrolltell-automation-2.png` | AI builds → Scroll & Tell visual 2 | Export a screenshot of the corresponding n8n automation canvas from the Scroll & Tell workflow. |
-| `images/aibuilds/pipeline-architecture.png` | AI builds → AI Content Automation Pipeline visual | Open the n8n workflow, fit the full canvas to the window, and export a legible PNG of the pipeline architecture. |
+| File | Current use |
+|---|---|
+| `images/aibuilds/mathdesk-hero.png` | MathDesk AI Builds card visual |
+| `images/aibuilds/scrolltell-automation-1.png` | Scroll & Tell conversation/story-intake visual |
+| `images/aibuilds/scrolltell-automation-2.png` | Scroll & Tell n8n automation visual |
+
+The AI Builds card visuals should remain current with the working projects. Replace an image only after checking that it does not show an obsolete interface, broken feature, private information, credential, token, or account data.
 
 ### Certification badges
 
-| File to upload | Placement | How and where to get it |
-|---|---|---|
-| `images/certs/upgrad-badge.png` | Certifications → upGrad | Download the badge from the upGrad certificate or learner profile. The updated HTML also contains a direct certificate URL for reference. |
-| `images/certs/googlecloud-badge.png` | Certifications → Google Cloud | Download the badge from the Google Cloud Skills Boost achievement/certificate page. |
-| `images/certs/kodekloud-badge.png` | Certifications → KodeKloud | Download the badge from the KodeKloud profile or course-completion page. |
-| `images/certs/efset-badge.png` | Certifications → EF SET | Download the score/certificate badge from the EF SET certificate page. |
-| `images/certs/canva-essentials-badge.png` | Certifications → Canva Essentials | Download the certificate/badge from Canva or the course provider where it was issued. |
-| `images/certs/canva-graphic-badge.png` | Certifications → Canva Graphic Design | Download the certificate/badge from Canva or the course provider where it was issued. |
-| `images/certs/google-digital-badge.png` | Certifications → Google Digital Garage | Download the badge/certificate from the Google Digital Garage credential page. |
+| File | Current use |
+|---|---|
+| `images/certs/kodekloud-badge.png` | n8n: Zero to Hero, KodeKloud |
+| `images/certs/upgrad-badge.png` | Advanced Prompt Engineering with ChatGPT, upGrad |
+| `images/certs/googlecloud-badge.png` | Introduction to Generative AI, Google Cloud |
+| `images/certs/efset-badge.png` | EF SET English Certificate, C2 Proficient |
+| `images/certs/canva-essentials-badge.png` | Additional Canva Essentials certificate |
+| `images/certs/canva-graphic-badge.png` | Additional Graphic Design Essentials certificate |
+| `images/certs/google-digital-badge.png` | Additional Google Digital Garage certificate |
 
-Use PNG exports with transparent backgrounds where available. Do not use screenshots containing private credential IDs unless you intend those IDs to be public.
+Use public badge or brand artwork rather than screenshots containing personal certificate IDs unless those IDs are intentionally public.
 
-### MathDesk project detail gallery
+### Project-detail galleries
 
-| Files to upload | Placement | How and where to get them |
-|---|---|---|
-| `images/projects/mathdesk-visual-1.png` | MathDesk modal: opening visual | Capture the MathDesk homepage/hero from the live app. |
-| `images/projects/mathdesk-visual-2a.png` through `mathdesk-visual-2d.png` | MathDesk modal: input modes/gallery | Capture the four input-mode states shown in the modal copy: typing, handwriting, camera, and image input. |
-| `images/projects/mathdesk-visual-3a.png` through `mathdesk-visual-3d.png` | MathDesk modal: solving/explanation states | Capture the four step-by-step solving or explanation states represented in the project narrative. |
-| `images/projects/mathdesk-visual-4a.png` through `mathdesk-visual-4d.png` | MathDesk modal: practice/features gallery | Capture the four practice, calculator, chat, or related feature screens used by the project story. |
-| `images/projects/mathdesk-visual-5.png` | MathDesk modal: supporting visual | Capture the specific feature or result screen corresponding to the fifth visual in the modal. |
-| `images/projects/mathdesk-visual-6.png` | MathDesk modal: supporting visual | Capture the sixth visual from the MathDesk walkthrough. |
-| `images/projects/mathdesk-visual-7.png` | MathDesk modal: supporting visual | Capture the seventh visual from the MathDesk walkthrough. |
-| `images/projects/mathdesk-visual-8a.png` and `mathdesk-visual-8b.png` | MathDesk modal: final gallery | Capture the two final screens/results used to close the MathDesk case study. |
+The project articles reference the following local image groups. Keep filenames stable when replacing screenshots so the article markup does not need to change.
 
-The exact visual-to-caption mapping is defined by the `<figure>` blocks in `index.html` around the MathDesk article. Use those captions as the final authority when selecting screenshots.
+- MathDesk: `images/projects/mathdesk-visual-1.png`, `mathdesk-visual-2a.png` through `mathdesk-visual-2d.png`, `mathdesk-visual-3a.png` through `mathdesk-visual-3d.png`, `mathdesk-visual-4a.png` through `mathdesk-visual-4d.png`, `mathdesk-visual-5.png` through `mathdesk-visual-8b.png`.
+- Scroll & Tell: `images/projects/scrolltell-visual-1a.png` through `scrolltell-visual-1f.png`, `scrolltell-visual-2a.png` through `scrolltell-visual-2d.png`, `scrolltell-visual-3.png`, and `scrolltell-visual-4a.png` through `scrolltell-visual-4d.png`.
+- Scroll & Tell workflow support: `images/projects/shortform-visual-1.png` through `shortform-visual-4.png` and `images/projects/pipeline-visual-1.png` through `pipeline-visual-6.png`.
 
-### Scroll & Tell project detail gallery
+For every gallery replacement:
 
-| File to upload | Placement | How and where to get it |
-|---|---|---|
-| `images/projects/scrolltell-visual-1a.png` through `scrolltell-visual-1f.png` | Scroll & Tell modal: opening/gallery sequence | Export the six primary product/content screens from the Scroll & Tell project. |
-| `images/projects/scrolltell-visual-2a.png` through `scrolltell-visual-2d.png` | Scroll & Tell modal: workflow/content sequence | Export the four supporting workflow or content-transformation screens. |
-| `images/projects/scrolltell-visual-3.png` | Scroll & Tell modal: supporting visual | Export the screen matching the third visual in the modal article. |
-| `images/projects/scrolltell-visual-4a.png` through `scrolltell-visual-4d.png` | Scroll & Tell modal: closing gallery | Export the four final case-study screens. |
+1. Match the screenshot to its figure caption and the current workflow.
+2. Redact tokens, credentials, private account data, and personal information.
+3. Keep text-heavy screenshots legible; do not crop away the evidence needed by the caption.
+4. Verify that the image loads locally and on GitHub Pages.
 
-The existing repository has older Scroll & Tell screenshots in `images/scrolltell-*.png`; reuse them only if they match the updated modal captions and crop requirements. Otherwise export fresh screenshots from the project files/live demo.
+## External-link QA
 
-### AI pipeline project detail gallery
+Test these destinations from the deployed site after each content or link change:
 
-| File to upload | Placement | How and where to get it |
-|---|---|---|
-| `images/projects/pipeline-visual-1.png` through `pipeline-visual-6.png` | AI Content Automation Pipeline modal | Open the n8n workflow and the related content-generation outputs, then export six legible screenshots matching the modal’s six figure captions. Prefer one workflow overview, one intake example, one generation output, one approval step, one distribution step, and one end-to-end result. |
+- LinkedIn: `https://www.linkedin.com/in/chelseaandreadominguez/`
+- GitHub profile: `https://github.com/Tselseya`
+- MathDesk demo: `https://app.mathdesk.page.gd/`
+- Scroll & Tell Facebook: `https://www.facebook.com/thescrolltell`
+- Scroll & Tell Instagram: `https://www.instagram.com/thescrolltell/`
+- Scroll & Tell TikTok: `https://www.tiktok.com/@thescrolltell`
+- Scroll & Tell YouTube: `https://www.youtube.com/@thescrolltell`
+- Substack homepage: `https://chelseaandrea.substack.com/`
+- Four primary certificate links in `index.html`
 
-### Short-form workflow project detail gallery
+The Substack destination is a publication homepage, so the visible CTA must say `Visit Substack →`, not `Case study →`.
 
-| File to upload | Placement | How and where to get it |
-|---|---|---|
-| `images/projects/shortform-visual-1.png` | Short-Form Workflow modal: opening visual | Capture the source/input stage shown in the article. |
-| `images/projects/shortform-visual-2.png` | Short-Form Workflow modal: five-stage pipeline | Export a diagram or screenshot showing Extract → Script → Caption → CTA → Hashtags. |
-| `images/projects/shortform-visual-3a.png` through `shortform-visual-3c.png` | Short-Form Workflow modal: prompt/output examples | Export the raw → extracted, extracted → script, and script → caption examples. |
-| `images/projects/shortform-visual-4.png` | Short-Form Workflow modal: connection to next project | Export the visual showing the five-stage content workflow leading to the modular n8n automation. |
+## Final QA checklist
 
-## Existing assets that were not renamed
-
-The repository already contains older assets such as `images/mathdesk-home.png`, `images/mathdesk-chat.png`, `images/mathdesk-calculator.png`, `images/mathdesk-solve.png`, and several `images/scrolltell-*.png` files. The updated HTML does not reference those filenames directly, so they were left untouched. They can be reused as source material when creating the new named assets above.
-
-## Upload workflow
-
-1. Capture or export each screenshot from the corresponding live project, n8n canvas, credential page, or design file.
-2. Rename it to the exact path in this checklist.
-3. Keep sensitive certificate details out of public screenshots.
-4. Test the site locally and check the browser console for 404 errors before publishing.
-5. Commit the assets and push them to `main` together with the updated `index.html`.
-
-## Certification badge upload completed
-
-The seven certification image slots are now populated in `images/certs/`. The two Canva files use the repository's existing Canva brand mark; the other files use public brand/logo artwork normalized to 600×600 PNGs. These are **brand/badge logos**, not personal credential verification documents. If a specific credential platform provides your personal badge artwork, it can replace the corresponding file later without changing `index.html`.
+- [ ] Hard-refresh the deployed site after Pages publishes.
+- [ ] Check 320–360 px, 375–430 px, 768 px, 1280–1440 px, and 1600+ px widths.
+- [ ] Check light and dark themes.
+- [ ] Confirm Projects images fill their frames without unintended gutters.
+- [ ] Confirm both AI Builds cards keep their wording and expose their buttons without an extra card-level scroll.
+- [ ] Confirm every navigation item opens the intended page.
+- [ ] Confirm the Scroll & Tell card exposes only `Visit Substack →` as its external CTA.
+- [ ] Confirm project cards still open their detail modal and the modal can close and reopen.
+- [ ] Confirm keyboard focus indicators and reduced-motion behavior remain usable.
+- [ ] Check for broken images, missing fonts, clipped headings, horizontal overflow, and console 404s.
