@@ -1026,7 +1026,6 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .cert-frame .cert-name{font-size:.82rem;line-height:1.25}
 .cert-frame .cert-meta{font-size:.68rem}
 .cert-frame .cert-badge{width:36px;height:36px;flex-basis:36px}
-.aib-card-article{appearance:none;cursor:pointer;font-family:'Poppins',sans-serif}
 @media(max-width:900px){
   .page-projects .outer-frame--grid{padding:1.25rem .55rem .55rem}
   .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr;gap:.55rem;height:100%}
@@ -1060,6 +1059,26 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .cert-frame .cert-name{font-size:clamp(.55rem,2.2vw,.7rem);line-height:1.15}
   .cert-frame .cert-meta{font-size:clamp(.46rem,1.7vw,.58rem)}
   .cert-frame .cert-num{font-size:.52rem}
+}
+/* Audit cleanup: edge-to-edge project banners and compact AI-build cards. */
+.project-banner-track,
+.project-banner-track img{width:100%;height:100%;}
+.project-banner-track img{object-fit:cover!important;object-position:center!important;padding:0!important;background:transparent!important;display:block;}
+.aib-card{min-height:0;}
+.aib-card-visual{aspect-ratio:2.8/1;min-height:0;overflow:hidden;}
+@media(max-width:900px){
+  .page-aibuilds .outer-frame--page-inner{overflow:hidden;}
+  .aib-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:.3rem;margin-top:.3rem;}
+  .aib-card-visual{aspect-ratio:2.8/1;}
+  .aib-card-body{padding:.3rem .32rem .34rem;gap:.05rem;}
+  .aib-card-tag{font-size:clamp(.3rem,1.2vw,.44rem);line-height:1.02;}
+  .aib-card-title{font-size:clamp(.52rem,2.2vw,.7rem);line-height:1.04;}
+  .aib-card-tagline{font-size:clamp(.37rem,1.45vw,.52rem);line-height:1.12;margin-bottom:.08rem;}
+  .aib-card-desc{font-size:clamp(.34rem,1.25vw,.46rem);line-height:1.14;margin-bottom:.12rem;}
+  .aib-card-meta{gap:.08rem;}
+  .aib-card-meta span{font-size:clamp(.28rem,1vw,.38rem);padding:.05rem .14rem;line-height:1.05;}
+  .aib-card-cta{padding:.18rem .14rem;font-size:clamp(.34rem,1.2vw,.48rem);margin-top:.12rem;line-height:1;}
+  .aib-card-socials{gap:.12rem;margin-top:.12rem;}
 }
 </style>
 <link rel="stylesheet" href="./motion.css" />
@@ -1429,7 +1448,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
             <div class="cert-group cert-frame">
               <a class="cert-row" href="https://learn.kodekloud.com/certificate/7b5b303a-6b4b-4856-9ec5-4b5d497501bb" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/kodekloud-badge.png" alt="KodeKloud" />
-                <div class="cert-body"><div class="cert-name">FreeCodeCamp: n8n: Zero to Hero</div><div class="cert-meta">KodeKloud · April 2026</div></div><span class="cert-num" aria-hidden="true">01</span></a>
+                <div class="cert-body"><div class="cert-name">n8n: Zero to Hero</div><div class="cert-meta">KodeKloud · April 2026</div></div><span class="cert-num" aria-hidden="true">01</span></a>
               <a class="cert-row" href="https://certificates.upgrad.com/9bde6d64-6f3d-42d3-b7f4-99b82a6d2382-Free%20Course%20Completion-QZavAIwTDco5Coaf.jpeg" target="_blank" rel="noopener">
                 <img class="cert-badge" src="images/certs/upgrad-badge.png" alt="upGrad" />
                 <div class="cert-body"><div class="cert-name">Advanced Prompt Engineering with ChatGPT</div><div class="cert-meta">upGrad · January 2026</div></div><span class="cert-num" aria-hidden="true">02</span></a>
@@ -1481,8 +1500,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
               <p class="aib-card-tagline">A modular workflow for story intake, content preparation, human review, and distribution.</p>
               <p class="aib-card-desc">A merged technical case study documenting the five-stage content workflow and four-module n8n architecture behind Scroll &amp; Tell.</p>
               <div class="aib-card-meta"><span>n8n</span><span>AI-assisted workflow</span><span>Instagram</span></div>
-              <a class="aib-card-cta" href="https://chelseaandrea.substack.com/" target="_blank" rel="noopener">Case study →</a>
-              <button type="button" class="aib-card-cta aib-card-article" data-open-project="scrolltell">Project article →</button>
+              <a class="aib-card-cta" href="https://chelseaandrea.substack.com/" target="_blank" rel="noopener">Visit Substack →</a>
               <div class="aib-card-socials">
                 <a href="https://www.facebook.com/thescrolltell" target="_blank" rel="noopener" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.017 1.792-4.684 4.533-4.684 1.312 0 2.686.235 2.686.235v2.955h-1.513c-1.49 0-1.955.93-1.955 1.885v2.252h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
@@ -1919,9 +1937,6 @@ function openProject(id) {
   requestAnimationFrame(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
   setTimeout(() => modalArticle.scrollTo({ top: 0, left: 0, behavior: 'instant' }), 0);
 }
-document.querySelectorAll('[data-open-project]').forEach(function(btn){
-  btn.addEventListener('click', function(e){ e.stopPropagation(); openProject(btn.dataset.openProject); });
-});
 function closeModal() {
   closeLightbox();
   clearFigureFitObservers();
