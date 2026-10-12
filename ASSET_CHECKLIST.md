@@ -7,7 +7,7 @@ This checklist reflects the current portfolio structure after the Scroll & Tell 
 | Area | Current state |
 |---|---|
 | Project cards | Two cards remain: MathDesk and Scroll & Tell. The older AI Content Automation Pipeline and Short-Form Workflow cards are no longer rendered in the Projects grid. |
-| AI Builds cards | Two cards remain: MathDesk and Scroll & Tell Automation. The Scroll & Tell card uses the Substack homepage as its only card CTA, labeled `Visit Substack →`. |
+| AI Builds cards | Two cards remain: MathDesk and Scroll & Tell Automation. The Scroll & Tell card has a direct `Read case study →` modal action and a secondary `Visit Substack →` external action. |
 | MathDesk status | The existing card wording is intentionally preserved while the app is being revised. Do not rewrite feature claims or replace its screenshots without checking the current build first. |
 | Scroll & Tell workflow | The case study distinguishes the five-stage content-preparation process from the four-module n8n architecture. It must not imply validated end-to-end autonomous publishing. |
 | Certifications | Four primary rows are shown in the framed credentials panel, with compact additional certificates below. Badge images are public brand/badge artwork, not private credential documents. |
@@ -79,7 +79,7 @@ Test these destinations from the deployed site after each content or link change
 - Substack homepage: `https://chelseaandrea.substack.com/`
 - Four primary certificate links in `index.html`
 
-The Substack destination is a publication homepage, so the visible CTA must say `Visit Substack →`, not `Case study →`.
+The Substack destination is a publication homepage, so the external CTA says `Visit Substack →`; the separate `Read case study →` action opens the in-portfolio article.
 
 ## Final QA checklist
 
@@ -87,7 +87,7 @@ The Substack destination is a publication homepage, so the visible CTA must say 
 - [ ] Check 320–360 px, 375–430 px, 768 px, 1280–1440 px, and 1600+ px widths.
 - [ ] Check light and dark themes.
 - [ ] Confirm Projects images fill their frames without unintended gutters.
-- [ ] Confirm both AI Builds cards keep their wording and expose their buttons without an extra card-level scroll.
+- [ ] Confirm AI Builds cards remain readable on mobile, adapt to added cards, and expose both Scroll & Tell actions without clipping or nested card scrolling.
 - [ ] Confirm every navigation item opens the intended page.
 - [ ] Confirm the Scroll & Tell card exposes only `Visit Substack →` as its external CTA.
 - [ ] Confirm project cards still open their detail modal and the modal can close and reopen.

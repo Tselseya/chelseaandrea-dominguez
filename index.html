@@ -1015,9 +1015,9 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 }
 /* Portfolio revision: compact mobile frames, two-card builds, and framed credentials. */
 .projects-filter-preserved{display:none!important}
-.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr;gap:1rem}
+.projects-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));grid-auto-rows:auto;grid-template-rows:none;align-items:stretch;align-content:start;gap:1rem}
 .projects-grid .project-card[data-tall="true"]{grid-row:auto}
-.aib-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+.aib-grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));grid-auto-rows:auto;align-items:stretch;gap:1rem;margin-top:1rem}
 .cert-frame{padding:.35rem .75rem .75rem;border:1px solid var(--border);border-radius:18px;background:var(--surface2);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
 .cert-frame .cert-row{border:0;border-radius:0;background:transparent;margin:0;padding:.7rem .2rem;border-bottom:1px solid var(--border);position:relative}
 .cert-frame .cert-row:last-of-type{border-bottom:0}
@@ -1028,7 +1028,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 .cert-frame .cert-badge{width:36px;height:36px;flex-basis:36px}
 @media(max-width:900px){
   .page-projects .outer-frame--grid{padding:1.25rem .55rem .55rem}
-  .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:1fr;gap:.55rem;height:100%}
+  .projects-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));grid-template-rows:none;grid-auto-rows:auto;align-content:start;gap:.55rem;height:auto}
   .project-card{min-height:0;--banner-h:clamp(78px,22vw,125px);padding:.65rem}
   .project-card[data-tall="true"]{--banner-h:clamp(78px,22vw,125px)}
   .project-banner{margin:-.65rem -.65rem .55rem}
@@ -1060,6 +1060,9 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .cert-frame .cert-meta{font-size:clamp(.46rem,1.7vw,.58rem)}
   .cert-frame .cert-num{font-size:.52rem}
 }
+.aib-card-actions{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;margin-top:1rem;}
+.aib-card-actions .aib-card-cta{margin-top:0;}
+.aib-card-cta--case{background:var(--accent)!important;color:#fff!important;}
 /* Audit cleanup: edge-to-edge project banners and compact AI-build cards. */
 .project-banner-track,
 .project-banner-track img{width:100%;height:100%;}
@@ -1072,7 +1075,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .page-aibuilds .outer-frame--page-inner{overflow:hidden;}
   .projects-grid .project-card,
   .projects-grid .project-card[data-tall="true"]{--banner-h:clamp(92px,24vw,130px);}
-  .aib-grid-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:.3rem;margin-top:.3rem;}
+  .aib-grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.75rem;margin-top:.75rem;}
   .aib-card-visual{aspect-ratio:2.8/1;}
   .aib-card-body{padding:.3rem .32rem .34rem;gap:.05rem;}
   .aib-card-tag{font-size:clamp(.3rem,1.2vw,.44rem);line-height:1.02;}
@@ -1083,6 +1086,19 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
   .aib-card-meta span{font-size:clamp(.28rem,1vw,.38rem);padding:.05rem .14rem;line-height:1.05;}
   .aib-card-cta{padding:.18rem .14rem;font-size:clamp(.34rem,1.2vw,.48rem);margin-top:.12rem;line-height:1;}
   .aib-card-socials{gap:.12rem;margin-top:.12rem;}
+  .aib-card-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem;align-items:center;}
+  .aib-card-actions .aib-card-cta{margin-top:0;}
+}
+@media(max-width:600px){
+  .projects-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
+  .aib-grid-2{grid-template-columns:1fr;grid-auto-rows:auto;gap:1rem;}
+  .aib-card-tag{font-size:.75rem;line-height:1.15;letter-spacing:.04em;}
+  .aib-card-title{font-size:1.05rem;line-height:1.2;}
+  .aib-card-tagline{font-size:.9rem;line-height:1.4;}
+  .aib-card-desc{font-size:.85rem;line-height:1.45;}
+  .aib-card-meta span{font-size:.72rem;padding:.16rem .45rem;}
+  .aib-card-actions{gap:.5rem;margin-top:.75rem;}
+  .aib-card-cta{min-height:42px;padding:.65rem .9rem;font-size:.9rem;justify-content:center;}
 }
 </style>
 <link rel="stylesheet" href="./motion.css" />
@@ -1151,23 +1167,23 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 
   <nav class="sidebar-nav">
     <ul>
-      <li><a data-page="home" class="active">
+      <li><a href="#home" data-page="home" class="active" aria-current="page">
         <span class="nav-icon"><svg viewBox="0 0 432 576" fill="currentColor" aria-hidden="true"><path class="slab__2 ricon__whole" d="M0 261C0 239 10 219 27 205L171 88C197 67 235 67 261 88L405 205C422 219 432 239 432 261V504C432 544 400 576 360 576H324C284 576 252 544 252 504V432C252 412 236 396 216 396C196 396 180 412 180 432V504C180 544 148 576 108 576H72C32 576 0 544 0 504V261ZM193 116 49 233C41 240 36 250 36 261V468C36 488 52 504 72 504H108C128 504 144 488 144 468V396C144 356 176 324 216 324C256 324 288 356 288 396V468C288 488 304 504 324 504H360C380 504 396 488 396 468V261C396 250 391 240 383 233L239 116C226 105 207 105 193 116Z"/><path class="slab__1 ricon__whole" d="M171 88 27 205C10 219 0 239 0 261V504C0 544 32 576 72 576H108C148 576 180 544 180 504V432C180 412 196 396 216 396C236 396 252 412 252 432V504C252 544 284 576 324 576H360C400 576 432 544 432 504V261C432 239 422 219 405 205L261 88C235 67 197 67 171 88ZM193 116C207 105 226 105 239 116L383 233C391 240 396 250 396 261V468C396 488 380 504 360 504H324C304 504 288 488 288 468V396C288 356 256 324 216 324C176 324 144 356 144 396V468C144 488 128 504 108 504H72C52 504 36 488 36 468V261C36 250 41 240 49 233L193 116Z"/></svg></span>
         <span class="nav-label">Home</span>
       </a></li>
-      <li><a data-page="projects">
+      <li><a href="#projects" data-page="projects">
         <span class="nav-icon"><svg viewBox="0 0 504 576" fill="currentColor" aria-hidden="true"><path class="slab__2 ricon__whole" d="M504 486C504 526 472 558 432 558H72C32 558 0 526 0 486V162C0 122 32 90 72 90H172C194 90 215 100 228 117L268 167C275 175 285 180 296 180H432C472 180 504 212 504 252V486ZM72 486H432C452 486 468 470 468 450V252C468 232 452 216 432 216H296C274 216 253 206 240 189L200 140C193 131 183 126 172 126H72C52 126 36 142 36 162V450C36 470 52 486 72 486Z"/><path class="slab__1 ricon__whole" d="M72 90C32 90 0 122 0 162V486C0 526 32 558 72 558H432C472 558 504 526 504 486V252C504 212 472 180 432 180H296C285 180 275 175 268 167L228 117C215 100 194 90 172 90H72ZM36 162C36 142 52 126 72 126H172C183 126 193 131 200 140L240 189C253 206 274 216 296 216H432C452 216 468 232 468 252V450C468 470 452 486 432 486H72C52 486 36 470 36 450V162Z"/></svg></span>
         <span class="nav-label">Projects</span>
       </a></li>
-      <li><a data-page="about">
+      <li><a href="#about" data-page="about">
         <span class="nav-icon"><svg viewBox="0 0 432 576" fill="currentColor" aria-hidden="true"><path class="slab__2 ricon__whole" d="M216 90C146 90 90 146 90 216V252C90 281 99 307 115 328C90 340 69 356 53 372C34 391 16 415 5 441C2 450 0 459 0 468V504C0 518 4 532 12 544C26 564 48 576 72 576H360C384 576 406 564 420 544C428 532 432 518 432 504V468C432 459 430 450 427 441C416 415 398 391 379 372C363 356 343 340 317 328C333 307 342 280 342 252V216C342 146 286 90 216 90ZM216 342C281 342 326 370 354 398C371 414 385 434 394 455C398 466 397 478 390 488C383 498 372 504 360 504H72C60 504 49 498 42 488C36 478 34 466 39 455C47 434 61 414 78 398C106 370 151 342 216 342ZM306 216C306 266 266 306 216 306C166 306 126 266 126 216C126 166 166 126 216 126C266 126 306 166 306 216Z"/><path class="slab__1 ricon__whole" d="M216 90C146 90 90 146 90 216V252C90 281 99 307 115 328C90 340 69 356 53 372C34 391 16 415 5 441C2 450 0 459 0 468V504C0 518 4 532 12 544C26 564 48 576 72 576H360C384 576 406 564 420 544C428 532 432 518 432 504V468C432 459 430 450 427 441C416 415 398 391 379 372C363 356 343 340 317 328C333 307 342 280 342 252V216C342 146 286 90 216 90ZM306 216C306 266 266 306 216 306C166 306 126 266 126 216C126 166 166 126 216 126C266 126 306 166 306 216ZM78 398C106 370 151 342 216 342C281 342 326 370 354 398C371 414 385 434 394 455C398 466 397 478 390 488C383 498 372 504 360 504H72C60 504 49 498 42 488C36 478 34 466 39 455C47 434 61 414 78 398Z"/></svg></span>
         <span class="nav-label">About</span>
       </a></li>
-      <li><a data-page="aibuilds">
+      <li><a href="#aibuilds" data-page="aibuilds">
         <span class="nav-icon"><svg viewBox="0 0 504 576" fill="currentColor" aria-hidden="true"><path class="slab__2 ricon__whole" d="M319 117C308 90 282 72 252 72C223 72 196 90 185 117L156 191L76 197C47 199 22 218 13 246C10 253 9 261 9 268V305C9 326 18 346 35 360L89 405L77 452C75 458 74 464 74 470V505C74 528 85 550 104 564C128 581 160 582 185 567L252 524L320 567C345 582 377 581 400 564C419 550 430 528 430 505V470C430 464 429 458 428 452L416 405L470 360C486 346 495 326 495 305V268C495 261 494 253 492 246C483 218 458 199 428 197L349 191L319 117ZM262 452C256 448 249 448 243 452L166 500C153 508 137 507 125 499C113 490 108 475 112 461L134 373C136 366 133 359 128 354L58 296C50 289 45 279 45 269C45 250 60 234 79 232L169 226C176 226 182 222 185 215L219 131C224 117 238 108 252 108C267 108 280 117 286 131L319 215C322 222 328 226 335 226L426 232C444 234 459 250 459 269C459 279 455 289 446 296L376 354C371 359 369 366 371 373L393 461C396 475 391 490 379 499C367 507 351 508 339 500L262 452Z"/><path class="slab__1 ricon__whole" d="M252 72C223 72 196 90 185 117L156 191L76 197C47 199 22 218 13 246C10 253 9 261 9 268V305C9 326 18 346 35 360L89 405L77 452C75 458 74 464 74 470V505C74 528 85 550 104 564C128 581 160 582 185 567L252 524L320 567C345 582 377 581 400 564C419 550 430 528 430 505V470C430 464 429 458 428 452L416 405L470 360C486 346 495 326 495 305V268C495 261 494 253 492 246C483 218 458 199 428 197L349 191L319 117C308 90 282 72 252 72ZM219 131C224 117 238 108 252 108C267 108 280 117 286 131L319 215C322 222 328 226 335 226L426 232C444 234 459 250 459 269C459 279 455 289 446 296L376 354C371 359 369 366 371 373L393 461C396 475 391 490 379 499C367 507 351 508 339 500L262 452C259 450 256 449 252 449C249 449 246 450 243 452L166 500C153 508 137 507 125 499C113 490 108 475 112 461L134 373C136 366 133 359 128 354L58 296C50 289 45 279 45 269C45 250 60 234 79 232L169 226C176 226 182 222 185 215L219 131Z"/></svg></span>
         <span class="nav-label">AI Builds</span>
       </a></li>
-      <li class="nav-item--center"><a data-page="contact">
+      <li class="nav-item--center"><a href="#contact" data-page="contact">
         <span class="nav-icon"><svg viewBox="0 0 504 576" fill="currentColor" aria-hidden="true"><path class="slab__2 ricon__whole" d="M0 297C0 162 125 72 252 72C380 72 504 162 504 297V333C504 422 451 502 369 537L208 606C178 619 144 610 123 585C113 572 108 556 108 540V518C45 479 0 414 0 333V297ZM36 297C36 369 80 427 142 460C152 464 155 476 149 485C142 498 142 514 152 526C162 539 179 544 194 537L355 468C424 439 468 372 468 297C468 188 366 108 252 108C138 108 36 188 36 297Z"/><path class="slab__1 ricon__whole" d="M252 72C125 72 0 162 0 297V333C0 414 45 479 108 518V540C108 556 113 571 123 585C144 610 178 619 208 606L369 537C451 502 504 422 504 333V297C504 162 380 72 252 72ZM36 297C36 188 138 108 252 108C366 108 468 188 468 297C468 372 424 439 355 468L194 537C179 544 162 539 152 526C142 514 142 498 149 485C152 481 153 476 151 471C150 466 147 462 142 460C80 427 36 369 36 297Z"/></svg></span>
         <span class="nav-label">FAQs</span>
       </a></li>
@@ -1504,7 +1520,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
               <p class="aib-card-tagline">A modular workflow for story intake, content preparation, human review, and distribution.</p>
               <p class="aib-card-desc">A merged technical case study documenting the five-stage content workflow and four-module n8n architecture behind Scroll &amp; Tell.</p>
               <div class="aib-card-meta"><span>n8n</span><span>AI-assisted workflow</span><span>Instagram</span></div>
-              <a class="aib-card-cta" href="https://chelseaandrea.substack.com/" target="_blank" rel="noopener">Visit Substack →</a>
+              <div class="aib-card-actions"><a class="aib-card-cta aib-card-cta--case" href="#scrolltell-case-study" data-open-project="scrolltell">Read case study →</a><a class="aib-card-cta" href="https://chelseaandrea.substack.com/" target="_blank" rel="noopener">Visit Substack →</a></div>
               <div class="aib-card-socials">
                 <a href="https://www.facebook.com/thescrolltell" target="_blank" rel="noopener" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.017 1.792-4.684 4.533-4.684 1.312 0 2.686.235 2.686.235v2.955h-1.513c-1.49 0-1.955.93-1.955 1.885v2.252h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
@@ -1597,7 +1613,7 @@ details[open] .contact-faq__chev{transform:rotate(180deg);color:#6b8cff}
 </div>
 
 <script>
-const TOOLS=[{name:'ChatGPT',file:'tool-chatgpt.svg'},{name:'Claude',file:'tool-claude.svg'},{name:'Manus',file:'tool-manus.svg'},{name:'n8n',file:'tool-n8n.svg'},{name:'Groq',file:'tool-groq.svg'},{name:'Supabase',file:'tool-supabase.svg'},{name:'GitHub',file:'tool-github.svg'},{name:'HTML5',file:'tool-html5.svg'},{name:'CSS',file:'tool-css.svg'},{name:'JavaScript',file:'tool-js.svg'},{name:'Google Veo',file:'tool-google-veo.svg'},{name:'CapCut',file:'tool-capcut.svg'},{name:'Canva',file:'tool-canva.svg'},{name:'Google Workspace',file:'tool-google-workspace.svg'}];
+const TOOLS=[{name:'ChatGPT',file:'tool-chatgpt.svg'},{name:'Claude',file:'tool-claude.svg'},{name:'Claude Code',file:'tool-claude-code.svg'},{name:'n8n',file:'tool-n8n.svg'},{name:'Groq',file:'tool-groq.svg'},{name:'Supabase',file:'tool-supabase.svg'},{name:'GitHub',file:'tool-github.svg'},{name:'HTML',file:'tool-html5.svg'},{name:'CSS',file:'tool-css.svg'},{name:'JavaScript',file:'tool-js.svg'},{name:'Google Veo',file:'tool-google-veo.svg'},{name:'CapCut',file:'tool-capcut.svg'},{name:'Canva',file:'tool-canva.svg'},{name:'Google Workspace',file:'tool-google-workspace.svg'}];
 
 const PROJECTS=[
 {id:'mathdesk',banner:'banner-mathdesk.png',tall:true,categories:['ai','web-app','automation'],title:'MathDesk',subtitle:'A free-to-use AI-assisted math learning tool that combines step-by-step solving, conversational explanations, practice, and multiple ways to work with math, from typing and handwriting to camera and image input.',fit:'cover',
@@ -1707,6 +1723,12 @@ const FAQS=[
   });
 })();
 
+document.querySelectorAll('[data-open-project]').forEach(el => el.addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  openProject(el.dataset.openProject);
+}));
+
 (function(){
   const g = document.getElementById('projectsGrid'); if(!g) return;
   g.innerHTML = PROJECTS.map(p => {
@@ -1737,9 +1759,7 @@ const FAQS=[
       card.style.display = show ? '' : 'none';
       if (show) v++;
     });
-    if (f === 'all') { g.style.gridTemplateColumns = ''; g.style.gridTemplateRows = ''; }
-    else if (v <= 2) { g.style.gridTemplateColumns = 'repeat(2,minmax(0,1fr))'; g.style.gridTemplateRows = 'repeat(2,minmax(0,1fr))'; }
-    else { g.style.gridTemplateColumns = 'repeat(3,minmax(0,1fr))'; g.style.gridTemplateRows = 'repeat(2,minmax(0,1fr))'; }
+    g.style.gridTemplateColumns = ''; g.style.gridTemplateRows = ''; g.style.gridAutoRows = '';
     refreshScrollFades();
   }));
 })();
@@ -1968,7 +1988,7 @@ function switchPage(name, options) {
     try { localStorage.setItem('portfolio-page', name); } catch(e) {}
   }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.toggle('active', a.dataset.page === name));
+  document.querySelectorAll('.sidebar-nav a').forEach(a => { const active = a.dataset.page === name; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   const t = document.getElementById('page-' + name);
   if (t) t.classList.add('active');
   const cta = document.getElementById('heroCta');
@@ -1976,7 +1996,7 @@ function switchPage(name, options) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   setTimeout(refreshScrollFades, 60);
 }
-document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', () => switchPage(a.dataset.page)));
+document.querySelectorAll('.sidebar-nav a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); switchPage(a.dataset.page); }));
 try {
   const savedPage = localStorage.getItem('portfolio-page');
   if (savedPage) switchPage(savedPage, { skipSave: true });
